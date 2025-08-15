@@ -629,27 +629,8 @@
     "Subtipo": "Pueblos",
     "ZA": "ZA Ullibarri Olleros"
   },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
+ 
+
   {
     "Sampling point": "D-120",
     "Nombre": "Aberásturi",
@@ -699,13 +680,7 @@
     "Subtipo": "Pueblos",
     "ZA": "ZA Vitoria"
   },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
+
   {
     "Sampling point": "D-130",
     "Nombre": "Ullibarri Arrazua",
@@ -741,27 +716,8 @@
     "Subtipo": "Pueblos",
     "ZA": "ZA Oreitia"
   },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
+ 
+
   {
     "Sampling point": "D-140",
     "Nombre": "Gometxa",
@@ -811,13 +767,7 @@
     "Subtipo": "Pueblos",
     "ZA": "ZA Vitoria"
   },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
+ 
   {
     "Sampling point": "D-150",
     "Nombre": "Ariñez",
@@ -867,27 +817,8 @@
     "Subtipo": "Pueblos",
     "ZA": "ZA Vitoria"
   },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
+ 
+ 
   {
     "Sampling point": "D-160",
     "Nombre": "Yurre",
@@ -937,20 +868,8 @@
     "Subtipo": "Pueblos",
     "ZA": "ZA Vitoria"
   },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
+ 
+ 
   {
     "Sampling point": "D-170",
     "Nombre": "Artaza de Foronda",
@@ -1049,62 +968,10 @@
     "Subtipo": NaN,
     "ZA": NaN
   },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
-  {
-    "Sampling point": NaN,
-    "Nombre": NaN,
-    "Tipo": NaN,
-    "Subtipo": NaN,
-    "ZA": NaN
-  },
+ 
+
+ 
+ 
   {
     "Sampling point": "D-606",
     "Nombre": "Escuela Infantil Ariznavarra",
