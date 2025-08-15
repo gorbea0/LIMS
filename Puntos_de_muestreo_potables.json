@@ -1,0 +1,4573 @@
+[
+  {
+    "Sampling point": "D-010",
+    "Nombre": "Ins Int CC Aldave",
+    "Tipo": "Instalación Interior AFCH",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-011",
+    "Nombre": "Mercado Abendaño",
+    "Tipo": "Centro comercial",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-012",
+    "Nombre": "CC Judimendi",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-013",
+    "Nombre": "Frontones Mendizorrotza",
+    "Tipo": "Frontones",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-014",
+    "Nombre": "Arcaute",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-015",
+    "Nombre": "Aretxabaleta",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-016",
+    "Nombre": "CC Lakua Sansomendi",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-017",
+    "Nombre": "Ins Int CC Abetxuko",
+    "Tipo": "Instalación Interior AFCH",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-018",
+    "Nombre": "Betoño pueblo",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-019",
+    "Nombre": "Portal Gamarra El Currante",
+    "Tipo": "Bar",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-020",
+    "Nombre": "DEMSAC Red de distribucion",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-021",
+    "Nombre": "CC Ariznavarra",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-022",
+    "Nombre": "CC Iparralde",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-023",
+    "Nombre": "Ins Int CC Hegoalde",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-024",
+    "Nombre": "Elorriaga",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-025",
+    "Nombre": "Sociedad Dep Estadio Potables",
+    "Tipo": "Polideportivo privado",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-026",
+    "Nombre": "Asteguieta",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-027",
+    "Nombre": "Arangiz",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Gorbea"
+  },
+  {
+    "Sampling point": "D-028",
+    "Nombre": "Gamarra Mayor",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-029",
+    "Nombre": "Tuvisa",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-030",
+    "Nombre": "Polidep Arriaga",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-031",
+    "Nombre": "CC Arana",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-032",
+    "Nombre": "Mercado Santa Bárbara",
+    "Tipo": "Centro comercial",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-033",
+    "Nombre": "Ins Int CC Arriaga",
+    "Tipo": "Instalación Interior AFCH",
+    "Subtipo": "AFCH Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-034",
+    "Nombre": "CC Campillo",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-035",
+    "Nombre": "Ins Int CC El Pilar",
+    "Tipo": "Instalación Interior AFCH",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-036",
+    "Nombre": "CC Europa",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-037",
+    "Nombre": "Dendaraba",
+    "Tipo": "Centro comercial",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-038",
+    "Nombre": "Centro Comercial Boulevard",
+    "Tipo": "Centro comercial",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-039",
+    "Nombre": "Polidep San Andrés",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-040",
+    "Nombre": "Centro Comercial Lakua",
+    "Tipo": "Centro comercial",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-041",
+    "Nombre": "Complejo deportivo Betoño",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-042",
+    "Nombre": "Ins Int Complejo deportivo Mendizorrotza",
+    "Tipo": "Instalación Interior AFCH",
+    "Subtipo": "AFCH Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-043",
+    "Nombre": "Pabellón Mendizorrotza",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-044",
+    "Nombre": "Parque Gamarra",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-045",
+    "Nombre": "Polidep Abetxuko",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-046",
+    "Nombre": "Polidep Aranalde",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-047",
+    "Nombre": "Polidep Ariznavarra",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-048",
+    "Nombre": "Polidep Divino Maestro",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-049",
+    "Nombre": "Polidep Landazuri",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-050",
+    "Nombre": "Polidep Ibaiondo",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-052",
+    "Nombre": "Escuela Infantil Haurtzaro",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-054",
+    "Nombre": "Escuela Infantil Aranbizkarra",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-066",
+    "Nombre": "Escuela Infantil ARANA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-067",
+    "Nombre": "Escuela Infantil Izarra",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-086",
+    "Nombre": "Escuela Infantil Gurutzmendi",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1000",
+    "Nombre": "CC Zabalgana AFCH",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Red vitoria",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1002",
+    "Nombre": "Escuela Infantil Landaberde",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1003",
+    "Nombre": "Escuela Infantil Virgen Blanca",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1004",
+    "Nombre": "Escuela Infantil Henrike Knorr",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1005",
+    "Nombre": "Escuela Infantil Katagorri",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1006",
+    "Nombre": "Escuela Infantil Salburua",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1007",
+    "Nombre": "Escuela Infantil Galtzagorri",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1008",
+    "Nombre": "Escuela Infantil Mariturri",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1009",
+    "Nombre": "Escuela Infantil Ortzadar",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1010",
+    "Nombre": "Escuela Infantil Zabalgana",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1011",
+    "Nombre": "Renfe Agua pot distribucion",
+    "Tipo": "Varios",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1012",
+    "Nombre": "Aretxabaleta Agua pot distribucion",
+    "Tipo": "Varios",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1013",
+    "Nombre": "CC Abetxuko Agua pot distribucion",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1014",
+    "Nombre": "CC Arriaga Agua pot distribucion",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1015",
+    "Nombre": "CC El Pilar Agua pot distribucion",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1016",
+    "Nombre": "CC Aldave Agua pot distribucion",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1017",
+    "Nombre": "CC Hegoalde Agua pot distribucion",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1020",
+    "Nombre": "CC Ibaiondo distribución",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1021",
+    "Nombre": "CC Lakua Sansomendi distribución",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1022",
+    "Nombre": "CC Zabalgana distribución",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1023",
+    "Nombre": "CC Ariznavarra distribución",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1024",
+    "Nombre": "CD Mendizorrotza distribución",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1025",
+    "Nombre": "CC Salburua distribución",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1026",
+    "Nombre": "CC Judizmendi distribución",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1027",
+    "Nombre": "Parque Gamarra distribución",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1028",
+    "Nombre": "CC Hegoalde distribución",
+    "Tipo": "polideportivo",
+    "Subtipo": "Red distribucion",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1051",
+    "Nombre": "Pozo Bakh",
+    "Tipo": "Polideportivo privado",
+    "Subtipo": NaN,
+    "ZA": "ZA Bakh"
+  },
+  {
+    "Sampling point": "D-1051",
+    "Nombre": "Pozo agua Bakh",
+    "Tipo": "Polideportivo privado",
+    "Subtipo": "potables",
+    "ZA": "ZA Bakh"
+  },
+  {
+    "Sampling point": "D-1052",
+    "Nombre": "Pozo Bakh tratada",
+    "Tipo": "Polideportivo privado",
+    "Subtipo": NaN,
+    "ZA": "ZA Bakh"
+  },
+  {
+    "Sampling point": "D-1052",
+    "Nombre": "Pozo Bakh Tratado",
+    "Tipo": "Polideportivo privado",
+    "Subtipo": "potables",
+    "ZA": "ZA Bakh"
+  },
+  {
+    "Sampling point": "D-1053",
+    "Nombre": "Bakh agua potable Amvisa",
+    "Tipo": "Polideportivo privado",
+    "Subtipo": "Red vitoria",
+    "ZA": "ZA Bakh"
+  },
+  {
+    "Sampling point": "D-1053",
+    "Nombre": "Bakh agua potable Amvisa",
+    "Tipo": "Polideportivo privado",
+    "Subtipo": "potables",
+    "ZA": "ZA Bakh"
+  },
+  {
+    "Sampling point": "D-1055",
+    "Nombre": "Armentia",
+    "Tipo": "Varios",
+    "Subtipo": "potables",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1056",
+    "Nombre": "Aretxabaleta",
+    "Tipo": "Varios",
+    "Subtipo": "potables",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1063",
+    "Nombre": "Deposito refuerzo cloración Lasarte",
+    "Tipo": "Varios",
+    "Subtipo": "potables",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1065",
+    "Nombre": "Fuente de Castillo Lavadero",
+    "Tipo": "Varios",
+    "Subtipo": "potables",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1078",
+    "Nombre": "Vivero Municipal Olarizu",
+    "Tipo": "Varios",
+    "Subtipo": "potables",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-110",
+    "Nombre": "Arcaia",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-111",
+    "Nombre": "Bolivar",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-112",
+    "Nombre": "Gamiz",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-113",
+    "Nombre": "Mendiola",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Monasterio"
+  },
+  {
+    "Sampling point": "D-114",
+    "Nombre": "Monasterioguren",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Monasterio"
+  },
+  {
+    "Sampling point": "D-115",
+    "Nombre": "Otazu",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-116",
+    "Nombre": "Ullibarri Olleros",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Ullibarri Olleros"
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": "D-120",
+    "Nombre": "Aberásturi",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Ullibarri Olleros"
+  },
+  {
+    "Sampling point": "D-121",
+    "Nombre": "Andollu",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Aberasturi"
+  },
+  {
+    "Sampling point": "D-122",
+    "Nombre": "Cerio",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-123",
+    "Nombre": "Argandoña",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Aberasturi"
+  },
+  {
+    "Sampling point": "D-124",
+    "Nombre": "Ascarza",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-125",
+    "Nombre": "Ilarratza",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-126",
+    "Nombre": "Villafranca",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": "D-130",
+    "Nombre": "Ullibarri Arrazua",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Ullibarri Arrazua"
+  },
+  {
+    "Sampling point": "D-131",
+    "Nombre": "Junguitu",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-132",
+    "Nombre": "Lubiano",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-133",
+    "Nombre": "Matauco",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-134",
+    "Nombre": "Oreitia",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Oreitia"
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": "D-140",
+    "Nombre": "Gometxa",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Oreitia"
+  },
+  {
+    "Sampling point": "D-141",
+    "Nombre": "Zuazo Vitoria",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-142",
+    "Nombre": "Berrostegieta",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Berrostegieta"
+  },
+  {
+    "Sampling point": "D-143",
+    "Nombre": "Castillo",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-145",
+    "Nombre": "Gardelegui",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-146",
+    "Nombre": "Lasarte",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-148",
+    "Nombre": "Esquivel",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": "D-150",
+    "Nombre": "Ariñez",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-151",
+    "Nombre": "Mendoza",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-152",
+    "Nombre": "Lermanda",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-153",
+    "Nombre": "Margarita",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-154",
+    "Nombre": "Subijana de Alava",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Subijana"
+  },
+  {
+    "Sampling point": "D-155",
+    "Nombre": "Crispijana",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-156",
+    "Nombre": "Zumelzu",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": "D-160",
+    "Nombre": "Yurre",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-161",
+    "Nombre": "Hueto Abajo",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Huetos"
+  },
+  {
+    "Sampling point": "D-162",
+    "Nombre": "Hueto Arriba",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Huetos"
+  },
+  {
+    "Sampling point": "D-163",
+    "Nombre": "Estarrona",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-164",
+    "Nombre": "Gobeo",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-165",
+    "Nombre": "Martioda",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-166",
+    "Nombre": "Lopidana",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": "D-170",
+    "Nombre": "Artaza de Foronda",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Mandojana"
+  },
+  {
+    "Sampling point": "D-171",
+    "Nombre": "Gereña",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Mandojana"
+  },
+  {
+    "Sampling point": "D-172",
+    "Nombre": "Antezana",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-173",
+    "Nombre": "Foronda",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-174",
+    "Nombre": "Legarda",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Mandojana"
+  },
+  {
+    "Sampling point": "D-175",
+    "Nombre": "Mandojana",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Mandojana"
+  },
+  {
+    "Sampling point": "D-176",
+    "Nombre": "Ullibarri Viña",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-180",
+    "Nombre": "Mendiguren",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-181",
+    "Nombre": "Amarita",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-182",
+    "Nombre": "Miñano Mayor",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-183",
+    "Nombre": "Miñano Menor",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-184",
+    "Nombre": "Gamarra Menor",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-185",
+    "Nombre": "Retana",
+    "Tipo": "Varios",
+    "Subtipo": "Pueblos",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": NaN,
+    "Nombre": NaN,
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": NaN
+  },
+  {
+    "Sampling point": "D-606",
+    "Nombre": "Escuela Infantil Ariznavarra",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-615",
+    "Nombre": "Escuela Infantil Tximeleta",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-627",
+    "Nombre": "Escuela Infantil Ibaiondo",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-635",
+    "Nombre": "Escuela Infantil Txantxangorri",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-638",
+    "Nombre": "Escuela Infantil Gloria Fuertes",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-639",
+    "Nombre": "Escuela Infantil Lakuabizkarra",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-640",
+    "Nombre": "Escuela Infantil Sansomendi",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-649",
+    "Nombre": "Escuela Infantil El Pilar",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-657",
+    "Nombre": "EMI Zaramaga",
+    "Tipo": "Centro educativo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-657",
+    "Nombre": "Escuela Infantil Zaramaga",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-660",
+    "Nombre": "Escuela Infantil Txagorritxu",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-666",
+    "Nombre": "Escuela Infantil Lourdes Lejarreta",
+    "Tipo": "Escuela infantil",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-667",
+    "Nombre": "Centro Capac Agraria",
+    "Tipo": "Centro educativo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-670",
+    "Nombre": "Residencia Arana pot",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-671",
+    "Nombre": "Residencia San Prudencio",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-672",
+    "Nombre": "Residencia Etxebidea",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-673",
+    "Nombre": "Residencia Juan Pablo I",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-674",
+    "Nombre": "Residencia Alto del Prado",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-675",
+    "Nombre": "Residencia Ariznavarra",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-676",
+    "Nombre": "CC Ariznavarra",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-677",
+    "Nombre": "Residencia Herm pobres",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-678",
+    "Nombre": "Residencia Txagorritxu",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-679",
+    "Nombre": "Residencia Ajuria",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-700",
+    "Nombre": "Residencia Casa Aurora",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-701",
+    "Nombre": "Residencia Los arquillos",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-711",
+    "Nombre": "Residencia Los Molinos",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-730",
+    "Nombre": "Residencia Zadorra Abetxuko",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-956",
+    "Nombre": "CC Salburua",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-957",
+    "Nombre": "Ayuntamiento S Martin",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-967",
+    "Nombre": "C/Jacinto Arregi 7",
+    "Tipo": "Varios",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-968",
+    "Nombre": "Fuente manantial Eskibel",
+    "Tipo": "Varios",
+    "Subtipo": "Fuentes",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-973",
+    "Nombre": "Casa abierta municipal Cuesta S Vicente",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-974",
+    "Nombre": "Aterpe Municipal Cta S Vicente",
+    "Tipo": "Residencia",
+    "Subtipo": "Vitoria Red",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "POT-000",
+    "Nombre": "no programadas potables",
+    "Tipo": "Varios",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-144",
+    "Nombre": "JUNTA ADMINISTRATIVA DE ESQUIBEL (MANANTIAL)",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-051",
+    "Nombre": "DIOCESANAS MOLINUEVO",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-053",
+    "Nombre": "C.E.I. 1º ANTONIO LOPEZ DE GUERE?U-JOSE MARDONES",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-055",
+    "Nombre": "C.E.I. 1º ARANZABELA IKASTOLA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-056",
+    "Nombre": "C.E.I. 1º SAMANIEGO",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-057",
+    "Nombre": "CENTRO DE ENSE?ANZA SECUNDARIA JESUS OBRERO",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-058",
+    "Nombre": "COLEGIO PUBLICO RAMON MARIA DE VALLE INCLAN",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-059",
+    "Nombre": "E.I. KUKOS",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-060",
+    "Nombre": "E.M.I. ARANBIZKARRA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-061",
+    "Nombre": "I.E. 2º SAMANIEGO",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-062",
+    "Nombre": "C.E.I. 1º ANGEL GANIVET-IZARRA-SANTA LUCIA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-083",
+    "Nombre": "E. U. DE FORMACION DEL PROFESORADO DE ALAVA U.P.V.",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-084",
+    "Nombre": "E. U. DE INGENIERIA TECNICA INDUSTRIAL Y DE TOPOGRAFIA U.P.V.",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-085",
+    "Nombre": "E. U. DE TRABAJO SOCIAL U.P.V.",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-087",
+    "Nombre": "E.M.I. OLARIZU",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-088",
+    "Nombre": "ESCUELA SUPERIOR DE NEGOCIOS Y TECNOLOGIAS - ESDEN",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-089",
+    "Nombre": "FACULTAD DE FARMACIA U.P.V.",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-090",
+    "Nombre": "FACULTAD DE FILOLOGIA, GEOGRAFIA E HISTORIA U.P.V.",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-091",
+    "Nombre": "I.E. 2º (ITS) CIUDAD JARDIN",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-092",
+    "Nombre": "I.E. 2º FEDERICO BARAIBAR",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-093",
+    "Nombre": "INSTITUTO DE BACHILLERATO A DISTANCIA RAMIRO DE MAEZTU",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-094",
+    "Nombre": "INSTITUTO DE BACHILLERATO EKIALDEA II (ANTIGUO RAMIRO DE MAEZTU)",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-095",
+    "Nombre": "PREESCOLAR CENTRO SAN JOSE",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-096",
+    "Nombre": "RESIDENCIA FEMENINA SAN JOSE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-097",
+    "Nombre": "RESIDENCIA UNIVERSITARIA TOMAS ALFARO FOURNIER",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-098",
+    "Nombre": "C.E.I. 1º MIGUEL DE CERVANTES",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-099",
+    "Nombre": "C.E.I. 1º y 2º HOGAR SAN JOSE",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-600",
+    "Nombre": "C.E.I. 1ª y 2ª PADRE RAIMUNDO OLABIDE (IKASTOLA)",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-610",
+    "Nombre": "C.E.I. 1ª SAN MARTIN",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-620",
+    "Nombre": "C.E.I. 1? UNIDAD EDUCATIVA TXAGORRITXU",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-063",
+    "Nombre": "C.E.I. 1º JUDIZMENDI-CANCILLER AYALA-STA. LUCIA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-064",
+    "Nombre": "C.E.I. 1º y 2º CALASANZ (ESCOLAPIOS)",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-065",
+    "Nombre": "E.I. NIÑOS",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-068",
+    "Nombre": "I.E. 2º LOS HERRAN",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-069",
+    "Nombre": "PREESCOLAR ANGEL DE LA GUARDA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-070",
+    "Nombre": "PREESCOLAR SANTA LUCIA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-071",
+    "Nombre": "I.E. 2º EKIALDEA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-072",
+    "Nombre": "RESIDENCIA Mª INMACULADA. FEMENINA PARA TRABAJADORAS Y ESTUDIANTES",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-073",
+    "Nombre": "C.E.I. 1º y 2º SAGRADO CORAZON-CARMELITAS",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-074",
+    "Nombre": "RESIDENCIA CASA 400 VITORIA-GASTEIZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-075",
+    "Nombre": "RESIDENCIA JOSE ANTONIO VELASCO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-076",
+    "Nombre": "AULARIO DE LAS NIEVES",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-077",
+    "Nombre": "C.E.I. 1º SAN IGNACIO",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-078",
+    "Nombre": "C.E.I. 1º y 2º NAZARETH",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-079",
+    "Nombre": "CENTRO DE EDUCACION INFANTIL ASPER",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-080",
+    "Nombre": "CENTRO DE ENSE?ANZA SECUNDARIA DIOCESANAS",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-081",
+    "Nombre": "CENTROS DE ENSE?ANZA PRIMARIA ADURZA IKASTOLA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-082",
+    "Nombre": "E. U. DE EMPRESARIALES U.P.V.",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-641",
+    "Nombre": "EDUCACION INFANTIL MANUEL DE FALLA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-642",
+    "Nombre": "I.E. 2? (ITS) CONSTRUCCION",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-643",
+    "Nombre": "INSTITUTO PUBLICO DE ENSE?ANZA SECUNDARIA MENDEBALDEA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-644",
+    "Nombre": "PREESCOLAR FRANCISCO JAVIER LANDABURU",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-645",
+    "Nombre": "C.E.I. 1? DIVINO MAESTRO-MARIA DE MAEZTU",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-646",
+    "Nombre": "C.E.I. 1? LUIS ELEJALDE-ROGELIA DE ALVARO",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-647",
+    "Nombre": "C.E.I. 1ª y 2ª PRESENTACION DE MARIA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-648",
+    "Nombre": "E.I. HAURREN GEROA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-651",
+    "Nombre": "I.E. 2? FRANCISCO DE VITORIA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-652",
+    "Nombre": "PREESCOLAR MARIA DE MAEZTU",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-653",
+    "Nombre": "C.E.I. 1? ABETXUKO IKASTOLA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-654",
+    "Nombre": "C.E.I. 1ª y 2ª ARMENTIA IKASTOLA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-655",
+    "Nombre": "C.E.I. 1ª y 2ª INMACULADA CONCEPCION",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-656",
+    "Nombre": "C.E.I. 1ª y 2ª NUESTRA SE?ORA DE LAS MERCEDES",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-658",
+    "Nombre": "ESCUELA MUNICIPAL DE EDUCACION VIRGEN BLANCA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-659",
+    "Nombre": "I.E. 2? KOLDO MITXELENA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-661",
+    "Nombre": "PREESCOLAR NUESTRA SE?ORA DE ORO",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-662",
+    "Nombre": "DIOCESANAS ARRIAGA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-663",
+    "Nombre": "ESCUELA DE ARTES APLICADAS",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-664",
+    "Nombre": "ESCUELA DE EDUCACION INFANTIL KIMBA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-665",
+    "Nombre": "C.E.I. 1? ODON DE APRAIZ IKASTOLA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-668",
+    "Nombre": "I.E. 2? ESCUELA AGRARIA DE ARKAUTE",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-669",
+    "Nombre": "I.E. 2? (ITS) HOSTELERIA",
+    "Tipo": "Escuela",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-680",
+    "Nombre": "CENTRO CULTURAL MONTEHERMOSO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-690",
+    "Nombre": "HOTEL NH CANCILLER AYALA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-710",
+    "Nombre": "CENTRO SOCIO-CULTURAL DE MAYORES ERREKALEOR",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-720",
+    "Nombre": "APARTAMENTOS DE MAYORES DE CORRERIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-681",
+    "Nombre": "MUSEO DE ARQUEOLOGIA DE ALAVA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-682",
+    "Nombre": "MUSEO DE CIENCIAS NATURALES DE ALAVA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-683",
+    "Nombre": "MUSEO FOURNIER DE NAIPES DE ALAVA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-684",
+    "Nombre": "MUSEO VASCO DE ARTE CONTEMPORANEO ARTIUM",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-685",
+    "Nombre": "CASA DE CULTURA IGNACIO ALDECOA. BIBLIOTECA PUBLICA PROVINCIAL DE VITORIA-GASTEIZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-686",
+    "Nombre": "ARCHIVO MUNICIPAL PILAR AROSTEGUI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-687",
+    "Nombre": "ARCHIVO DEL TERRITORIO HISTORICO DE ALAVA (ATHA)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-688",
+    "Nombre": "MUSEO DE BELLAS ARTES DE ALAVA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-689",
+    "Nombre": "MERCADO DE MAYORISTAS DE PESCADOS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-691",
+    "Nombre": "BARCELO HOTEL GASTEIZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-692",
+    "Nombre": "HOTEL CIUDAD DE VITORIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-693",
+    "Nombre": "GRAN HOTEL LAKUA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-694",
+    "Nombre": "HOTEL GOBEO PARK",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-695",
+    "Nombre": "HOTEL DATO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-696",
+    "Nombre": "PALACIO DE ELORRIAGA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-697",
+    "Nombre": "HOTEL SERCOTEL GENERAL ALAVA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-698",
+    "Nombre": "HOTEL RUTA DE EUROPA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-721",
+    "Nombre": "APARTAMENTOS DE MAYORES DE BLAS DE OTERO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-722",
+    "Nombre": "CENTRO OCUPACIONAL ALIBARRA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-723",
+    "Nombre": "CENTRO OCUPACIONAL ARRIAGA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-724",
+    "Nombre": "CENTRO OCUPACIONAL LAKUA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-725",
+    "Nombre": "CENTRO SOCIO-CULTURAL DE MAYORES SANSOMENDI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-726",
+    "Nombre": "RESIDENCIA AMA LUR",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-727",
+    "Nombre": "RESIDENCIA JUNTAS GENERALES",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-728",
+    "Nombre": "CENTRO OCUPACIONAL PUERTO RICO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-729",
+    "Nombre": "CENTRO SOCIO-CULTURAL DE MAYORES EL PILAR",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-699",
+    "Nombre": "MERCADO DE MAYORISTAS DE FRUTAS, HORTALIZAS Y VERDURAS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-702",
+    "Nombre": "CENTRO OCUPACIONAL HELIOS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-703",
+    "Nombre": "CENTRO SOCIO-CULTURAL DE MAYORES ARANBIZKARRA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-704",
+    "Nombre": "CENTRO OCUPACIONAL SALBURUA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-705",
+    "Nombre": "CENTRO SOCIO-CULTURAL DE MAYORES JUDIMENDI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-706",
+    "Nombre": "CENTRO SOCIO-CULTURAL DE MAYORES LOS HERRAN",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-707",
+    "Nombre": "APARTAMENTOS DE MAYORES DE SAN ANTONIO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-708",
+    "Nombre": "APARTAMENTOS DE MAYORES DE SANTA MARIA DE OLARIZU",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-709",
+    "Nombre": "CENTRO OCUPACIONAL ADURZA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-712",
+    "Nombre": "RESIDENCIA ZUBIALDE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-713",
+    "Nombre": "CENTRO OCUPACIONAL ARIZNABARRA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-714",
+    "Nombre": "CENTRO SOCIO-CULTURAL DE MAYORES ARIZNABARRA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-715",
+    "Nombre": "APARTAMENTOS DE MAYORES DE BEATO TOMAS DE ZUMARRAGA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-716",
+    "Nombre": "APARTAMENTOS DE MAYORES DE RAMIRO DE MAEZTU",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-717",
+    "Nombre": "CENTRO SOCIO-CULTURAL DE MAYORES SANTA MARIA DE LOS ANGELES",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-718",
+    "Nombre": "COMEDOR LANDAZURI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-719",
+    "Nombre": "APARTAMENTOS DE MAYORES BIZIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-630",
+    "Nombre": "C.E.I. 1? TOKI EDER IKASTOLA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-650",
+    "Nombre": "ESCUELA DE EDUCACION INFANTIL ALMUDENA CID",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-601",
+    "Nombre": "C.E.I. 1ª y 2ª SAGRADO CORAZON (CORAZONISTAS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-602",
+    "Nombre": "C.E.I. 1ª y 2ª VERA CRUZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-603",
+    "Nombre": "C.E.I. 1ª y 2ª VIRGEN NI?A",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-604",
+    "Nombre": "Escuela Oficial de Idiomas. Ctra de Lasarte",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-605",
+    "Nombre": "E.I. VILLA GASTEIZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-607",
+    "Nombre": "INSTITUTO MENDIZABALA (IEFPS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-608",
+    "Nombre": "INSTITUTO VASCO DE EDUCACION FISICA (IVEF) U.P.V.",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-609",
+    "Nombre": "RESIDENCIA VIRGEN NI?A",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-611",
+    "Nombre": "C.E.I. 1ª SANTA MARIA DE VITORIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-612",
+    "Nombre": "C.E.I. 1ª y 2ª NIÑO JESUS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-613",
+    "Nombre": "C.E.I. 1ª y 2ª SANTA MARIA (MARIANISTAS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-614",
+    "Nombre": "C.E.I. 1ª y 2ª URSULINAS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-616",
+    "Nombre": "ESCUELA DE EDUCACION INFANTIL IZALDE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-617",
+    "Nombre": "FUNDACION ESCUELA DE ARTES Y OFICIOS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-618",
+    "Nombre": "C.E.I. 1? ABENDA?O IKASTOLA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-619",
+    "Nombre": "C.E.I. 1? LUIS DORAO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-621",
+    "Nombre": "C.E.I. 1? y 2? SAN VIATOR",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-622",
+    "Nombre": "E.I. VIVENCIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-623",
+    "Nombre": "I.E. 2? MIGUEL DE UNAMUNO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-624",
+    "Nombre": "RESIDENCIA DIOCESANA JUVENIL TXAGORRITXU.MASCULINA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-625",
+    "Nombre": "UNIDAD DOCENTE DE U.P.V.",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-626",
+    "Nombre": "UNIVERSIDAD NACIONAL DE EDUCACION A DISTANCIA - UNED",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-628",
+    "Nombre": "C.E.I. 1? PADRE ORBISO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-629",
+    "Nombre": "C.E.I. 1? PEDRO IGNACIO BARRUTIA IKASTOLA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-631",
+    "Nombre": "C.E.I. 1ª y 2ª CALASANCIO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-632",
+    "Nombre": "C.E.I. 1ª y 2ª PEDAGOGICA SAN PRUDENCIO, S.C.L.",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-633",
+    "Nombre": "CENTRO DE ENS?ANZA PRIMARIA ANTONIO FORNIES - MANUEL DE FALLA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-634",
+    "Nombre": "CEP UMANDI IKASTOLA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-636",
+    "Nombre": "E.I. TXIRRINBIL",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-637",
+    "Nombre": "E.M.I. FRANCISCO JAVIER LANDABURU",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-147",
+    "Nombre": "JUNTA ADMINISTRATIVA DE ESQUIBEL (CASAS NUEVAS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F144",
+    "Nombre": "ACCESO AL PARQUE DE ZABALGANA POR LA ROTONDA DE LA CALLE LAS ARENAS CON LERMANDABIDEA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F56",
+    "Nombre": "ACCESO AL PARQUE POR EL PUEBLO DE ZUAZO (JUNTO A LA LAGUNA DE LEZEA)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F354",
+    "Nombre": "SENDA DE ZARAUNA DE CON AV. DE LOS DERECHOS HUMANOS (AGORESPACE)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F303",
+    "Nombre": "SENDA DE ZARAUNA DE CON AV. DE LOS DERECHOS HUMANOS (AGORESPACE)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F204",
+    "Nombre": "Fuente Plaza España",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-221",
+    "Nombre": "Fuente parque Judimendi, junto a la cafetería",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-255",
+    "Nombre": "Fuente parque Judimendi, en el monumento",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-35",
+    "Nombre": "Fuente c/ Federico Baraibar",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-87",
+    "Nombre": "Fuente plazoleta Errekatxiki 39",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D67",
+    "Nombre": "Fuente parque Abendaño",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D289",
+    "Nombre": "Fuente Sancho El Sabio",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F290",
+    "Nombre": "PEREGRINO, PASEO DEL",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F167",
+    "Nombre": "BOSQUE DE ARMENTIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-187",
+    "Nombre": "CALLE BEGOÑA CON CALLE SAN LUIS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-188",
+    "Nombre": "CALLE BEGOÑA CON PORTAL DE ARRIAGA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-189",
+    "Nombre": "CALLE VIRGEN BLANCA CON ESTIBALIZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-190",
+    "Nombre": "CALLE VIRGEN BLANCA CON SAN MATEO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-191",
+    "Nombre": "CALLE SAN JOSE CON SANTA BRIGIDA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-193",
+    "Nombre": "CALLE SAN JOSE CON SAN VICENTE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-285",
+    "Nombre": "Fuente parque c/ Valladolid",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-20",
+    "Nombre": "Fuente plaza Benito Pérez Galdós",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-254",
+    "Nombre": "Fuente plaza Zuberoa (CC Iparralde)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-129",
+    "Nombre": "Fuente parque c/ Reyes de Navarra con c/ Amurrio",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-6",
+    "Nombre": "Fuente plaza Santo Domingo",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-17",
+    "Nombre": "Fuente Parque del Norte. Columpios residencia",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-43",
+    "Nombre": "Fuente plazoleta c/ Anglo Vasco",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-124",
+    "Nombre": "Fuente 1 parque Arana",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-248",
+    "Nombre": "ZARAMAGA CON PORTAL DE GAMARRA (EN PARQUE EL ALAS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-82",
+    "Nombre": "HERACLIO ALFARO, 8 (ZONA DE JUEGOS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-347",
+    "Nombre": "ARAIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-343",
+    "Nombre": "ASPARRENA 27",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-341",
+    "Nombre": "ASPARRENA, 7",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-152",
+    "Nombre": "EN PUEBLO JUNTO A LA IGLESIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-346",
+    "Nombre": "GARDELEGI 41",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-344",
+    "Nombre": "MATURANA CON ASPARRENA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-345",
+    "Nombre": "ZALDUONDO 15",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-356",
+    "Nombre": "ERENTXUN, 36",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-132",
+    "Nombre": "CUADRILLA DE LAGUARDIA-RIOJA ALAVESA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-355",
+    "Nombre": "CUADRILLA DE LAGUARDIA-RIOJA ALAVESA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-127",
+    "Nombre": "LLODIO, PLAZA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-366",
+    "Nombre": "LLODIO, PLAZA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-126",
+    "Nombre": "PUERTO DE ETXEGARATE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-125",
+    "Nombre": "SENDA DE LOS PUERTOS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-128",
+    "Nombre": "ZARAMAGA, PLAZA DE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-207",
+    "Nombre": "SAN PRUDENCIO, AVENIDA, 1 (EL MINERAL)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-367",
+    "Nombre": "CASTILLO DE PORTILLA (TRASERA POLID.ARIZNAVARRA)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-95",
+    "Nombre": "ARIZNABARRA 17",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-96",
+    "Nombre": "CASTILLO DE BERNEDO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-98",
+    "Nombre": "ETXEZARRA, 35 (EN PARQUE)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-210",
+    "Nombre": "SOR SOFIA, PLAZA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-97",
+    "Nombre": "URAL-MENDI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-198",
+    "Nombre": "ARAMANGELU",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-235",
+    "Nombre": "ARAMANGELU",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-237",
+    "Nombre": "ARAMANGELU, 21",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-234",
+    "Nombre": "ARAMANGELU,3",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-265",
+    "Nombre": "AVENIDA DEL ZADORRA CON DUQUE DE WELLINGTON (ACCESO AL ANILLO VERDE)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-52",
+    "Nombre": "BOLIVIA (C.C.EUROPA - PARTE TRASERA)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-49",
+    "Nombre": "BOLIVIA (zona de juegos)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-212",
+    "Nombre": "DIEGO DE BORICA Y RETEGUI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-349",
+    "Nombre": "LA CONSTITUCION, PLAZA DE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-120",
+    "Nombre": "LA RIBERA, 3F (POLIDEPORTIVO)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-151",
+    "Nombre": "ALBERTO SCHOMMER, 6 (EN PARQUE)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-208",
+    "Nombre": "CAMPO DE LOS PALACIOS (PARQUE LINEAL)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-209",
+    "Nombre": "CAMPO DE LOS PALACIOS (PARQUE LINEAL)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-58",
+    "Nombre": "ENRIQUE DE EGUREN",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-374",
+    "Nombre": "MAXIMO GUISASOLA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-57",
+    "Nombre": "SAN MARTIN DE ABENDAÑO, PLAZA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-371",
+    "Nombre": "MAR TIRRENO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-381",
+    "Nombre": "VIÑASPRE, PARQUE DE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-21",
+    "Nombre": "LLEIDA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-110",
+    "Nombre": "GABRIEL CELAYA, 15",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-111",
+    "Nombre": "GABRIEL CELAYA, 25",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-112",
+    "Nombre": "GABRIEL CELAYA, 26",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-113",
+    "Nombre": "IGNACIO ALDECOA, PLAZA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-135",
+    "Nombre": "SAN JUAN DE ARRIAGA, PARQUE (ZOOLOGICO)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-136",
+    "Nombre": "SAN JUAN DE ARRIAGA, PARQUE (BAR)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-137",
+    "Nombre": "SAN JUAN DE ARRIAGA, PARQUE (ZONA DE JUEGOS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-138",
+    "Nombre": "SAN JUAN DE ARRIAGA, PARQUE (ZONA ESCALEXTRIC)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-139",
+    "Nombre": "SAN JUAN DE ARRIAGA, PARQUE (ZONA ERMITA)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-140",
+    "Nombre": "SAN JUAN DE ARRIAGA, PARQUE (JUNTO A PORTAL DE ARRIAGA)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-197",
+    "Nombre": "MALTZAGA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-200",
+    "Nombre": "LANDABERDE, 49 (EN ZONA INTERIOR-ZONA JUEGOS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-213",
+    "Nombre": "GERNIKAKO ARBOLA, 17",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-303",
+    "Nombre": "BULEVAR DE MARITURRI ,Nª16",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-354",
+    "Nombre": "SENDA DE ZARAUNA DE CON AV. DE LOS DERECHOS HUMANOS (AGORESPACE)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-304",
+    "Nombre": "IRUÑA-VELEIA, AVENIDA DE, (ENTRE LOS Nº27-25)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-141",
+    "Nombre": "PASEO DE LA CRUZ ROJA CON PASEO DE JUAN PABLO II",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-161",
+    "Nombre": "PASEO DE JUAN PABLO II CON PASEO DE LA UNESCO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-232",
+    "Nombre": "RIO URAGANA, 2",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-233",
+    "Nombre": "JUAN CRISOSTOMO DE ARRIAGA, 2",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-236",
+    "Nombre": "Fuente LARRABAZTERRA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-238",
+    "Nombre": "FELIX ALFARO FOURNIER, 29",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-241",
+    "Nombre": "CATALUÑA, PLAZA DE, 10 (EN ZONA DE ESTANCIA)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-242",
+    "Nombre": "RIO BERRON, 2",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-274",
+    "Nombre": "LANDABERDE, 55 (EN ZONA INTERIOR-ZONA JUEGOS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-286",
+    "Nombre": "LUIS OLARIAGA CON PORTAL DE FORONDA (PARKING AUTOCARABANAS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-281",
+    "Nombre": "PASEO DEL DALAI LAMA CON MAHATMA GANDHI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-284",
+    "Nombre": "PLAZA O ROTONDA DE LA ANTONIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-288",
+    "Nombre": "LANCIEGO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-306",
+    "Nombre": "ANTONI TAPIES ,Nº2",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-307",
+    "Nombre": "ANTONI TAPIES CON CLARA CAMPOAMOR",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-308",
+    "Nombre": "JUAN GRIS , Nº13",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-309",
+    "Nombre": "ENTRE PORTAL DE ZUAZO DE VITORIA, 2 Y C/LABASTIDA, 38",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-310",
+    "Nombre": "CLARA CAMPOAMOR ENTRE Nº22 Y Nº24",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-312",
+    "Nombre": "HANS CHRISTIAN ANDERSEN CON HENRY MORTON STANLEY",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-313",
+    "Nombre": "EN PARQUE JUNTO A C/IGNACIO RUIZ DE LUZURIAGA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-314",
+    "Nombre": "EN PARQUE SITUADO DETRÁS DE C/OCEANO ATLANTICO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-332",
+    "Nombre": "OCEANO PACIFICO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-333",
+    "Nombre": "MAR BALTICO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-352",
+    "Nombre": "PASEO DE ESKIBEL, ENTRE P.DE LA UNESCO Y SENDA DE RIO ALI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-353",
+    "Nombre": "REINA SOFIA, AVENIDA ,53",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-368",
+    "Nombre": "SALVADOR DALI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-369",
+    "Nombre": "TRASERA DE OCEANO PACIFICO, 17",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-131",
+    "Nombre": "ZARAMAGA, PLAZA DE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-166",
+    "Nombre": "BORQUE DE ARMENTIA ( EN EL ACCESO )",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-167",
+    "Nombre": "BOsQUE DE ARMENTIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-117",
+    "Nombre": "DE LA UNIVERSIDAD, PASEO (ESCUELA DE MAGISTERIO EN ZONA DE JUEGOS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-220",
+    "Nombre": "DE LA UNIVERSIDAD, PASEO (ESCUELA DE MAGISTERIO EN ZONA VERDE)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-37",
+    "Nombre": "DOMINGO MARTINEZ DE ARAGON",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-165",
+    "Nombre": "EN PASEO QUE VA DESDE AV. SAN PRUDENCIO HASTA JACINTO QUINCOCES (EN ZONA DE JUEGOS)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-40",
+    "Nombre": "ESCULTOR ISAAC DIEZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-10",
+    "Nombre": "GURUTZELARRE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-291",
+    "Nombre": "JUBILEO CON C/MENDIKO BIDEA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-292",
+    "Nombre": "JUBILEO CON CONPOSTELA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-42",
+    "Nombre": "MARIA DE MAEZTU, PARQUE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-251",
+    "Nombre": "MARTIN FIZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-211",
+    "Nombre": "PORTAL DE CASTILLA, 59",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-36",
+    "Nombre": "HERACLIO FOURNIER (INICIO DE LA CARRETERA A-2430)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-149",
+    "Nombre": "LA ZUMAQUERA, PASEO DE, 53",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-370",
+    "Nombre": "LOS MOLINOS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-214",
+    "Nombre": "LOS NAIPES, PLAZUELA DE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-144",
+    "Nombre": "OLARIZU PARQUE (ZONA SUR)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-145",
+    "Nombre": "OLARIZU, AVENIDA DE, 10",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-257",
+    "Nombre": "TXIRULA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-269",
+    "Nombre": "TXIRULA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-203",
+    "Nombre": "LAS ROTURAS, 2",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-156",
+    "Nombre": "PLAZA DEL PUEBLO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-77",
+    "Nombre": "PEDRO IGNACIO BARRUTIA, SENDA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-78",
+    "Nombre": "PEDRO IGNACIO BARRUTIA, SENDA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-81",
+    "Nombre": "PEDRO IGNACIO BARRUTIA, SENDA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-336",
+    "Nombre": "Fuente Avenida Capital de Euskadi 18",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-316",
+    "Nombre": "Fuente Riga con Paseo de la Iliada",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-326",
+    "Nombre": "Fuente Avenida de Varsovia con Avenida de Budapest",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-328",
+    "Nombre": "Fuente Vilnius (en paseo paralelo a calle Riga)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-295",
+    "Nombre": "Fuente Gabriela Mistral con calle Lubiana",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-321",
+    "Nombre": "Fuente Parque del Este ( zona medio)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-301",
+    "Nombre": "Fuente Doris Lessing con calle Nicosia",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-297",
+    "Nombre": "Fuente Gabriela Mistral con Avenida de Varsovia",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-300",
+    "Nombre": "Fuente Doris Lessing con Avenida de Bratislava",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-299",
+    "Nombre": "Fuente Gabriela Mistral con calle de la Valleta",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-250",
+    "Nombre": "Fuente Plaza Rigoberta Menchu",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-319",
+    "Nombre": "Fuente Las Neveras con Bulevar Salburua",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-337",
+    "Nombre": "Fuente Isaac Puente Amestoy",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-334",
+    "Nombre": "Fuente Miguel Latourneur",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-93",
+    "Nombre": "fuente Senda del Rio Ali con Paseo de Unicef",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-76",
+    "Nombre": "Fuente Nicaragua",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-199",
+    "Nombre": "Fuente rio bayas 2",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-228",
+    "Nombre": "Fuente Rio Barrundia 2",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-229",
+    "Nombre": "Fuente Rio Zaia 46",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-230",
+    "Nombre": "Fuente Rio Zubialde 2",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-1087",
+    "Nombre": "Residencia Lakua C/ Orio AFCH",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F249",
+    "Nombre": "Fuente Paseo la Biosfera",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F77",
+    "Nombre": "Fuente C Nicaragua",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F127",
+    "Nombre": "Fuente Pza LLodio",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-298",
+    "Nombre": "Fuente gabriela mistral con Nicosia",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "A-ABETXUKO",
+    "Nombre": "Punto de red Abetxuko de AMVISA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "A-SALBURU1",
+    "Nombre": "Punto red Salburua 1 de AMVISA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "A-MARITURR",
+    "Nombre": "Punto red Mariturri de AMVISA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "A-ITURRITX",
+    "Nombre": "Punto red Iturritxu de AMVISA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "A-CASCOVIE",
+    "Nombre": "Punto red Casco Viejo de AMVISA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "A-ARAKA",
+    "Nombre": "Salida de depósito de ARAKA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "A-GARDELEG",
+    "Nombre": "Salida de depósito de Gardfelegui",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-53",
+    "Nombre": "fuente Enrique de Eguren",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-70",
+    "Nombre": "Fuente Pintor Angel Saenz de Ugarte",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-66",
+    "Nombre": "Senda Jose Luis Gonzalo-Bilbao",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-350",
+    "Nombre": "GETARIA 13",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-365",
+    "Nombre": "RIO BAYAS , 22",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-377",
+    "Nombre": "GETARIA",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-142",
+    "Nombre": "EN ZONA DE JUEGOS",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-143",
+    "Nombre": "EN PUEBLO",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-69",
+    "Nombre": "Pintor Aurelio Vera-Fajardo",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-323",
+    "Nombre": "fuente parque venta de estrella y vias de tren",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-324",
+    "Nombre": "fuente parque venta estrella y vias tren",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-325",
+    "Nombre": "fuente parque venta estrella y vias tren",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-317",
+    "Nombre": "fuente Ferrocarril del Norte 2 en plaza",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-318",
+    "Nombre": "fuente Itinerario de Antonio con las Neveras",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-71",
+    "Nombre": "Fuente Gazalbide parque ( zona juegos)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-3",
+    "Nombre": "Fuente Honduras 3",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-293",
+    "Nombre": "fuente Galeon exterior",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-272",
+    "Nombre": "Fuente Galeón",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-271",
+    "Nombre": "Fuente galeon",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-273",
+    "Nombre": "Fuente Galeón",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-287",
+    "Nombre": "Fuente Padeleku lakua",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "D-105",
+    "Nombre": "Fuente Alfonso XI",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-278",
+    "Nombre": "Paseo de Berlin con calle Cuenca del Deva",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-280",
+    "Nombre": "Paseo de Berlin con Copenhage",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-279",
+    "Nombre": "Avenida Juan Carlos i",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F277",
+    "Nombre": "Paseo de Estrasburgo con Berlin",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-276",
+    "Nombre": "Paseo de Europa con Viena",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-282",
+    "Nombre": "Aerodromo Paseo de Salburua",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-275",
+    "Nombre": "Fuente Avenida de París 2 ( parque)",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-277",
+    "Nombre": "Fuente Paseo de EStrasburgo con Dublin",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-73",
+    "Nombre": "Fuente Plaza de la Constitución",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-75",
+    "Nombre": "Fuente Caracas",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-359",
+    "Nombre": "Fuente Ibarruri con iliada 29",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-360",
+    "Nombre": "Fuente Ibarruri con marta mata",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-361",
+    "Nombre": "Fuente Arkaiabidea con Avd bruselas",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-296",
+    "Nombre": "Fuente gabriela mistral con avd varsovia",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "F-138",
+    "Nombre": "Fuente san juan de arriaga excalectric",
+    "Tipo": "Fuente",
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-1",
+    "Nombre": "Inst Int Res SAN PRUDENCIO",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-2",
+    "Nombre": "Inst Int Res GAZALBIDE DOMUS VI",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-3",
+    "Nombre": "Inst Int Res TXAGORRITXU",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-4",
+    "Nombre": "Inst Int Res AJURIA",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-5",
+    "Nombre": "Inst Int Res ZADORRA",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-6",
+    "Nombre": "Inst Int Res LAKUA DFA",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-7",
+    "Nombre": "Inst Int Res ETXEBIDEA",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-8",
+    "Nombre": "Inst Int Res JUAN PABLO I",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-9",
+    "Nombre": "Inst Int Res METROCES ALTO EL PRADO",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-10",
+    "Nombre": "Inst Int Res ARIZNABARRA DOMUSVI",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-11",
+    "Nombre": "Inst Int Res CASA AURORA",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-12",
+    "Nombre": "Inst Int Res LOS MOLINOS",
+    "Tipo": "Residencia",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-13",
+    "Nombre": "Inst Int CC JUDIZMENDI",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-14",
+    "Nombre": "Inst Int CC  IPARRALDE",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-15",
+    "Nombre": "Inst Int CC  ARANA",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-16",
+    "Nombre": "Inst Int CC EL CAMPILLO",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-17",
+    "Nombre": "Inst Int CC EUROPA",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-18",
+    "Nombre": "Ins Int Polid LANDAZURI",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-19",
+    "Nombre": "Inst Int CC  ARIZNABARRA",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-20",
+    "Nombre": "Ins Int Polid SAN ANDRÉS",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-21",
+    "Nombre": "Ins Int Of Tec AYTO. SAN MARTIN",
+    "Tipo": "Oficinas",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-22",
+    "Nombre": "Inst Int CC ZABALGANA",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-23",
+    "Nombre": "Inst Int CC LAKUA SANSOMENDI",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-24",
+    "Nombre": "Ins Int Compl Dep BETOÑO",
+    "Tipo": "Compl",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-25",
+    "Nombre": "Ins Int PARQUE DE GAMARRA",
+    "Tipo": "Instalación Interior AFCH",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-26",
+    "Nombre": "Ins Int CC IBAIONDO",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-27",
+    "Nombre": "Inst Int CC SALBURUA",
+    "Tipo": "Centro Cívico",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-28",
+    "Nombre": "Inst Int Esc Inf IBAIONDO",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-29",
+    "Nombre": "Inst Int Esc Inf  GLORIA FUERTES",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-30",
+    "Nombre": "Inst Int Esc Inf  LAKUABIZKARRA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-31",
+    "Nombre": "Inst Int Esc Inf SANSOMENDI",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-32",
+    "Nombre": "Inst Int Esc Inf EL PILAR",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-33",
+    "Nombre": "Inst Int Esc Inf LOURDES LEJARRETA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-34",
+    "Nombre": "Inst Int Esc Inf LANDABERDE",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-35",
+    "Nombre": "Inst Int Esc Inf VIRGEN BLANCA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-36",
+    "Nombre": "Inst Int Frontones BETI JAI",
+    "Tipo": "Frontones",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-37",
+    "Nombre": "Inst Int Campo fútbol OLARAMBE",
+    "Tipo": "Campo de futbol",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-38",
+    "Nombre": "Inst Int Conservatorio LUIS ARAMBURU",
+    "Tipo": "Centro educativo",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-39",
+    "Nombre": "Inst Int Polid ABETXUKO",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-40",
+    "Nombre": "Inst Int Polid ARANALDE",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-41",
+    "Nombre": "Inst Int Polid ARIZNABARRA",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-42",
+    "Nombre": "Inst Int Polid ARRIAGA",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-43",
+    "Nombre": "Inst Int Polid MENDIZORROTZA",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-44",
+    "Nombre": "Inst Int CAFA JULIO ROCA",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-45",
+    "Nombre": "Inst Int Esc Inf HAURTZARO",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-46",
+    "Nombre": "Inst Int Esc Inf ARIZNABARRA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-47",
+    "Nombre": "Inst Int Esc Inf TXIMELETA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-48",
+    "Nombre": "Inst Int Esc Inf TXAGORRITXU",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-49",
+    "Nombre": "Inst Int Esc Inf GALTZAGORRI",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-50",
+    "Nombre": "Inst Int Esc Inf MARITURRI",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-51",
+    "Nombre": "Inst Int Esc Inf ORTZADAR",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-52",
+    "Nombre": "Inst Int Esc Inf ZABALGANA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-53",
+    "Nombre": "Inst Int Esc Inf ARANBIZKARRA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-54",
+    "Nombre": "Inst Int Esc Inf ARANA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-55",
+    "Nombre": "Inst Int Esc Inf IZARRA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-56",
+    "Nombre": "Inst Int Esc Inf GURUTZMENDI",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-57",
+    "Nombre": "Inst Int Esc Inf ZARAMAGA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-58",
+    "Nombre": "Inst Int Esc Inf HENRIKE KNORR",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-59",
+    "Nombre": "Inst Int Esc Inf KATAGORRI",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-60",
+    "Nombre": "Inst Int Esc Inf SALBURUA",
+    "Tipo": "Escuela infantil",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-94",
+    "Nombre": "Inst Int Complejo Mendizorrotza",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-95",
+    "Nombre": "Inst Int CC Hegoalde",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-96",
+    "Nombre": "Inst Int CC El Pilar",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-97",
+    "Nombre": "Inst Int CC Arriaga",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-98",
+    "Nombre": "Inst Int CC Aldave",
+    "Tipo": "Polideportivo",
+    "Subtipo": "Grifo",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-61",
+    "Nombre": "Inst Int Bizan Arana",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-62",
+    "Nombre": "IntInt Bizan Coronación",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-63",
+    "Nombre": "InstInt Bizan Zaramaga",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-64",
+    "Nombre": "Inst Int Centro Comercial Lakua",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-65",
+    "Nombre": "Inst Int Estación de Autobuses",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-66",
+    "Nombre": "Inst Int UNED",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-67",
+    "Nombre": "Inst Int Dendaraba",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-68",
+    "Nombre": "Inst Int RENFE",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-69",
+    "Nombre": "Inst Int El Corte Inglés",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-70",
+    "Nombre": "Inst Int EUNEIZ",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-71",
+    "Nombre": "Inst Int Centro Comercial El Boulevard",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-72",
+    "Nombre": "Inst Int Bizan San Cristóbal",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-73",
+    "Nombre": "Inst Int Bizan y CC Abetxuko",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-74",
+    "Nombre": "Inst Int Bakh",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-75",
+    "Nombre": "Inst Int Buesa Arena",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-76",
+    "Nombre": "Inst Int Facultad Letras",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-77",
+    "Nombre": "Inst Int Facultad IVEF",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-78",
+    "Nombre": "Inst Int Facultad Farmacia",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-79",
+    "Nombre": "Inst Int Escuela Oficial de Idiomas",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-80",
+    "Nombre": "Inst Int Fundación Estadio",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-81",
+    "Nombre": "Inst Int CEIP Mendizabala",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-82",
+    "Nombre": "Inst Int IES Francisco Vitoria",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-83",
+    "Nombre": "Inst Int Conservatorio Jesús Guridi",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-84",
+    "Nombre": "Inst Int CEIPS Olabide",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-85",
+    "Nombre": "Inst Int Ikastola Armentia",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-86",
+    "Nombre": "Inst Int CPIFP Egibide",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-87",
+    "Nombre": "Inst Int CPEIPS Sagrado Corazón",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-88",
+    "Nombre": "Inst Int CPEIPS Carmelitas",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-89",
+    "Nombre": "Inst Int CPEIPS San Viator",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-90",
+    "Nombre": "Inst Int CPEIPS San Prudencio",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-91",
+    "Nombre": "Inst Int CPEIPS Santa María",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-92",
+    "Nombre": "Inst Int CPEIPS Urkide",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-93",
+    "Nombre": "Inst Int CPEIPS Egibide BHIP",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-95",
+    "Nombre": "Inst Int CC Hegoalde",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-96",
+    "Nombre": "Inst Int CC El Pilar",
+    "Tipo": NaN,
+    "Subtipo": NaN,
+    "ZA": "ZA Vitoria"
+  },
+  {
+    "Sampling point": "G-94",
+    "Nombre": "Complejo Dep. Mendi",
+    "Tipo": NaN,
+    "Subtipo": "Prioritario",
+    "ZA": "ZA Vitoria"
+  }
+]
