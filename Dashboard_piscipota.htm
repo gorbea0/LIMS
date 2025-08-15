@@ -1,0 +1,3374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard LIMS Piscinas /Potables</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/lucide-static@0.321.0/font/lucide.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+  details > summary::-webkit-details-marker { display: none; }
+  :root { color-scheme: light dark; }
+
+  /* Sustitutos de @apply (si no compilas Tailwind) */
+  .tab-active {
+    background-color: #2563eb; /* bg-blue-600 */
+    color: #fff;               /* text-white */
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;     /* rounded-full */
+    padding: 0.125rem 0.5rem;  /* py-0.5 px-2 */
+    font-size: 0.75rem;        /* text-xs */
+    font-weight: 500;          /* font-medium */
+    line-height: 1rem;
+  }
+
+  /* Inputs con buen contraste */
+  input[type="date"],
+  input[type="text"],
+  input[type="file"] {
+    background: #fff;
+    color: #0f172a;            /* slate-900 */
+    border-color: #cbd5e1;     /* slate-300 */
+  }
+  @media (prefers-color-scheme: dark) {
+    input[type="date"],
+    input[type="text"],
+    input[type="file"] {
+      background: #fff !important;
+      color: #0f172a !important;
+    }
+  }
+
+  /* Selector múltiple legible (claro en ambos modos) */
+  select[multiple] {
+    background: #fff;
+    color: #0f172a;
+  }
+  select[multiple] option {
+    background: #fff;
+    color: #0f172a;
+  }
+</style>
+
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="sticky top-0 z-40 border-b bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-7xl px-4 py-4 flex items-center gap-3">
+      <i class="lucide-pool text-blue-600 text-2xl"></i>
+      <h1 class="text-xl sm:text-2xl font-semibold">Análisis LIMS Piscinas / Potables</h1>
+      <span id="summaryCounts" class="ml-auto text-sm text-slate-600"></span>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl p-4 space-y-4">
+    <!-- Estado + acordeón de carga manual -->
+<section class="rounded-2xl border bg-white shadow-sm">
+  <!-- Mensaje de estado de la carga automática -->
+  <div class="p-4">
+    <div id="remoteCsvMsg" class="text-sm text-slate-600">
+      Cargando datos…
+    </div>
+  </div>
+
+  <!-- Acordeón (cerrado por defecto) -->
+  <details id="manualCsvAcc" class="group border-t">
+    <summary class="flex items-center justify-between cursor-pointer select-none px-4 py-3 hover:bg-slate-50">
+      <span class="font-medium">Carga manual de CSV</span>
+      <span class="text-slate-500 text-sm group-open:hidden">Mostrar</span>
+      <span class="text-slate-500 text-sm hidden group-open:inline">Ocultar</span>
+    </summary>
+
+    <div class="grid gap-4 md:grid-cols-2 p-4 pt-2">
+      <div class="rounded-xl border p-4">
+        <h2 class="font-medium mb-2">1) Cargar CSV de muestras</h2>
+        <input id="csvSamples" type="file" accept=".csv" class="block w-full cursor-pointer rounded border p-2" />
+      </div>
+      <div class="rounded-xl border p-4">
+        <h2 class="font-medium mb-2">2) Cargar CSV de análisis</h2>
+        <input id="csvAnalyses" type="file" accept=".csv" class="block w-full cursor-pointer rounded border p-2" />
+      </div>
+	  
+	  <!-- 3) Cargar JSON de puntos (opcional) -->
+<div class="mt-4">
+  <label class="block text-sm font-medium mb-1">3) Cargar JSON de puntos (opcional)</label>
+  <input id="filePuntosJson"
+         type="file"
+         accept=".json,application/json"
+         class="block w-full rounded-lg border px-3 py-2 text-sm" />
+  <p class="text-xs text-slate-500 mt-1">
+    Usa el fichero <code>Puntos_potables.json</code> si falla la carga automática desde GitHub.
+  </p>
+</div>
+
+	  
+	  
+	  
+	  
+      <p class="md:col-span-2 text-sm text-slate-500">
+        Consejo: selecciona ambos archivos y se cargarán automáticamente.
+      </p>
+    </div>
+  </details>
+</section>
+
+
+    <section class="rounded-2xl border bg-white p-4 shadow-sm">
+      <div class="grid gap-3 md:grid-cols-4 items-end">
+        <div>
+          <label class="block text-sm text-slate-600">Desde</label>
+          <input id="dateFrom" type="date" placeholder="dd/mm/aaaa" class="mt-1 w-full rounded border p-2" />
+        </div>
+        <div>
+          <label class="block text-sm text-slate-600">Hasta</label>
+          <input id="dateTo" type="date" placeholder="dd/mm/aaaa" class="mt-1 w-full rounded border p-2" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-sm text-slate-600">Buscar por Punto / Nombre</label>
+          <input id="searchBox" type="text" placeholder="Ej. D-224 o Piscina Municipal" class="mt-1 w-full rounded border p-2" />
+        </div>
+      </div>
+      <!-- Filtro Job Name -->
+	  
+	  
+	  
+	  
+	  
+      <div class="mt-3 flex flex-wrap items-center gap-2">
+        <span class="text-sm text-slate-600 mr-1">Job Name:</span>
+       <!-- Conmutador Piscinas / Potables -->
+<div id="scopeSwitch" class="inline-flex rounded-xl border p-1 bg-white">
+  <button data-scope="piscinas" class="scope-chip rounded-lg px-3 py-1.5 text-sm bg-blue-600 text-white">Piscinas</button>
+  <button data-scope="potables" class="scope-chip rounded-lg px-3 py-1.5 text-sm hover:bg-slate-50">Potables</button>
+</div>
+
+<!-- Filtros para PISCINAS -->
+<div id="jobFilterPools" class="inline-flex rounded-xl border p-1 bg-white">
+  <button data-job="autocontrol" class="job-chip rounded-lg px-3 py-1.5 text-sm hover:bg-slate-50">AUTOCONTROL</button>
+  <button data-job="ludicas"     class="job-chip rounded-lg px-3 py-1.5 text-sm hover:bg-slate-50">LÚDICAS</button>
+  <button data-job="ambas"       class="job-chip rounded-lg px-3 py-1.5 text-sm bg-blue-600 text-white">Ambas</button>
+</div>
+
+<!-- Filtros para POTABLES (oculto por defecto) -->
+<div id="jobFilterPotables" class="inline-flex rounded-xl border p-1 bg-white hidden">
+  <button data-job="sanita" class="job-chip rounded-lg px-3 py-1.5 text-sm hover:bg-slate-50">Sanita</button>
+  <button data-job="grifo"  class="job-chip rounded-lg px-3 py-1.5 text-sm hover:bg-slate-50">Grifo</button>
+  <button data-job="ambas"  class="job-chip rounded-lg px-3 py-1.5 text-sm bg-blue-600 text-white">Ambas</button>
+</div>
+
+		
+		
+		
+		
+		
+		
+		
+		
+		<button id="btnStats" class="rounded-xl border px-4 py-2 hover:bg-slate-50">Estadística</button>
+		
+		
+		<button id="btnCalendar" class="px-2 py-1 bg-sky-600 text-white rounded hover:bg-sky-700 text-sm">
+  📅 Ver calendario
+</button>
+
+	<button onclick="openFuentesMap()"
+  class="rounded-lg border px-3 py-1.5 text-sm bg-white hover:bg-slate-50">
+  🗺️ Mapa de fuentes
+</button>
+	
+		
+		
+        <button id="btnApplyFilters" class="ml-auto rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Aplicar filtros</button>
+		
+		
+        <button id="btnClearFilters" class="rounded-xl border px-4 py-2 hover:bg-slate-50">Limpiar</button>
+      </div>
+	  
+	  
+	  
+    </section>
+	
+	
+	
+
+<!-- Modal Calendario -->
+<div id="modalCalendar" class="hidden fixed inset-0 z-50 bg-black/50 items-center justify-center">
+  <!-- Panel -->
+  <div class="bg-white rounded-xl shadow-xl w-[95%] max-w-6xl max-h-[90vh] flex flex-col">
+    <!-- Cabecera sticky -->
+    <div class="sticky top-0 z-10 bg-white border-b px-4 py-2 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <button id="calPrev" class="rounded-lg border px-2 py-1 hover:bg-slate-50" title="3 meses atrás">←</button>
+        <h2 id="calTitle" class="text-lg font-semibold">Calendario</h2>
+        <button id="calNext" class="rounded-lg border px-2 py-1 hover:bg-slate-50" title="3 meses adelante">→</button>
+      </div>
+      <div class="flex items-center gap-3 text-xs">
+        <span class="inline-block w-3 h-3 rounded bg-sky-300"></span> Piscinas
+        <span class="inline-block w-3 h-3 rounded bg-green-300"></span> Potables
+      </div>
+      <button onclick="closeCalendar()" class="text-slate-500 hover:text-slate-800 text-xl leading-none">&times;</button>
+    </div>
+
+    <!-- Cuerpo scrollable -->
+    <div class="px-4 pt-3 pb-4 overflow-y-auto grow min-h-0">
+      <div id="calendarContainer" class="flex flex-wrap gap-3"></div>
+      <div id="calendarList" class="mt-4"></div>
+    </div>
+  </div>
+</div>
+
+
+	
+	
+	<!-- Modal: Mapa de Fuentes -->
+<div id="modalFuentes" class="hidden fixed inset-0 z-50 bg-black/50 items-center justify-center">
+  <div class="bg-white rounded-xl shadow-xl w-[95%] max-w-6xl max-h-[90vh] flex flex-col">
+    <!-- Cabecera sticky -->
+    <div class="sticky top-0 z-10 bg-white border-b px-4 py-2 flex items-center justify-between">
+      <h2 class="text-lg font-semibold">Mapa de fuentes</h2>
+      <div class="text-xs text-slate-600">
+        <span class="inline-block w-3 h-3 rounded bg-green-500 align-middle"></span> 0 inc. &nbsp;
+        <span class="inline-block w-3 h-3 rounded bg-amber-400 align-middle"></span> 1 inc. &nbsp;
+        <span class="inline-block w-3 h-3 rounded bg-red-500 align-middle"></span> ≥2 inc. &nbsp;
+		<span class="inline-block w-3 h-3 rounded bg-slate-400"></span> sin muestras
+      </div>
+      <button onclick="closeFuentesMap()" class="text-slate-500 hover:text-slate-800 text-xl leading-none">&times;</button>
+    </div>
+
+    <!-- Cuerpo scrollable -->
+    <div class="px-4 pt-3 pb-4 overflow-y-auto grow min-h-0">
+      <div id="mapFuentes" class="rounded-xl border" style="height: 60vh;"></div>
+      <div id="mapFuentesList" class="mt-4"></div>
+    </div>
+  </div>
+</div>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+    <section class="rounded-2xl border bg-white p-2 shadow-sm">
+      <!-- Pestañas PISCINAS -->
+<div id="tabsPools" class="flex flex-wrap gap-2 p-2">
+  <button data-tab="all" class="tab-btn rounded-xl border px-3 py-1.5">Todas</button>
+  <button data-tab="Privada" class="tab-btn rounded-xl border px-3 py-1.5">Privadas</button>
+  <button data-tab="Municipal" class="tab-btn rounded-xl border px-3 py-1.5">Municipales</button>
+  <button data-tab="Exterior" class="tab-btn rounded-xl border px-3 py-1.5">Exteriores</button>
+  <button data-tab="Interior" class="tab-btn rounded-xl border px-3 py-1.5">Interiores</button>
+  <button data-tab="incumplimientos" class="tab-btn rounded-xl border px-3 py-1.5">Incumplimientos</button>
+  <button data-tab="puntosIncumplimiento" class="tab-btn rounded-xl border px-3 py-1.5">Puntos con incumplimiento</button>
+  <button data-tab="puntosTodos" class="tab-btn rounded-xl border px-3 py-1.5">Puntos</button>
+
+  <button id="btnSiloe" class="rounded-xl border px-3 py-1.5 ml-auto hover:bg-slate-50">Siloe</button>
+</div>
+
+<!-- Pestañas POTABLES (inicialmente ocultas) -->
+<div id="tabsPotables" class="flex flex-wrap gap-2 p-2 hidden">
+  <button data-tab="all" class="tab-btn rounded-xl border px-3 py-1.5">Todas</button>
+  <button data-tab="fuentes" class="tab-btn rounded-xl border px-3 py-1.5">Fuentes</button>
+  <button data-tab="prioritarios" class="tab-btn rounded-xl border px-3 py-1.5">Prioritarios</button>
+  <button data-tab="pueblos" class="tab-btn rounded-xl border px-3 py-1.5">Pueblos</button>
+  <button data-tab="noprog" class="tab-btn rounded-xl border px-3 py-1.5">No Prog</button>
+  <button data-tab="incumplimientos" class="tab-btn rounded-xl border px-3 py-1.5">Incumplimientos</button>
+  <button data-tab="puntosIncumplimiento" class="tab-btn rounded-xl border px-3 py-1.5">Puntos con incumplimiento</button>
+  <button data-tab="puntosTodos" class="tab-btn rounded-xl border px-3 py-1.5">Puntos</button>
+</div>
+
+      <div class="p-2">
+	  
+	  
+<!-- Panel de tarjetas de puntos (oculto por defecto) -->
+<section id="panelPuntos" class="hidden">
+  <h3 id="panelPuntosTitle" class="mt-4 font-medium"></h3>
+  <ul id="puntosList" class="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3"></ul>
+</section>
+
+<!-- Panel de tabla (visible por defecto) -->
+<section id="tablaMuestrasWrap" class="overflow-x-auto rounded-xl border">
+  <table class="min-w-full divide-y divide-slate-200">
+    <thead class="bg-slate-50 text-xs uppercase text-slate-600">
+      <tr>
+        <th class="px-3 py-2 text-left">Fecha</th>
+        <th class="px-3 py-2 text-left">Id Numeric</th>
+        <th class="px-3 py-2 text-left">Nombre</th>
+        <th class="px-3 py-2 text-left">Collected from</th>
+        <th class="px-3 py-2 text-left">Collected by</th>
+        <th class="px-3 py-2 text-left"># Analisis</th>
+        <th class="px-3 py-2 text-left"># Incumplimientos</th>
+        <th class="px-3 py-2 text-left">Evaluación</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody" class="divide-y divide-slate-100 text-sm"></tbody>
+  </table>
+</section>
+
+		
+	
+      </div>
+    </section>
+
+    <section class="rounded-2xl border bg-white p-4 shadow-sm">
+      <details>
+        <summary class="cursor-pointer select-none text-sm text-slate-700">Estructura JSON de puntos de muestreo</summary>
+        <pre class="mt-2 whitespace-pre-wrap text-xs bg-slate-50 p-2 rounded">[{"Sampling point":"D-1035","Nombre":"Piscina Hotel Lakua con chorros","instalacion":"Hotel lakua","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"}]</pre>
+      </details>
+    </section>
+  </main>
+  
+  
+  
+  <!-- Modal Estadística -->
+  
+<div id="modalStats" class="fixed inset-0 z-50 hidden items-center justify-center">
+  <div class="absolute inset-0 bg-black/40" onclick="closeStatsModal()"></div>
+  <div class="relative max-h-[85vh] w-[95vw] max-w-5xl overflow-hidden rounded-2xl border bg-white shadow-2xl">
+    
+    <!-- HEADER -->
+    <div class="flex items-center justify-between border-b p-4">
+      <h3 class="text-lg font-semibold">Estadística de parámetros</h3>
+      <button class="rounded-lg p-2 hover:bg-slate-100" onclick="closeStatsModal()" aria-label="Cerrar">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="p-4 space-y-3 overflow-y-auto max-h-[70vh]">
+      <p class="text-sm text-slate-600">Cálculo sobre las muestras actualmente visibles con los filtros aplicados.</p>
+      <div class="overflow-x-auto rounded-xl border">
+        <table class="min-w-full divide-y divide-slate-200 text-sm">
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="px-3 py-2 text-left">Parámetro</th>
+              <th class="px-3 py-2 text-left">Mín</th>
+              <th class="px-3 py-2 text-left">Máx</th>
+              <th class="px-3 py-2 text-left">Media</th>
+              <th class="px-3 py-2 text-left">Mediana</th>
+              <th class="px-3 py-2 text-left"># análisis</th>
+			  <th class="px-3 py-2 text-left"># incumpl.</th>
+            </tr>
+          </thead>
+          <tbody id="statsBody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="border-t p-3 text-right">
+      <button class="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" onclick="closeStatsModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+
+  
+  
+  
+  
+  
+
+  <!-- JSON embebido de puntos de muestreo -->
+  <script id="puntos-json-data" type="application/json">[{"Sampling point":"D-1035","Nombre":"Piscina Hotel Lakua chorros",  "instalacion":"Hotel lakua","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-1050","Nombre":"Vaso spa Mar Muerto Bakh","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-200","Nombre":"Iparralde Grande","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-201","Nombre":"Iparralde Peque","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-202","Nombre":"Judimendi Grande","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-203","Nombre":"Judimendi Peque","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-204","Nombre":"Mendizorrotza grande cubierta","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-205","Nombre":"Mendizorrotza peque cubierta","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-206","Nombre":"Mendizorrotza exterior Olímpica","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-207","Nombre":"Mendizorrotza exterior Infantil","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-208","Nombre":"MENDIZORROTZA: Vaso Descubierto Chapoteo","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":null,"aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-210","Nombre":"Gamarra Familiar Descubierto","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-211","Nombre":"Gamarra Olímpica Descubierto","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-212","Nombre":"Gamarra Infantil Descubierto","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-213","Nombre":"Gamarra Chapoteo Descubierto","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-214","Nombre":"GAMARRA: Vaso Descubierto Tobogán 1","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":null,"aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-218","Nombre":"COLEGIO BLAS LOPEZ: Vaso Cubierto","instalacion":"Blas lopez","titular":"privado","tipo":null,"aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-219","Nombre":"Estadio Grande Cubierto","instalacion":"Estadio","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-220","Nombre":"Estadio Peque Cubierto","instalacion":"Estadio","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-221","Nombre":"Estadio Aprendiz Cubierto","instalacion":"Estadio","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-222","Nombre":"Estadio Saltos Descubierto","instalacion":"Estadio","titular":"privado","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-223","Nombre":"Estadio Señoras Descubierto","instalacion":"Estadio","titular":"privado","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-224","Nombre":"Estadio Chapoteo Descubierto","instalacion":"Estadio","titular":"privado","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-225","Nombre":"Olabide Ikastola piscina","instalacion":"Olabide Ikastetxea","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-226","Nombre":"Atlas natacion","instalacion":"Atlas","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-227","Nombre":"La Peña Grande Descubierto","instalacion":"Peña Vitoriana","titular":"privado","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-228","Nombre":"La Peña Peque Descubierto","instalacion":"Peña Vitoriana","titular":"privado","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-230","Nombre":"Lakua Sansomendi Grande","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-231","Nombre":"Lakua Sansomendi Peque","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-232","Nombre":"Hegoalde Vaso único","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-233","Nombre":"Aldave Grande","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-234","Nombre":"Aldave Peque","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-235","Nombre":"Aquamendi Grande Descubierta","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-235-1","Nombre":"MENDIZORROTZA: ACUAMENDI VASO POLIVALENTE: Zona de saltos","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":null,"aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-235-2","Nombre":"MENDIZORROTZA: ACUAMENDI VASO POLIVALENTE: Jakuzzi Isla","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":null,"aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-235-3","Nombre":"MENDIZORROTZA: ACUAMENDI VASO POLIVALENTE: Zona de natacion","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":null,"aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-235-4","Nombre":"MENDIZORROTZA: ACUAMENDI VASO POLIVALENTE: Jakuzzi exterior","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":null,"aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-236","Nombre":"Aquamendi Peque Descubierta","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-237","Nombre":"K2 Grande","instalacion":"K2","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-238","Nombre":"K2 Peque","instalacion":"K2","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-240","Nombre":"Abechuco Grande","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-241","Nombre":"Abechuco Peque","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-242","Nombre":"San Andrés Grande","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-243","Nombre":"San Andrés Peque","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-244","Nombre":"Bakh Vaso adultos natacion","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-245","Nombre":"Bakh Vaso chorros natacion","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-246","Nombre":"Bakh vaso maternonatacion","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-247","Nombre":"Bakh Chapoteo interior","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-248","Nombre":"Atlas vaso romano","instalacion":"Atlas","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-249","Nombre":"Bakh vaso exterior grande","instalacion":"Bakh","titular":"privado","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-250","Nombre":"IBAIONDO: Vaso polivalente","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":null,"aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-250-1","Nombre":"CC Ibaiondo natacion","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-250-2","Nombre":"CC Ibaiondo infantil","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-250-3","Nombre":"CC Ibaiondo chorros","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-251","Nombre":"Bakh vaso exterior chapoteo","instalacion":"Bakh","titular":"privado","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-252","Nombre":"K2 Jacuzzi grande arriba","instalacion":"K2","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-253","Nombre":"K2 Jacuzzi masculino","instalacion":"K2","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-254","Nombre":"K2 jacuzzi femenino","instalacion":"K2","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-256","Nombre":"Bakh jacuzzi grande wellness chorros","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-257","Nombre":"Bakh jacuzzi circular","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-258","Nombre":"Bakh jacuzzi frio","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-954","Nombre":"Salburua vaso Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-955","Nombre":"Salburua vaso Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-961","Nombre":"K2 jacuzzi femenino","instalacion":"K2","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-962","Nombre":"K2 jacuzzi masculino","instalacion":"K2","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-964","Nombre":"Bakh jacuzzi circular","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-965","Nombre":"Bakh jacuzzi grande chorros","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-975","Nombre":"Jacuzzi K2 grande","instalacion":"K2","titular":"privado","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"D-984","Nombre":"Zabalgana piscina GR","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-985","Nombre":"Zabalgana piscina PQ","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"D-986","Nombre":"Bakh vaso frío balneario legio","instalacion":"Bakh","titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"LUD-000","Nombre":"otros piscina","instalacion":null,"titular":"privado","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-A1","Nombre":"Urpa Aldave Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-A2","Nombre":"Urpa Aldave Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-AB1","Nombre":"Urpa Abetxuko Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-AB2","Nombre":"Urpa Abetxuko Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-AQ1","Nombre":"Urpa Aquamendi Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-AQ2","Nombre":"Urpa Aquamendi Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-G1","Nombre":"Urpa gamarra familiar","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-G2","Nombre":"Urpa gamarra olimpica","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-G3","Nombre":"Urpa gamarra infantil","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-G4","Nombre":"Urpa gamarra chapoteo","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-H1","Nombre":"Urpa Hegoalde pisc","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-I1","Nombre":"Urpa Iparralde Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-I2","Nombre":"Urpa Iparralde Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-IB-1","Nombre":"Urpa Ibaiondo Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-IB-2","Nombre":"Urpa Ibaiondo chorros ","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"VASO-IB-3","Nombre":"Urpa Ibaiondo chapoteo","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-J1","Nombre":"Urpa Judimendi Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-J2","Nombre":"Urpa Judimendi Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-L1","Nombre":"Urpa Lakua Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-L2","Nombre":"Urpa Lakua Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-M1","Nombre":"Urpa Mendizorroza cub Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-M2","Nombre":"Urpa Mendizorroza cub pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"conaerosolizacion"},
+  {"Sampling point":"VASO-MD1","Nombre":"Urpa Mendizorroza desc Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-MD2","Nombre":"Urpa Mendizorroza desc Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"exterior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-SA1","Nombre":"Urpa San Andres Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-SA2","Nombre":"Urpa San Andres Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-SB1","Nombre":"Salburua vaso Gr","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"},
+  {"Sampling point":"VASO-SB2","Nombre":"Salburua vaso Pq","instalacion":"Ayuntamiento","titular":"Ayuntamiento","tipo":"interior","aerosolizacion":"sinaerosolizacion"}]
+  
+  
+  
+  
+  
+  
+  
+  </script>
+
+  <script>
+  // ====== POTABLES: límites (VP, Estricto, Unidades) + helpers ======
+const limitesPotablesRaw = {
+  'aluminio': [200, 600, 'µg/L'],
+  'amonio': [0.5, 1, 'mg/L'],
+  'antimonio': [10, null, 'µg/L'],
+  'arsenico': [10, null, 'µg/L'],
+  'benceno': [1, null, 'µg/L'],
+  'boro': [1.5, null, 'mg/L'],
+  'bromato': [10, null, 'µg/L'],
+  'cadmio': [5, null, 'µg/L'],
+  'clorato': [0.250, null, 'mg/L'],
+  'clorito': [0.250, null, 'mg/L'],
+  'cloro combinado': [2, 3, 'mg/L'],
+  'cloro libre': [1, 5, 'mg/L'],
+  'cloruro': [250, null, 'mg/L'],
+  'cloruro de vinilo': [0.5, null, 'µg/L'],
+  'clostridios sulfitorreductores': [0, null, 'UFC/100mL'],
+  'clostridium perfringens': [0, null, 'UFC/100mL'],
+  'cobre': [2, null, 'mg/L'],
+  'coliformes totales': [0, 100, 'UFC/100mL'],
+  'conductividad': [2500, 4000, 'µS/cm'],
+  'cromo total': [50, null, 'µg/L'],
+  'enterococos': [0, null, 'UFC/100mL'],
+  'escherichia coli': [0, null, 'UFC/100mL'],
+  'hierro': [200, 600, 'µg/L'],
+  'leg': [100, null, 'UFC/L'],
+  'legionella spp': [100, null, 'UFC/L'],
+  'legionella ser2-14': [100, null, 'UFC/L'],
+  'manganeso': [50, 80, 'µg/L'],
+  'níquel': [20, null, 'µg/L'],
+  'nitrato': [50, null, 'mg/L'],
+  'nitritos': [0.5, null, 'mg/L'],
+  'oxidabilidad': [5, 7, 'mg/L'],
+  // Para pH: VP alto 9.5, Estricto alto 10; y además mínimos VP 6.5, Estricto 5.5 (se gestionan aparte)
+  'ph': [9.5, 10, 'pH'],
+  'plaguicidas, total': [0.005, null, 'ng/L'],
+  'plomo': [10, null, 'µg/L'],
+  'rcto. bacterias heterótrofas 22º': [100, 1000, 'UFC/mL'],
+  'selenio': [20, null, 'µg/L'],
+  'sodio': [200, 600, 'mg/L'],
+  'sulfato': [250, 750, 'mg/L'],
+  'tricloroeteno+tetracloroeteno': [10, null, 'µg/L'],
+  'sum. trihalometanos': [100, null, 'µg/L'],
+  'turbidez': [4, null, 'UNF'],
+  '1,2-dicloroetano': [3, null, 'µg/L'],
+  'bisfenol': [2.5, null, 'µg/L'],
+  'color': [null, null, 'mg/L'],
+  
+};
+
+const parametrosMinimosPot = ["ph", "cloro libre", "escherichia coli", "coliformes totales", "nitrato", "nitritos"];
+const parametrosMinimosGrifo = ["enterococos", "PH", "cloro libre", "ECOLI", "coliformes", "NITRATO", "NITRITO"];
+
+// Normalización + sinónimos para casar nombres del CSV con la tabla
+const potableSynonyms = new Map([
+  ['ph', 'ph'],
+  ['pH', 'ph'],
+  ['e coli', 'escherichia coli'],
+  ['escherichia coli', 'escherichia coli'],
+  ['ecoli', 'escherichia coli'],
+  ['coliformes', 'coliformes totales'],
+  ['coliformes totales', 'coliformes totales'],
+  ['cloro libre', 'cloro libre'],
+  ['cloro combinado', 'cloro combinado'],
+  ['conductividad', 'conductividad'],
+  ['turbidez', 'turbidez'],
+  ['manganeso', 'manganeso'],
+  ['boro', 'boro'],
+  ['hierro', 'hierro'],
+  ['sodio', 'sodio'],
+  ['sulfato', 'sulfato'],
+  ['cloruro', 'cloruro'],
+  ['nitrato', 'nitrato'],
+  ['nitrito', 'nitritos'],
+  ['nitritos', 'nitritos'],
+  ['legionella', 'leg'],
+  ['legionella spp', 'legionella spp'],
+  ['clostridium perfringens', 'clostridium perfringens'],
+  ['enterococos', 'enterococos'],
+  ['rcto. bacterias heterótrofas 22º', 'rcto. bacterias heterótrofas 22º'],
+]);
+
+
+
+ const cleanId = (v) => (v == null ? '' : String(v).trim());
+    const normalize = (s) => (s ?? "").toString().normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
+
+
+
+
+
+const limitesPotables = (() => {
+  const out = new Map();
+  for (const [k, v] of Object.entries(limitesPotablesRaw)) {
+    const key = normalize(k);
+    if (!out.has(key)) out.set(key, v);
+  }
+  return out; // Map<paramNorm, [VP, Estricto, Unidad]>
+})();
+
+function potKey(name){
+  const n = normalize(name || '');
+  if (!n) return null;
+  // mapea por sinónimos si existe
+  if (potableSynonyms.has(n)) return potableSynonyms.get(n);
+  // si coincide tal cual con la tabla
+  if (limitesPotables.has(n)) return n;
+  // intents básicos
+  const try_ = [...limitesPotables.keys()].find(k => n.includes(k));
+  return try_ || null;
+}
+
+function isPotableSample(row){
+  const j = up(row?.job_name || '');
+  return j.startsWith('AGUAS') || j.startsWith('FUENTES');
+}
+
+function isPiscinaSample(row){
+  const j = up(row?.job_name || '').trim();
+  // mismos prefijos que usas en passJobFilter para piscinas
+  return j.startsWith('AUTOCONTROL') || j.startsWith('LUDICAS');
+}
+
+
+// mapa fuentes
+
+// === Mapa de Fuentes ===
+const URL_COORDS_FUENTES = 'https://raw.githubusercontent.com/gorbea0/LIMS/main/coordenadas_fuentes.json';
+let _fuentesMap, _fuentesLayer, _coordsFuentes = null;
+
+// Abrir/cerrar modal
+function openFuentesMap(){
+  const m = document.getElementById('modalFuentes');
+  m.classList.remove('hidden'); m.classList.add('flex');
+  initFuentesMapOnce().then(renderFuentesMarkers);
+}
+function closeFuentesMap(){
+  const m = document.getElementById('modalFuentes');
+  m.classList.add('hidden');
+}
+
+
+
+
+// ¿Es un sampling point de FUENTE?  F45, F-45, F 45…
+function isFuenteSP(sp){
+  return /^[Ff][\s-]?\d+\s*$/.test(String(sp || '').trim());
+}
+
+// Extrae el número del SP de fuente (F-45 -> "45")
+function normalizeSPNum(sp){
+  const m = String(sp || '').trim().match(/^[Ff][\s-]?(\d+)\s*$/);
+  return m ? m[1] : '';
+}
+
+// Devuelve todas las muestras cuyo SP sea de FUENTE y tenga ese número
+function samplesForFuenteNumber(numStr){
+  const n = String(numStr);
+  return (samples || []).filter(s =>
+    isFuenteSP(s.sampling_point) && normalizeSPNum(s.sampling_point) === n
+  );
+}
+
+
+
+
+
+
+
+function normalizeSP(sp) {
+  const m = String(sp || '').match(/\d+/);
+  return m ? m[0] : '';
+}
+
+// A partir del número del JSON de coords (p.ej. "45") busca un SP real de FUENTE (F45, F-45…)
+function getSPFromCoordKey(key) {
+  const k = String(key);
+  for (const [sp] of Object.entries(puntosInfo || {})) {
+    if (!isFuenteSP(sp)) continue;
+    if (normalizeSPNum(sp) === k) return sp;
+  }
+  return null;
+}
+
+
+
+
+function colorForInc(n, hasData){
+  if (!hasData) return '#9ca3af'; // gris: sin muestras
+  if (n >= 2) return '#ef4444';   // rojo
+  if (n === 1) return '#f59e0b';  // amarillo
+  return '#22c55e';               // verde
+}
+
+
+
+async function initFuentesMapOnce() {
+  if (_fuentesMap) return;
+  _fuentesMap = L.map('mapFuentes', { zoomControl: true }).setView([42.85, -2.67], 12);
+
+  // Capas base
+  const baseCalles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19, attribution: '&copy; OpenStreetMap'
+  });
+  const baseSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/' +
+    'World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri'
+  });
+  const baseCarto = L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; Carto'
+  });
+
+  const baseMaps = {
+    "Calles (OSM)": baseCalles,
+    "Satélite (Esri)": baseSatelite,
+    "Carto Light": baseCarto
+  };
+
+  baseCalles.addTo(_fuentesMap);
+  L.control.layers(baseMaps).addTo(_fuentesMap);
+
+  _fuentesLayer = L.layerGroup().addTo(_fuentesMap);
+
+  // Cargar coordenadas
+  try {
+    const res = await fetch(URL_COORDS_FUENTES, { cache: 'no-store' });
+    const raw = await res.text();
+    _coordsFuentes = JSON.parse(raw);
+  } catch (e) {
+    console.warn('No se pudieron cargar las coordenadas de fuentes:', e);
+    _coordsFuentes = {};
+  }
+
+  // Añadir buscadores
+  addFuentesSearchControls();
+}
+
+
+
+function addFuentesSearchControls() {
+  const ctrl = L.control({ position: 'topright' });
+  ctrl.onAdd = function () {
+    const div = L.DomUtil.create('div', 'custom-search bg-white/95 backdrop-blur p-1 rounded shadow');
+    div.innerHTML = `
+      <div class="flex items-center gap-1">
+        <input id="searchSP" type="text" placeholder="SP o nº"
+               class="w-24 px-2 py-0.5 border rounded text-xs" />
+        <input id="searchNombre" type="text" placeholder="Calle"
+               class="w-40 px-2 py-0.5 border rounded text-xs" />
+        <button id="searchBtn"
+                class="px-2 py-0.5 text-xs border rounded bg-white hover:bg-slate-50"
+                title="Buscar">🔎</button>
+      </div>`;
+    L.DomEvent.disableClickPropagation(div);
+    L.DomEvent.disableScrollPropagation(div);
+    return div;
+  };
+  ctrl.addTo(_fuentesMap);
+
+  // Eventos
+  const run = () => {
+    const spInput  = (document.getElementById('searchSP')?.value || '').trim();
+    const nomInput = (document.getElementById('searchNombre')?.value || '').trim().toLowerCase();
+
+    let found = null;
+    for (const [key, coords] of Object.entries(_coordsFuentes || {})) {
+      const spReal = getSPFromCoordKey(key) || '';      // F45, F-45…
+      const info   = getPuntoInfo(spReal) || {};
+      const nombre = (info.nombre || `Fuente ${key}`).toLowerCase();
+
+      const matchSP =
+        spInput &&
+        (normalizeSP(spReal) === normalizeSP(spInput) ||
+         spReal.toLowerCase() === spInput.toLowerCase());
+
+      const matchNom = nomInput && nombre.includes(nomInput);
+
+      if ((spInput && matchSP) || (nomInput && matchNom)) {
+        const [lat, lng] = String(coords).split(',').map(parseFloat);
+        found = [lat, lng];
+        break;
+      }
+    }
+    if (found) _fuentesMap.setView(found, 17);
+    else alert('No encontrado.');
+  };
+
+  document.getElementById('searchBtn')?.addEventListener('click', run);
+  document.getElementById('searchSP')?.addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
+  document.getElementById('searchNombre')?.addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
+}
+
+
+// Calcula nº de incumplimientos acumulados para un SP (sin filtros)
+// Nº de incumplimientos para un SP de FUENTE (se comparan por número)
+function computeIncumplimientosForSP(sp){
+  const targetNum = normalizeSPNum(sp);
+  const rows = (samples || []).filter(s =>
+    isFuenteSP(s.sampling_point) && normalizeSPNum(s.sampling_point) === targetNum
+  );
+
+  let total = 0;
+  for (const s of rows){
+    const items = analysesById.get(cleanId(s.id_numeric)) || [];
+
+    if (isPotableSample(s)) {
+      const pot = evalPotablesMuestra(items);
+      total += pot.rows.filter(p => p.status === 'grave' || p.status === 'incumplimiento').length;
+    } else {
+      let inc = 0;
+      for (const it of items){
+        if (isOmittedComponent(it.component)) continue;
+        const key = matchParam(it.component);
+        const { value } = interpretValue(it.result_text, it.result_value);
+        const res = key
+          ? evalParam(key, value, { hasAerosol: /conaeros/i.test((getPuntoInfo(s.sampling_point).aerosol || '')) })
+          : { status: 'sin-criterio' };
+        if (res.status === 'grave' || res.status === 'incumplimiento') inc++;
+      }
+      total += inc;
+    }
+  }
+  return total;
+}
+
+
+
+
+
+
+
+function renderFuentesMarkers(){
+  if (!_fuentesMap || !_coordsFuentes) return;
+  _fuentesLayer.clearLayers();
+
+  const bounds = [];
+
+  for (const [key, coords] of Object.entries(_coordsFuentes)){
+    const [lat, lng] = String(coords).split(',').map(parseFloat);
+    if (!isFinite(lat) || !isFinite(lng)) continue;
+
+    const numKey = String(key);
+    const rows   = samplesForFuenteNumber(numKey);          // SOLO fuentes con ese número
+    const hasData = rows.length > 0;
+
+    // SP representativo: del índice o de la primera muestra encontrada
+    let sp = getSPFromCoordKey(numKey);
+    if (!sp && hasData) sp = rows[0].sampling_point;
+
+    const incTotal = hasData ? computeIncumplimientosForSP(sp) : 0;
+    const col = colorForInc(incTotal, hasData);
+
+    const marker = L.circleMarker([lat, lng], {
+      radius: 7, weight: 1, color: '#1f2937', fillColor: col, fillOpacity: 0.9
+    });
+
+    const info   = sp ? (getPuntoInfo(sp) || {}) : {};
+    const nombre = info.nombre || `Fuente ${numKey}`;
+    const za     = info.za || (sp ? getZAFrom(sp, info.subtipo || '') : '');
+
+    const popupHtml = hasData
+      ? `
+        <div class="text-sm">
+          <div class="font-medium">${escapeHtml(nombre)}</div>
+          <div>SP: <strong>${escapeHtml(sp)}</strong></div>
+          ${za ? `<div>ZA: <strong>${escapeHtml(za)}</strong></div>` : ''}
+          <div>Incumplimientos: <strong>${incTotal}</strong></div>
+          <button class="mt-1 px-2 py-0.5 rounded border text-xs hover:bg-slate-50"
+            onclick="showSamplesForPoint('${numKey}')">
+            Ver muestras
+          </button>
+        </div>`
+      : `
+        <div class="text-sm">
+          <div class="font-medium">Fuente ${escapeHtml(numKey)}</div>
+          <div class="text-slate-600">Sin datos de análisis</div>
+        </div>`;
+
+    marker.bindPopup(popupHtml);
+    marker.addTo(_fuentesLayer);
+    bounds.push([lat, lng]);
+  }
+
+  if (bounds.length) _fuentesMap.fitBounds(bounds, { padding: [20,20] });
+  const list = document.getElementById('mapFuentesList');
+  if (list) list.innerHTML = '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Fin mapa
+
+// Calendario
+// === Calendario ===
+let calAnchor = new Date(); // ancla del primer mes mostrado (mes actual)
+
+// Abre/cierra
+function openCalendarModal() {
+  // sin filtros: nos da igual activeTab/scope aquí
+  document.getElementById('modalCalendar').classList.remove('hidden');
+  document.getElementById('modalCalendar').classList.add('flex');
+  // ancla al mes actual cada vez que abres
+  const d = new Date();
+  calAnchor = new Date(d.getFullYear(), d.getMonth(), 1);
+  renderCalendar();
+}
+function closeCalendar() {
+  document.getElementById('modalCalendar').classList.add('hidden');
+}
+
+// Navegación
+document.addEventListener('DOMContentLoaded', () => {
+  const prev = document.getElementById('calPrev');
+  const next = document.getElementById('calNext');
+  if (prev) prev.onclick = () => { calAnchor = addMonths(calAnchor, -3); renderCalendar(); };
+  if (next) next.onclick = () => { calAnchor = addMonths(calAnchor,  3); renderCalendar(); };
+});
+
+function addMonths(date, n){
+  return new Date(date.getFullYear(), date.getMonth() + n, 1);
+}
+
+function dateISO(y,m,d){ // m: 0-11
+  return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+
+// Render principal (3 meses, lunes primero)
+function renderCalendar() {
+  const container = document.getElementById('calendarContainer');
+  const titleEl   = document.getElementById('calTitle');
+  const listEl    = document.getElementById('calendarList');
+  if (!container) return;
+
+  container.innerHTML = '';
+  listEl.innerHTML = '';
+
+  // Título: rango de meses
+  const end = addMonths(calAnchor, 2);
+  const rangeTitle = `${calAnchor.toLocaleString('es-ES',{month:'long',year:'numeric'})} – ${end.toLocaleString('es-ES',{month:'long',year:'numeric'})}`;
+  if (titleEl) titleEl.textContent = `Calendario · ${rangeTitle}`;
+
+  for (let m = 0; m < 3; m++) {
+    const monthDate = addMonths(calAnchor, m);
+    const y = monthDate.getFullYear();
+    const mo = monthDate.getMonth();
+
+    const monthName = monthDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
+
+    const monthDiv = document.createElement('div');
+    monthDiv.className = 'grow basis-[300px] max-w-[420px] border rounded-xl p-3 shadow-sm';
+    monthDiv.innerHTML = `<div class="font-semibold mb-2 capitalize">${monthName}</div>`;
+
+    const daysGrid = document.createElement('div');
+    daysGrid.className = 'grid grid-cols-7 text-center text-sm gap-1';
+
+    // Cabecera L a D
+    ['L','M','X','J','V','S','D'].forEach(d => {
+      const c = document.createElement('div');
+      c.className = 'font-semibold text-slate-600';
+      c.textContent = d;
+      daysGrid.appendChild(c);
+    });
+
+    // Huecos antes del día 1 (lunes=0)
+    const firstDay = (new Date(y, mo, 1).getDay() + 6) % 7;
+    for (let i=0; i<firstDay; i++){
+      const f = document.createElement('div');
+      f.className = 'py-1';
+      daysGrid.appendChild(f);
+    }
+
+    // Días del mes
+    const daysInMonth = new Date(y, mo+1, 0).getDate();
+
+    for (let d=1; d<=daysInMonth; d++){
+      const iso = dateISO(y, mo, d);
+
+      // Buscar si hay piscinas/potables ese día (SIN filtros → sobre samples directamente)
+      let hasPools = false, hasPots = false;
+      for (const s of samples) {
+        if (s.sampled_date_iso !== iso) continue;
+        if (isPotableSample(s)) hasPots = true;
+        else if (isPiscinaSample(s)) hasPools = true;
+        if (hasPots && hasPools) break;
+      }
+
+      const cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'rounded py-1 hover:ring-1 hover:ring-slate-400 transition';
+      if (hasPools && hasPots) {
+        cell.classList.add('bg-gradient-to-r','from-sky-300','to-green-300','hover:from-sky-400','hover:to-green-400');
+      } else if (hasPools) {
+        cell.classList.add('bg-sky-300','hover:bg-sky-400');
+      } else if (hasPots) {
+        cell.classList.add('bg-green-300','hover:bg-green-400');
+      } else {
+        cell.classList.add('bg-slate-100','text-slate-500','hover:bg-slate-200');
+      }
+      cell.textContent = d;
+      cell.onclick = () => showSamplesByDate(iso);
+      daysGrid.appendChild(cell);
+    }
+
+    monthDiv.appendChild(daysGrid);
+    container.appendChild(monthDiv);
+  }
+}
+
+// Lista de muestras del día (sin filtros)
+function showSamplesByDate(dateISO) {
+  const listEl = document.getElementById('calendarList');
+  if (!listEl) return;
+
+  // Tomamos del dataset bruto
+  const day = samples.filter(s => s.sampled_date_iso === dateISO);
+
+  listEl.innerHTML = `
+    <div class="mt-2 mb-1 font-medium">Muestras del ${toDisplayDate(dateISO)} (${day.length})</div>
+  `;
+
+  if (day.length === 0) {
+    listEl.innerHTML += `<div class="text-sm text-slate-500">No hay muestras ese día.</div>`;
+    return;
+  }
+
+  const ul = document.createElement('ul');
+  ul.className = 'divide-y rounded-lg border';
+
+  day
+    .sort((a,b)=> (a.id_numeric < b.id_numeric ? -1 : 1))
+    .forEach(s => {
+      const info = getPuntoInfo(s.sampling_point) || {};
+      const nombre = info.nombre || s.sampling_point;
+      const tipoBadge = isPotableSample(s)
+        ? '<span class="ml-2 inline-block text-[10px] px-1.5 py-0.5 rounded bg-green-200 text-green-800">Potable</span>'
+        : '<span class="ml-2 inline-block text-[10px] px-1.5 py-0.5 rounded bg-sky-200 text-sky-800">Piscina</span>';
+
+      const li = document.createElement('li');
+      li.className = 'p-2 hover:bg-slate-50 cursor-pointer';
+      li.onclick = () => openModal({
+        ...s,
+        nombre,
+      });
+      li.innerHTML = `
+        <div class="flex items-center justify-between">
+          <div class="truncate">
+            <span class="font-medium">${escapeHtml(nombre)}</span>
+            ${tipoBadge}
+            <span class="text-xs text-slate-600 ml-2">SP: ${escapeHtml(s.sampling_point || '')}</span>
+          </div>
+          <div class="text-xs text-slate-600">Id: <span class="font-semibold">${escapeHtml(String(s.id_numeric || ''))}</span></div>
+        </div>`;
+      ul.appendChild(li);
+    });
+
+  listEl.appendChild(ul);
+}
+
+
+
+
+// Fin calendario
+
+
+// Extrae una "ZA" a partir del sampling point y/o un subtipo textual.
+// Reglas típicas: 
+//   - subtipo: "... ZA: NOMBRE ..." o "... ZA-NOMBRE ..." o "ZA NOMBRE"
+//   - sampling point: "... ZA-ABC ..." o "... [ZA ABC] ..."
+function getZAFrom(sp, subtipo) {
+  const s = (sp ?? '').toString();
+  const t = (subtipo ?? '').toString();
+
+  // 1) Buscar en subtipo
+  const rxSub = /\bZA[:\-\s]+([A-Z0-9À-ÿ ./_-]{2,})\b/i;
+  const mSub = t.match(rxSub);
+  if (mSub && mSub[1]) return mSub[1].trim();
+
+  // 2) Buscar patrón en sampling point
+  const rxSp = /\bZA[:\-\s]+([A-Z0-9À-ÿ ./_-]{2,})\b/i;
+  const mSp = s.match(rxSp);
+  if (mSp && mSp[1]) return mSp[1].trim();
+
+  // 3) Si tu JSON remoto trae un campo 'za', úsalo (lo fusionamos en loadExternalPuntosPotables)
+  const info = getPuntoInfo(s);
+  if (info.za) return String(info.za).trim();
+
+  // 4) Sin coincidencias
+  return '';
+}
+
+
+
+
+
+
+
+
+function evalPotablesMuestra(items){
+  // 1) Indexar valores (ND => 0 ya lo haces en interpretValue)
+  const rows = [];
+  const valueByParam = new Map(); // paramNorm -> value
+  for (const it of items){
+    if (isOmittedComponent(it.component)) continue;
+    const k = potKey(it.component);
+    if (!k) continue;
+    const { value, flag } = interpretValue(it.result_text, it.result_value);
+    const lim = limitesPotables.get(k) || [null, null, ''];
+    const [vp, estricto, unidad] = lim;
+	
+	
+	// --- Conversión específica para Cobre (Cu) y Boro (B) ---
+// Si el resultado viene en µg/L, lo convertimos a mg/L para presentarlo y evaluar con el mismo criterio
+let valueUsed = value;
+let resultTextShown = it.result_text || '';
+
+if (k === 'cobre' || k === 'boro') {
+  const t = (resultTextShown || '').toLowerCase();
+  const isMicro = /µg\s*\/\s*l|ug\s*\/\s*l|microg/.test(t);
+  if (isMicro && Number.isFinite(valueUsed)) {
+    valueUsed = valueUsed / 1000;      // µg/L → mg/L
+    // Opcional: actualizar el texto mostrado sustituyendo la unidad
+    resultTextShown = resultTextShown
+      .replace(/µg/gi, 'mg')
+      .replace(/\bug/gi, 'mg')
+      .replace(/microgram(?:os)?/gi, 'mg');
+  }
+
+
+}
+
+	
+	
+	
+	
+
+    // Flags de superación individuales
+    let hitEstricto = false;
+    let hitVP = false;
+    // pH tiene umbrales bajos especiales (además de los altos de la tabla)
+    if (k === 'ph'){
+      const vpMin = 6.5, estrMin = 5.5;
+      const vpMax = vp;            // 9.5
+      const estrMax = estricto;    // 10
+      if (Number.isFinite(value)){
+        if ((estrMax!=null && value > estrMax) || value < estrMin) hitEstricto = true;
+        else if ((vpMax!=null && value >= vpMax) || value < vpMin) hitVP = true;
+      }
+    } else {
+      if (Number.isFinite(value)){
+        // VP = 0  ⇒  0 es ausencia (OK); >0 incumple (y puede ser "grave" si supera "estricto")
+        if (vp === 0) {
+          if (value === 0) {
+            // OK (ausencia)
+          } else if (estricto != null && value > estricto) {
+            hitEstricto = true;
+          } else {
+            hitVP = true;
+          }
+        } else {
+          // Límite alto "normal"
+          if (estricto != null && value > estricto) hitEstricto = true;
+          else if (vp != null && value >= vp) hitVP = true;
+        }
+      }
+    }
+
+    valueByParam.set(k, Number.isFinite(value) ? value : NaN);
+
+    const criterio =
+      hitEstricto
+        ? `> límite estricto${k==='ph' ? ' (o <5.5)' : ''}`
+        : (hitVP
+            ? (vp === 0
+                ? 'detección (> 0; VP = 0)'
+                : `≥ VP${k==='ph' ? ' (o <6.5)' : ''}`)
+            : 'OK');
+
+    rows.push({
+      key: k,
+      component: it.component,
+      result_text: it.result_text,
+      value,
+      unit: unidad || '',
+      flag,
+      status: hitEstricto ? 'grave' : (hitVP ? 'incumplimiento' : 'ok'),
+      criterio
+    });
+  }
+
+
+
+
+
+
+  // 2) Regla combinada (nitrato/50 + nitrito/3 > 1  ⇒ VP “por arriba”)
+  let comboVP = false;
+  if (valueByParam.has('nitrato') && valueByParam.has('nitritos')){
+    const no = valueByParam.get('nitrato');
+    const ni = valueByParam.get('nitritos');
+    if (Number.isFinite(no) && Number.isFinite(ni)){
+      const ratio = no/50 + ni/3;
+      if (ratio > 1) {
+        comboVP = true;
+        // añadimos una fila “virtual” informativa
+        rows.push({
+          key: 'nitrato+nitrito',
+          component: 'Nitrato/50 + Nitrito/3',
+          result_text: ratio.toFixed(3),
+          value: ratio,
+          unit: '',
+          flag: '',
+          status: 'incumplimiento', // cuenta como VP
+          criterio: 'VP por debajo: nitrato/50 + nitrito/3 < 1'
+        });
+      }
+    }
+  }
+
+  // 3) ¿Se han analizado todos los parámetros mínimos?
+  const presentes = new Set(rows.map(r => r.key));
+  const minOk = parametrosMinimosPot.every(m => presentes.has(m));
+
+  // 4) Clasificación de la muestra
+  const hasEstricto = rows.some(r => r.status === 'grave');
+  const hasVP = comboVP || rows.some(r => r.status === 'incumplimiento');
+
+  let sampleStatus = 'ok';
+  if (hasEstricto) sampleStatus = 'grave';
+  else if (minOk)  sampleStatus = hasVP ? 'incumplimiento' : 'ok';
+  else             sampleStatus = hasVP ? 'incumplimiento' : 'ok';
+
+  return { rows, sampleStatus, minOk };
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  function markActiveChip(groupId, which) {
+  document.querySelectorAll('#' + groupId + ' .job-chip').forEach(btn => {
+    const on = btn.dataset.job === which;
+    btn.classList.toggle('bg-blue-600', on);
+    btn.classList.toggle('text-white',  on);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Conmutador Piscinas/Potables
+  document.querySelectorAll('#scopeSwitch .scope-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      scope = btn.dataset.scope;
+      setScopeUI(scope);
+      renderAll();
+    });
+  });
+
+  // Chips piscinas
+  document.querySelectorAll('#jobFilterPools .job-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      jobFilterPools = btn.dataset.job;
+      markActiveChip('jobFilterPools', jobFilterPools);
+      renderAll();
+    });
+  });
+
+  // Chips potables
+  document.querySelectorAll('#jobFilterPotables .job-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      jobFilterPotables = btn.dataset.job;
+      markActiveChip('jobFilterPotables', jobFilterPotables);
+      renderAll();
+    });
+  });
+
+  // Estado inicial UI
+  setScopeUI(scope);
+  markActiveChip('jobFilterPools', jobFilterPools);
+  markActiveChip('jobFilterPotables', jobFilterPotables);
+  
+
+  
+});
+
+  
+const up = v => (v ?? '').toString().toUpperCase();
+
+function passJobFilter(r) {
+  if (scope === 'piscinas') {
+    const j = up((r.job_name || '').trim());
+    if (jobFilterPools === 'autocontrol') return j.startsWith('AUTOCONTROL');
+    if (jobFilterPools === 'ludicas')     return j.startsWith('LUDICAS');
+    return j.startsWith('AUTOCONTROL') || j.startsWith('LUDICAS');
+  } else {
+    const j  = up((r.job_name || '').trim());
+    const ts = up((r.test_schedule || r.testSchedule || r['test schedule'] || '').trim());
+    if (!(j.startsWith('FUENTES') || j.startsWith('AGUAS'))) return false;
+    if (jobFilterPotables === 'grifo')  return ts.includes('POT-GRIFO');
+    if (jobFilterPotables === 'sanita') return ts.includes('POT-SANITA');
+    return true;
+  }
+}
+
+
+
+  
+  
+  
+  
+  
+  
+    // ===== JSON puntos =====
+    let puntosInfo = {};
+    let puntosInfoNorm = {};
+    function buildPuntosInfoFromArray(arr){
+      const map = {};
+      for (const row of (arr || [])) {
+        const sp = row['Sampling point'] || row['sampling point'] || row['Sampling Point'] || row['Point'] || row['point'];
+        if (!sp) continue;
+        const spTrim = String(sp).trim();
+        map[spTrim] = {
+          nombre: row['Nombre'] || row['nombre'] || row['Name'] || row['name'] || spTrim,
+          titular: row['Titular'] || row['titular'] || row['titularidad'] || row['Titularidad'] || row['titular'] || '',
+          tipo: row['tipo'] || row['Tipo'] || row['interior/exterior'] || row['ubicacion'] || row['ubicación'] || '',
+          aerosol: row['aerosol'] || row['Aerosol'] || row['aerosolizacion'] || row['aerosolización'] || row['aerosolizacion'] || '',
+          instalacion: row['instalacion'] || row['Instalacion'] || row['Instalación'] || ''
+        };
+      }
+      return map;
+    }
+    function rebuildPuntosIndex(){
+      puntosInfoNorm = {};
+      for (const [k,v] of Object.entries(puntosInfo)) {
+        puntosInfoNorm[normalize(k)] = v;
+      }
+    }
+    function getPuntoInfo(sp){
+      const raw = (sp ?? '').toString();
+      const t = raw.trim();
+      return puntosInfo[t] || puntosInfoNorm[normalize(raw)] || {};
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      try {
+        const raw = document.getElementById('puntos-json-data').textContent || '[]';
+        puntosInfo = buildPuntosInfoFromArray(JSON.parse(raw));
+        rebuildPuntosIndex();
+      } catch(e) { console.error(e); }
+    });
+
+    // ===== Estado =====
+    let samples = [];
+    let analyses = [];
+    let analysesById = new Map();
+    let lastEnriched = [];
+
+    // ===== Utilidades =====
+   
+
+    function toISODate(v){ // yyyy-mm-dd
+      if (!v) return "";
+      const d = new Date(v);
+      if (!isNaN(d)) return d.toISOString().slice(0,10);
+      const raw = (v.toString().split(" ")[0] || v).replace(/T.*/, "");
+      // Si viniera como dd/mm/aaaa, convertir:
+      const m = raw.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/);
+      if (m){ const dd=m[1].padStart(2,'0'), mm=m[2].padStart(2,'0'), yyyy=m[3].length===2?('20'+m[3]):m[3]; return `${yyyy}-${mm}-${dd}`; }
+      // Si ya está en yyyy-mm-dd
+      return raw;
+    }
+    function toDisplayDate(iso){ // dd/mm/aaaa
+      if (!iso) return '';
+      const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      return m ? `${m[3]}/${m[2]}/${m[1]}` : iso;
+    }
+
+    const toNumber = (v) => { if (v === null || v === undefined) return NaN; const s = String(v).replace(/,/, ".").replace(/[^0-9.+-eE]/g, ""); const n = parseFloat(s); return isNaN(n) ? NaN : n; };
+
+    // Interpretación del valor: "<n" o ND => 0 (no detectado)
+  function interpretValue(result_text, result_value) {
+  const rt = (result_text ?? '').toString().trim();
+  const nrt = normalize(rt);
+
+  // 1) Casos especiales: "< …" o "no detectado"
+  const ltMatch = rt.match(/<\s*\d+([.,]\d+)?/);
+  const isND = /(\bnd\b|no detectad|not detected|no detectable)/i.test(rt) || nrt.includes('no detectado');
+  if (ltMatch || isND) return { value: 0, flag: 'nd' };
+
+  // 2) Parseos numéricos (usa tu helper toNumber)
+  const vText = toNumber(rt);                 // p.ej. "0.33" -> 0.33
+  const vRaw  = toNumber(result_value);       // p.ej. "330"  -> 330
+
+  // 3) Si solo uno es válido, usa el que exista
+  const hasText = Number.isFinite(vText);
+  const hasRaw  = Number.isFinite(vRaw);
+  if (hasText && !hasRaw) return { value: vText, flag: '' };
+  if (!hasText && hasRaw) return { value: vRaw,  flag: '' };
+  if (!hasText && !hasRaw) return { value: NaN,  flag: '' };
+
+  // 4) Ambos existen: reconciliar posibles desfaces de escala (10x/100x/1000x)
+  //    Si alguna escala de vRaw coincide (dentro de tolerancia) con el texto, confiamos en el texto.
+  const tol = Math.max(0.01, Math.abs(vText) * 0.02); // tolerancia: 0.01 o 2% del valor
+  const scaledCandidates = [vRaw, vRaw/10, vRaw/100, vRaw/1000, vRaw*10, vRaw*100, vRaw*1000];
+  const scaleMatchesText = scaledCandidates.some(x => Math.abs(x - vText) <= tol);
+
+  if (scaleMatchesText) {
+    // Caso típico: result_value=330 y result_text="0.33" → usamos 0.33
+    return { value: vText, flag: '' };
+  }
+
+  // Si no hay match claro pero la discrepancia es grande (órdenes de magnitud), preferimos el texto.
+  const bigMismatch = Math.abs(vRaw - vText) > Math.max(1, Math.abs(vText) * 5);
+  if (bigMismatch) return { value: vText, flag: '' };
+
+  // 5) Por defecto, usa el numérico bruto
+  return { value: vRaw, flag: '' };
+}
+
+
+    // Omisiones
+    const OMIT_CONTAINS = ["volumen","fecha","filtrado","limite","límite","ensayo"]; // substrings
+    const OMIT_TOKENS = ["d","p1","p2","p3"]; // tokens enteros
+    function isOmittedComponent(name) {
+      if (!name) return false; // no omitir por defecto
+      const n = ` ${normalize(name)} `;
+      if (OMIT_CONTAINS.some(w => n.includes(normalize(w)))) return true;
+      const tokenRe = new RegExp(`(^|\\W)(?:${OMIT_TOKENS.join('|')})(?=\\W|$)`, 'i');
+      if (tokenRe.test(n)) return true;
+      return false;
+    }
+
+    // Mapeo de parámetros
+    const PARAM_KEYS = {
+      ph: [/\bph\b/],
+      turbidez: [/turbidez/,/\bntu\b/],
+      cloro_libre: [/cloro\s*libre/,/free\s*chlorine/],
+      cloro_combinado: [/cloro\s*combinado/,/combined\s*chlorine/],
+      bromo: [/\bbromo\b/,/\bbromine\b/],
+      isocianurico: [/isocianurico|acido\s*isocianurico|isocyanuric/],
+      ecoli: [/\be\.?\s*coli\b|escherichia/],
+      temperatura: [/temperatura|temperature/],
+      pseudomonas: [/pseudomonas/],
+      legionella: [/legionella/],
+	  aluminio: [/aluminio|aluminum/],
+      estafilococos: [/estafilococos|staphylococc?i|staphylococcus/],
+
+    };
+
+    function matchParam(componentName) {
+      const n = normalize(componentName);
+      for (const [key, patterns] of Object.entries(PARAM_KEYS)) {
+        if (patterns.some(p => p.test ? p.test(n) : n.includes(normalize(p)))) return key;
+      }
+      return null; // sin criterio
+    }
+
+    // Reglas de evaluación 
+	
+	
+	
+	
+	function evalParam(key, v, ctx) {
+  if (isNaN(v)) return { status: 'sin-dato', criterio: 'Valor no numérico' };
+
+  switch (key) {
+    case 'ph':
+      if (v < 6 || v > 9) return { status: 'grave', criterio: 'pH < 6 o > 9' };
+      if (v > 8 || v < 7.2) return { status: 'incumplimiento', criterio: 'pH > 8 o < 7.2' };
+      return { status: 'ok', criterio: '7.2–8' };
+
+    case 'turbidez':
+      if (v > 40) return { status: 'grave', criterio: 'Turbidez > 40' };
+      if (v > 5) return { status: 'incumplimiento', criterio: 'Turbidez > 5' };
+      return { status: 'ok', criterio: '\u2264 5' };
+
+    case 'cloro_libre':
+      if (v > 5) return { status: 'grave', criterio: 'Cloro libre > 5' };
+      if (v < 0.5 || v > 2) return { status: 'incumplimiento', criterio: 'Cloro libre < 0.5 o > 2' };
+      return { status: 'ok', criterio: '0.5–2' };
+
+    case 'cloro_combinado':
+      if (v > 3) return { status: 'grave', criterio: 'Cloro combinado > 3' };
+      if (v < 0.6 || v > 3) return { status: 'incumplimiento', criterio: 'Cloro combinado < 0.6 o > 3' };
+      return { status: 'ok', criterio: '0.6–3' };
+
+    case 'bromo':
+      if (v > 10) return { status: 'grave', criterio: 'Bromo > 10' };
+      if (v < 2 || v > 5) return { status: 'incumplimiento', criterio: 'Bromo < 2 o > 5' };
+      return { status: 'ok', criterio: '2–5' };
+
+    case 'isocianurico':
+      if (v > 150) return { status: 'grave', criterio: 'Ácido isocianúrico > 150' };
+      if (v > 75) return { status: 'incumplimiento', criterio: 'Ácido isocianúrico > 75' };
+      return { status: 'ok', criterio: '\u2264 75' };
+
+    case 'ecoli':
+      if (v > 0) return { status: 'grave', criterio: 'E. coli > 0' };
+      return { status: 'ok', criterio: '= 0' };
+
+    case 'temperatura': {
+      // si el punto tiene aerosolización, el límite superior es 36
+      const upper = (ctx && ctx.hasAerosol) ? 36 : 30;
+      if (v < 24 || v > upper) {
+        return { status: 'incumplimiento', criterio: `Temperatura < 24 o > ${upper}` };
+      }
+      return { status: 'ok', criterio: `24–${upper}` };
+    } // <- ESTA llave faltaba
+
+    case 'aluminio':
+      if (v > 0.3) return { status: 'incumplimiento', criterio: 'Aluminio > 0.3' };
+      return { status: 'ok', criterio: '\u2264 0.3' };
+
+    case 'estafilococos':
+      if (v > 0) return { status: 'incumplimiento', criterio: 'Estafilococos > 0' };
+      return { status: 'ok', criterio: '= 0' };
+
+    case 'pseudomonas':
+      if (v > 0) return { status: 'incumplimiento', criterio: 'Pseudomonas > 0' };
+      return { status: 'ok', criterio: '= 0' };
+
+    case 'legionella':
+      if (v > 100) return { status: 'incumplimiento', criterio: 'Legionella > 100' };
+      return { status: 'ok', criterio: '\u2264 100' };
+
+    default:
+      return { status: 'sin-criterio', criterio: '' };
+  }
+}
+
+	
+	
+	// JSON EXTERNO PTOS MUESTREO
+	
+	
+	
+	// === Carga/merge de Puntos Potables desde GitHub RAW ===
+	
+const PUNTOS_POTABLES_URLS = [
+  'https://raw.githubusercontent.com/gorbea0/LIMS/main/Puntos_potables.json',
+  'https://cdn.jsdelivr.net/gh/gorbea0/LIMS@main/Puntos_potables.json'
+];
+
+async function loadExternalPuntosPotables() {
+  let text = null, lastErr = null;
+
+  for (const url of PUNTOS_POTABLES_URLS) {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      text = await res.text();
+      if (text && text.trim()) {
+        console.log('[Puntos potables] cargado de:', url);
+        break;
+      }
+    } catch (e) {
+      lastErr = e;
+      console.warn('[Puntos potables] fallo en', url, e);
+    }
+  }
+  if (!text) {
+    console.warn('No se pudo cargar Puntos_potables.json:', lastErr);
+    return;
+  }
+
+  // --- Saneos mínimos para JSON válido ---
+  // 1) NaN / Infinity → null
+  let cleaned = text.replace(/\bNaN\b/g, 'null')
+                    .replace(/\bInfinity\b/g, 'null')
+                    .replace(/\b-Infinity\b/g, 'null');
+  // 2) Comas colgantes ,} o ,] → } / ]
+  cleaned = cleaned.replace(/,\s*([}\]])/g, '$1');
+
+  let data;
+  try {
+    data = JSON.parse(cleaned);
+  } catch (e) {
+    console.error('JSON de potables sigue siendo inválido:', e, cleaned.slice(0, 400));
+    return;
+  }
+
+  // Normaliza a array
+  const rows = Array.isArray(data) ? data : (Array.isArray(data?.rows) ? data.rows : []);
+  if (!rows.length) return;
+
+  // --- Normalización de columnas y fusión con puntosInfo ---
+  for (const r of rows) {
+    const sp  = (r['Sampling point'] ?? r.sampling_point ?? r.SamplingPoint ?? '').toString().trim();
+    if (!sp) continue;
+
+    const nombre   = (r['Nombre']      ?? r.nombre      ?? '').toString().trim();
+    const tipo     = (r['Tipo']        ?? r.tipo        ?? '').toString().trim();
+    const subtipo  = (r['Subtipo']     ?? r.subtipo     ?? '').toString().trim();
+    const za       = (r['ZA']          ?? r.za          ?? '').toString().trim();
+    const titular  = (r['Titular']     ?? r.titular     ?? '').toString().trim();
+    const aerosol  = (r['Aerosol']     ?? r.aerosol     ?? '').toString().trim();
+    const inst     = (r['Instalacion'] ?? r.instalacion ?? r['Instalación'] ?? '').toString().trim();
+
+    if (!puntosInfo[sp]) puntosInfo[sp] = {};
+
+    const cur = puntosInfo[sp];
+    puntosInfo[sp] = {
+      // Conserva lo que ya había y completa con lo remoto
+      nombre:      cur.nombre      || nombre,
+      titular:     cur.titular     || titular,
+      tipo:        cur.tipo        || tipo,
+      aerosol:     cur.aerosol     || aerosol,
+      instalacion: cur.instalacion || inst,
+      // 🔸 Campos clave para tus filtros nuevos:
+      subtipo:     cur.subtipo     || subtipo,
+      za:          cur.za          || za
+    };
+  }
+
+  rebuildPuntosIndex();
+}
+
+
+// CARGA MANUAL DEL JSON
+
+
+// === Carga manual de JSON de puntos ===
+const filePuntosJson = document.getElementById('filePuntosJson');
+if (filePuntosJson) {
+  filePuntosJson.addEventListener('change', handlePuntosJsonFile);
+}
+
+function handlePuntosJsonFile(ev) {
+  const file = ev.target.files && ev.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const raw = String(e.target.result || '');
+
+      // Saneos mínimos para JSON válido (por si viene de pandas con NaN)
+      let cleaned = raw
+        .replace(/\bNaN\b/g, 'null')
+        .replace(/\bInfinity\b/g, 'null')
+        .replace(/\b-Infinity\b/g, 'null')
+        .replace(/,\s*([}\]])/g, '$1');
+
+      const data = JSON.parse(cleaned);
+      const rows = Array.isArray(data) ? data : (Array.isArray(data?.rows) ? data.rows : []);
+      if (!rows.length) {
+        alert('El JSON no contiene filas.');
+        return;
+      }
+
+      // Normalización de columnas y fusión con puntosInfo
+      let merged = 0;
+      for (const r of rows) {
+        const sp  = (r['Sampling point'] ?? r.sampling_point ?? r.SamplingPoint ?? '').toString().trim();
+        if (!sp) continue;
+
+        const nombre   = (r['Nombre']      ?? r.nombre      ?? '').toString().trim();
+        const tipo     = (r['Tipo']        ?? r.tipo        ?? '').toString().trim();
+        const subtipo  = (r['Subtipo']     ?? r.subtipo     ?? '').toString().trim();
+        const za       = (r['ZA']          ?? r.za          ?? '').toString().trim();
+        const titular  = (r['Titular']     ?? r.titular     ?? '').toString().trim();
+        const aerosol  = (r['Aerosol']     ?? r.aerosol     ?? '').toString().trim();
+        const inst     = (r['Instalacion'] ?? r.instalacion ?? r['Instalación'] ?? '').toString().trim();
+
+        if (!puntosInfo[sp]) puntosInfo[sp] = {};
+        const cur = puntosInfo[sp];
+
+        puntosInfo[sp] = {
+          nombre:      cur.nombre      || nombre,
+          titular:     cur.titular     || titular,
+          tipo:        cur.tipo        || tipo,
+          aerosol:     cur.aerosol     || aerosol,
+          instalacion: cur.instalacion || inst,
+          // claves usadas por tus filtros de tabs:
+          subtipo:     cur.subtipo     || subtipo,
+          za:          cur.za          || za
+        };
+        merged++;
+      }
+
+      rebuildPuntosIndex();
+      renderAll();
+      console.log(`[Puntos potables] JSON manual fusionado: ${merged} puntos.`);
+    } catch (err) {
+      console.error('No se pudo leer el JSON de puntos:', err);
+      alert('No se pudo leer el JSON. Revisa el formato.');
+    }
+  };
+  reader.readAsText(file, 'utf-8');
+}
+
+
+
+
+// Fin CARGA manual JSON
+
+
+// Arranque: primero JSON embebido (ya lo haces), luego remoto
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const raw = document.getElementById('puntos-json-data').textContent || '[]';
+    puntosInfo = buildPuntosInfoFromArray(JSON.parse(raw));
+    rebuildPuntosIndex();
+  } catch(e) { console.error(e); }
+
+  // ✅ ahora extendemos con el JSON de GitHub
+  await loadExternalPuntosPotables();
+
+  // tras fusionar, refrescamos lo visible
+  renderAll();
+});
+
+	
+	
+	
+	
+	
+	
+	// FIN JSON EXTERNO
+
+    function statusBadge(status) {
+      const base = 'badge';
+      if (status === 'grave') return `<span class="${base} bg-red-100 text-red-700">Incumplimiento grave</span>`;
+      if (status === 'incumplimiento') return `<span class="${base} bg-amber-100 text-amber-700">Incumplimiento</span>`;
+      if (status === 'ok') return `<span class="${base} bg-emerald-100 text-emerald-700">OK</span>`;
+      if (status === 'sin-dato') return `<span class="${base} bg-slate-100 text-slate-600">Sin dato</span>`;
+      return `<span class="${base} bg-slate-100 text-slate-600">Info</span>`; // sin-criterio
+    }
+
+    // ===== Carga de CSV =====
+    function parseCSVFile(file, onDone) {
+      Papa.parse(file, { header: true, skipEmptyLines: true, encoding: "ISO-8859-1", transformHeader: h => h.trim(), complete: (results) => onDone(results.data) });
+    }
+
+    document.getElementById('csvSamples').addEventListener('change', (e) => {
+      const f = e.target.files?.[0]; if (!f) return;
+      parseCSVFile(f, (rows) => {
+        
+		
+		
+		samples = rows.map(r => ({
+          sampled_date_iso: toISODate(r['Sampled date'] || r['sampled date'] || r['Date'] || r['date']),
+          id_numeric: cleanId(r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id']),
+          sampling_point: (r['Sampling point'] || r['sampling point'] || r['Sampling Point'] || r['Point'] || r['point'] || '').toString().trim(),
+          collected_from: r['Collected from'] || r['collected from'] || '',
+          collected_by: r['Collected by'] || r['collected by'] || '',
+          job_name: (r['Job Name'] || r['job name'] || r['Job'] || r['job'] || '').toString().trim(),
+		   test_schedule: (r['Test schedule'] || r['test schedule'] || r['Test Schedule'] || '').toString().trim(),
+        })).filter(r => r.id_numeric);
+        renderAll();
+      });
+    });
+
+    document.getElementById('csvAnalyses').addEventListener('change', (e) => {
+      const f = e.target.files?.[0]; if (!f) return;
+      parseCSVFile(f, (rows) => {
+        analyses = rows.map(r => ({
+          id_numeric: cleanId(r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id']),
+          component: r['Component name'] || r['component name'] || r['Component'],
+          result_text: r['Result text'] || r['result text'] || r['Result'],
+          result_value: r['Result value'] || r['result value'] || r['Value'],
+        }));
+        analysesById = new Map();
+        for (const a of analyses) {
+          if (!a.id_numeric) continue;
+          const key = cleanId(a.id_numeric);
+          if (!analysesById.has(key)) analysesById.set(key, []);
+          analysesById.get(key).push(a);
+        }
+        renderAll();
+      });
+    });
+
+    // ===== Job Name chips =====
+    //let jobFilter = 'ambas';
+	
+	
+	let scope = 'piscinas';        // 'piscinas' | 'potables'
+let jobFilterPools = 'ambas';   // 'autocontrol' | 'ludicas' | 'ambas'
+let jobFilterPotables = 'ambas';// 'sanita' | 'grifo' | 'ambas'
+
+	
+function setJobChipActive() {
+  const groupSel = (scope === 'piscinas') ? '#jobFilterPools' : '#jobFilterPotables';
+  const current  = (scope === 'piscinas') ? jobFilterPools     : jobFilterPotables;
+
+  document.querySelectorAll(`${groupSel} .job-chip`).forEach(btn => {
+    const on = btn.dataset.job === current;
+    btn.classList.toggle('bg-blue-600', on);
+    btn.classList.toggle('text-white',  on);
+  });
+}
+
+
+
+// Estado global de la pestaña seleccionada
+let activeTab = 'all';
+
+// Utilidad: resalta visualmente la pestaña activa en ambos contenedores
+function highlightActiveTab() {
+  ['tabsPools', 'tabsPotables'].forEach(id => {
+    const root = document.getElementById(id);
+    if (!root) return;
+    root.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
+    const current = root.querySelector(`.tab-btn[data-tab="${activeTab}"]`);
+    if (current) current.classList.add('tab-active');
+  });
+}
+
+// Delegación de eventos: un listener por contenedor
+function attachTabDelegates() {
+  ['tabsPools', 'tabsPotables'].forEach(id => {
+    const root = document.getElementById(id);
+    if (!root) return;
+    // Evita adjuntar dos veces el mismo listener
+    if (root.__hasTabDelegate) return;
+    root.__hasTabDelegate = true;
+
+    root.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tab-btn');
+      if (!btn || !root.contains(btn)) return;
+
+      activeTab = btn.dataset.tab || 'all';
+      highlightActiveTab();
+      renderAll();  // tu función que vuelve a pintar con el filtro actual
+    });
+  });
+}
+
+// Muestra/oculta contenedores según el ámbito y resetea la pestaña si quieres
+function setScopeUI(sel) {
+  // 1) Resaltar chip Piscinas/Potables
+  document.querySelectorAll('#scopeSwitch .scope-chip').forEach(b => {
+    const on = b.dataset.scope === sel;
+    b.classList.toggle('bg-blue-600', on);
+    b.classList.toggle('text-white',  on);
+  });
+
+  // 2) Mostrar/ocultar filtros de Job
+  const poolsVisible    = (sel === 'piscinas');
+  const potablesVisible = (sel === 'potables');
+  document.getElementById('jobFilterPools')   .classList.toggle('hidden', !poolsVisible);
+  document.getElementById('jobFilterPotables').classList.toggle('hidden', !potablesVisible);
+
+  // 3) Mostrar/ocultar barras de pestañas
+  document.getElementById('tabsPools')   .classList.toggle('hidden', !poolsVisible);
+  document.getElementById('tabsPotables').classList.toggle('hidden', !potablesVisible);
+
+  // 4) (Opcional) reset de pestaña activa al cambiar de ámbito
+  activeTab = 'all';
+  highlightActiveTab();
+}
+
+// Inicializa al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  attachTabDelegates();  // un solo set de listeners
+  highlightActiveTab();  // marca la pestaña activa inicial
+});
+
+
+    // Normaliza categorías desde el JSON
+    function titularCategoria(t) { const n = normalize(t); if (n.includes('priv')) return 'Privada'; if (n.includes('ayuntamiento') || n.includes('municip')) return 'Municipal'; return ''; }
+    function tipoCategoria(t) { const n = normalize(t); if (n.includes('interior')) return 'Interior'; if (n.includes('exterior')) return 'Exterior'; return ''; }
+
+
+
+
+
+
+
+
+
+function renderAll() {
+  const body = document.getElementById('tableBody'); 
+  body.innerHTML = '';
+
+  const dateFrom = document.getElementById('dateFrom').value || null; // yyyy-mm-dd
+  const dateTo   = document.getElementById('dateTo').value   || null; // yyyy-mm-dd
+  const q        = normalize(document.getElementById('searchBox').value);
+
+  let enriched = samples.map(s => {
+    const dateISO = s.sampled_date_iso;
+    const dateStr = toDisplayDate(dateISO);
+    const items = (analysesById.get(cleanId(s.id_numeric)) || []);
+    const numAnalisis = items.length;
+
+    let incumplimientos = 0; 
+    let graves = 0;
+    let paramsEvaluados = [];
+
+    if (isPotableSample(s)) {
+      // === POTABLES ===
+      const pot = evalPotablesMuestra(items);
+      paramsEvaluados = pot.rows;
+
+      graves = paramsEvaluados.filter(p => p.status === 'grave').length;
+      incumplimientos = paramsEvaluados.filter(p => p.status === 'grave' || p.status === 'incumplimiento').length;
+
+    } else {
+      // === PISCINAS (lo que ya tenías) ===
+      for (const it of items) {
+        if (isOmittedComponent(it.component)) continue;
+        const key = matchParam(it.component);
+        const { value, flag } = interpretValue(it.result_text, it.result_value);
+        const res = key
+          ? evalParam(key, value, { hasAerosol: /conaeros/i.test((getPuntoInfo(s.sampling_point).aerosol || '')) })
+          : { status: 'sin-criterio', criterio: '' };
+
+        if (res.status === 'grave') graves++;
+        if (res.status === 'grave' || res.status === 'incumplimiento') incumplimientos++;
+        paramsEvaluados.push({ key, component: it.component, result_text: it.result_text, value, flag, ...res });
+      }
+    }
+
+    const status = graves > 0 ? 'grave' : (incumplimientos > 0 ? 'incumplimiento' : 'ok');
+
+    const info    = getPuntoInfo(s.sampling_point);
+    const nombre  = (info.nombre || s.sampling_point || '').toString();
+    const titular = titularCategoria(info.titular || '');
+    const tipo    = tipoCategoria(info.tipo || '');
+
+    // ⚠️ NUEVO: ZA calculada (o del mapa fusionado si existe)
+    const za = (info.za ||
+                getZAFrom(s.sampling_point, s.subtipo || s.test_schedule || s['test schedule']) ||
+                '').toString();
+
+    return { 
+      ...s, dateISO, dateStr, items, paramsEvaluados,
+      numAnalisis, numIncumplimientos: incumplimientos, status, graves,
+      nombre, titular, tipo, za // ← añadimos 'za' al objeto
+    };
+  });
+
+  // Filtro fechas (usar ISO para comparar)
+  enriched = enriched.filter(r => {
+    if (dateFrom && r.dateISO < dateFrom) return false;
+    if (dateTo   && r.dateISO > dateTo)   return false;
+    return true;
+  });
+
+  // --- Filtro búsqueda: por Id numeric exacto o por nombre/punto ---
+  const searchInput = (document.getElementById('searchBox').value || '').trim();
+  if (searchInput) {
+    const isIdSearch = /^\d+$/.test(searchInput);
+    if (isIdSearch) {
+      enriched = enriched.filter(r =>
+        String(r.id_numeric).replace(/\s+/g, '') === searchInput
+      );
+    } else {
+      const qText = normalize(searchInput);
+      enriched = enriched.filter(r =>
+        normalize(r.sampling_point).includes(qText) ||
+        normalize(r.nombre).includes(qText)
+      );
+    }
+  }
+
+  // Filtro por ámbito + Job Name
+  enriched = enriched.filter(passJobFilter);
+
+  // Vistas (por defecto mostramos tabla)
+  const panelPuntos = document.getElementById('panelPuntos');
+  const tableWrap   = document.getElementById('tablaMuestrasWrap');
+  panelPuntos.classList.add('hidden');
+  tableWrap.classList.remove('hidden');
+
+  // --- Filtro por tab ---
+  if (scope === 'piscinas') {
+    if (activeTab === 'Privada' || activeTab === 'Municipal') {
+      enriched = enriched.filter(r => r.titular === activeTab);
+    } else if (activeTab === 'Exterior' || activeTab === 'Interior') {
+      enriched = enriched.filter(r => r.tipo === activeTab);
+    }
+  } else if (scope === 'potables') {
+    const U = v => (v ?? '').toString().toUpperCase().trim();
+    const J = s => U(s.job_name);
+
+    if (activeTab === 'fuentes') {
+      enriched = enriched.filter(r => J(r).startsWith('FUENTE'));
+    } else if (activeTab === 'noprog') {
+      enriched = enriched.filter(r => J(r).startsWith('AGUAS_NP'));
+    } else if (activeTab === 'prioritarios') {
+      // Subtipo "Prioritario" (tolerante a mayúsculas/acentos)
+      const isPrior = r => {
+        const fromRow  = U(r.subtipo).normalize('NFD').replace(/\p{Diacritic}/gu,'');
+        const fromInfo = U(getPuntoInfo(r.sampling_point)?.subtipo).normalize('NFD').replace(/\p{Diacritic}/gu,'');
+        return fromRow === 'PRIORITARIO' || fromInfo === 'PRIORITARIO';
+      };
+      enriched = enriched.filter(isPrior);
+    } else if (activeTab === 'pueblos') {
+      // ZA conocida y distinta de "ZA Vitoria"
+      enriched = enriched.filter(r => {
+        const za = U(r.za || getPuntoInfo(r.sampling_point)?.za ||
+                     getZAFrom(r.sampling_point, r.subtipo || r.test_schedule || r['test schedule']));
+        return za && za !== 'ZA VITORIA';
+      });
+    }
+  }
+
+  // Filtro común de “Incumplimientos”
+  if (activeTab === 'incumplimientos') {
+    enriched = enriched.filter(r => r.status === 'grave' || r.status === 'incumplimiento');
+  }
+
+  // --- Pestañas de tarjetas de puntos ---
+  if (activeTab === 'puntosIncumplimiento') {
+    const data = enriched.filter(r => r.status === 'grave' || r.status === 'incumplimiento');
+
+    panelPuntos.classList.remove('hidden');
+    tableWrap.classList.add('hidden');
+
+    const titleEl = document.getElementById('panelPuntosTitle');
+    if (titleEl) titleEl.textContent = 'Puntos con incumplimientos';
+
+    document.getElementById('summaryCounts').textContent = `${data.length} muestras mostradas`;
+    lastEnriched = data;
+    renderPuntos(data, /*showAll=*/false);
+    return;
+  }
+
+  if (activeTab === 'puntosTodos') {
+    panelPuntos.classList.remove('hidden');
+    tableWrap.classList.add('hidden');
+
+    const titleEl = document.getElementById('panelPuntosTitle');
+    if (titleEl) titleEl.textContent = 'Puntos (todos)';
+
+    document.getElementById('summaryCounts').textContent = `${enriched.length} muestras mostradas`;
+    lastEnriched = enriched;
+    renderPuntos(enriched, /*showAll=*/true);
+    return;
+  }
+  // --- fin pestañas de puntos ---
+
+  // Resumen y tabla (solo para vistas de tabla)
+  document.getElementById('summaryCounts').textContent = `${enriched.length} muestras mostradas`;
+  lastEnriched = enriched;
+
+  enriched.sort((a,b) => (a.dateISO < b.dateISO ? 1 : -1));
+  for (const r of enriched) {
+    const tr = document.createElement('tr'); 
+    tr.className = 'hover:bg-slate-50 cursor-pointer';
+    tr.addEventListener('click', () => openModal(r));
+    tr.innerHTML = `
+      <td class="px-3 py-2 whitespace-nowrap">${r.dateStr || ''}</td>
+      <td class="px-3 py-2">${r.id_numeric || ''}</td>
+      <td class="px-3 py-2">${escapeHtml(r.nombre || '')}</td>
+      <td class="px-3 py-2">${escapeHtml(r.collected_from || '')}</td>
+      <td class="px-3 py-2">${escapeHtml(r.collected_by || '')}</td>
+      <td class="px-3 py-2">${r.numAnalisis}</td>
+      <td class="px-3 py-2">${r.numIncumplimientos}</td>
+      <td class="px-3 py-2">${statusBadge(r.status)}</td>`;
+    document.getElementById('tableBody').appendChild(tr);
+  }
+}
+
+
+
+
+
+function renderPuntos(enriched, showAll) {
+  const N = (v) => (Number.isFinite(v) ? v : (v == null ? 0 : Number(v) || 0));
+  const U = (v) => (v ?? '').toString();
+
+  // Agrupar por punto de muestreo
+  const map = new Map();
+  for (const r of (enriched || [])) {
+    const key = r && (r.sampling_point || r.samplingPoint || r.punto || r.nombre || '—');
+    if (!map.has(key)) {
+      const info = getPuntoInfo(key) || {};
+      map.set(key, {
+        sp: key,
+        nombre: r?.nombre || info.nombre || key,
+        titular: r?.titular || info.titular || '',
+        tipo: r?.tipo || info.tipo || '',
+        // nuevos campos visibles:
+        za: U(r?.za || info.za || getZAFrom(key, r?.subtipo || info.subtipo || r?.test_schedule || r?.['test schedule'])),
+        subtipo: U(r?.subtipo || info.subtipo || ''),
+        // contadores
+        analisis: 0,
+        muestras: 0,
+        total: 0,
+        graves: 0,
+      });
+    }
+    const obj = map.get(key);
+    obj.muestras += 1;
+    obj.analisis += N(r?.numAnalisis);
+    obj.total    += N(r?.numIncumplimientos);
+    obj.graves   += N(r?.graves);
+  }
+
+  // Pintar lista
+  const list = document.getElementById('puntosList');
+  if (!list) return;
+  list.innerHTML = '';
+
+  const puntos = [...map.values()]
+    .sort((a, b) =>
+      (b.graves - a.graves) ||
+      (b.total - a.total) ||
+      (a.nombre || '').localeCompare(b.nombre || '')
+    );
+
+  if (puntos.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'text-sm text-slate-500 p-3';
+    empty.textContent = 'No hay puntos para mostrar.';
+    list.appendChild(empty);
+    return;
+  }
+
+  puntos.forEach(p => {
+    const li = document.createElement('li');
+    li.className = 'rounded-xl border bg-white p-3 shadow-sm cursor-pointer hover:bg-slate-50';
+    li.setAttribute('role', 'button');
+    li.setAttribute('tabindex', '0');
+
+    li.innerHTML =
+      `<div class="flex items-start justify-between gap-3">
+         <div class="min-w-0">
+           <div class="font-medium truncate">${escapeHtml(p.nombre || p.sp || '')}</div>
+           <div class="text-xs text-slate-600 truncate">
+             <strong>SP</strong> ${escapeHtml(p.sp || '')}
+           </div>
+           <div class="text-xs text-slate-600 truncate">
+             <strong>ZA:</strong> ${escapeHtml(p.za || '')}
+             ${p.subtipo ? ` · <strong></strong> ${escapeHtml(p.subtipo)}` : ''}
+           </div>
+           <div class="text-xs text-slate-500 truncate">
+             ${escapeHtml(p.titular || '-')} · ${escapeHtml(p.tipo || '-')}
+           </div>
+         </div>
+         <div class="flex flex-wrap items-center gap-1 shrink-0">
+           ${p.graves > 0 ? `<span class="badge bg-red-100 text-red-700">Graves: ${p.graves}</span>` : ''}
+           <span class="badge bg-amber-100 text-amber-700">Incumpl.: ${p.total}</span>
+           <span class="badge bg-slate-100 text-slate-700">Análisis: ${p.analisis}</span>
+           <span class="badge bg-slate-100 text-slate-700">Muestras: ${p.muestras}</span>
+         </div>
+       </div>`;
+
+    const open = () => (showAll ? openPointInfo(p.sp) : openPointModal(p.sp));
+    li.addEventListener('click', open);
+    li.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+    list.appendChild(li);
+  });
+}
+
+
+
+
+    // ===== Modales =====
+	
+	
+	
+	
+function openModal(row) {
+  // --- Normalización y enriquecimiento -------------------------------
+  if (!row?.dateStr && row?.sampled_date_iso) {
+    row.dateStr = toDisplayDate(row.sampled_date_iso);
+  }
+
+  if (!Array.isArray(row?.paramsEvaluados)) {
+    const items = analysesById.get(cleanId(row?.id_numeric)) || [];
+    const paramsEvaluados = [];
+    let incumplimientos = 0, graves = 0;
+
+    for (const it of items) {
+      if (isOmittedComponent(it.component)) continue;
+
+      const key = matchParam(it.component);
+      const { value, flag } = interpretValue(it.result_text, it.result_value);
+
+      const res = key
+        ? evalParam(key, value, {
+            hasAerosol: /conaeros/i.test((getPuntoInfo(row?.sampling_point)?.aerosol || ''))
+          })
+        : { status: 'sin-criterio', criterio: '' };
+
+      if (res.status === 'grave') graves++;
+      if (res.status === 'grave' || res.status === 'incumplimiento') incumplimientos++;
+
+      paramsEvaluados.push({
+        key,
+        component: it.component,
+        result_text: it.result_text,
+        value,
+        flag,
+        ...res
+      });
+    }
+
+    row.paramsEvaluados = paramsEvaluados;
+    row.graves = graves;
+    row.numIncumplimientos = incumplimientos;
+  }
+
+  // --- Referencias DOM (con validaciones básicas) --------------------
+  const $modal       = document.getElementById('modal');
+  const $title       = document.getElementById('modalTitle');
+  const $hdr         = document.getElementById('modalHeaderInfo');
+  const $eval        = document.getElementById('modalEval');
+  const $tbody       = document.getElementById('modalBody');
+
+  if (!$modal || !$title || !$hdr || !$eval || !$tbody) {
+    console.error('Faltan nodos del modal');
+    return;
+  }
+  
+  
+ // Datos extra del punto
+const pinfo   = getPuntoInfo(row?.sampling_point) || {};
+const subtipo = (pinfo.subtipo || row?.subtipo || '').toString();
+const za      = (pinfo.za || getZAFrom(row?.sampling_point, subtipo || row?.test_schedule || row?.['test schedule'] || '') || '').toString();
+
+  
+  
+  
+  
+  
+
+  // --- Cabecera ------------------------------------------------------
+  $title.textContent = `Muestra ${row?.id_numeric ?? ''}`;
+
+  // Solo las partes dinámicas pasan por escapeHtml
+  $hdr.innerHTML = `
+    <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      <div><span class="text-slate-500">Id numeric:</span> <strong>${escapeHtml(row?.id_numeric ?? '')}</strong></div>
+      <div><span class="text-slate-500">Fecha:</span> <strong>${escapeHtml(row?.dateStr ?? '')}</strong></div>
+      <div><span class="text-slate-500">Sampling point:</span> <strong>${escapeHtml(row?.sampling_point ?? '')}</strong></div>
+      <div><span class="text-slate-500">Nombre:</span> <strong>${escapeHtml(row?.nombre ?? '')}</strong></div>
+      <div><span class="text-slate-500">Collected from:</span> <strong>${escapeHtml(row?.collected_from ?? '')}</strong></div>
+      <div><span class="text-slate-500">Collected by:</span> <strong>${escapeHtml(row?.collected_by ?? '')}</strong></div>
+	  <div><span class="text-slate-500">ZA:</span> <strong>${escapeHtml(za || '-')}</strong></div>
+<div><span class="text-slate-500">Subtipo:</span> <strong>${escapeHtml(subtipo || '-')}</strong></div>
+
+
+    </div>
+  `;
+
+  // `statusBadge` devuelve HTML de confianza; deja clara la advertencia si aplica
+  $eval.innerHTML = `Evaluación general: ${statusBadge(row?.status)} <span class="text-slate-600">(si un solo parámetro incumple, la muestra se considera incumplimiento)</span>`;
+
+  // --- Cuerpo de la tabla -------------------------------------------
+  $tbody.innerHTML = '';
+  const ordered = [...(row?.paramsEvaluados ?? [])]
+    .sort((a, b) => (rankStatus(b?.status) ?? 0) - (rankStatus(a?.status) ?? 0));
+
+  const frag = document.createDocumentFragment();
+  for (const p of ordered) {
+    const tr = document.createElement('tr');
+
+   const valueText = (p?.value ?? '') + (p?.flag === 'nd' ? ' (no detectado)' : '');
+
+// unidad: para potables viene en p.unit; si no, la inferimos
+const unit =
+  (p && p.unit) ||
+  getParamUnit?.(p?.component || p?.key || '') ||
+  '';
+
+const resultWithUnit = (p?.result_text ?? '') + (unit ? ' ' + unit : '');
+
+tr.innerHTML = `
+  <td class="px-3 py-2">${escapeHtml(p?.component || p?.key || '')}</td>
+  <td class="px-3 py-2">${escapeHtml(resultWithUnit)}</td>
+  <td class="px-3 py-2">${escapeHtml(String(valueText))}</td>
+  <td class="px-3 py-2">${statusBadge(p?.status)}</td>
+  <td class="px-3 py-2 text-slate-600">${escapeHtml(p?.criterio ?? '')}</td>
+`;
+
+    frag.appendChild(tr);
+  }
+  $tbody.appendChild(frag);
+
+  // --- Mostrar modal + accesibilidad mínima -------------------------
+  $modal.classList.remove('hidden');
+  $modal.classList.add('flex');
+  $modal.setAttribute('role', 'dialog');
+  $modal.setAttribute('aria-modal', 'true');
+  $modal.setAttribute('aria-labelledby', 'modalTitle');
+
+  // foco inicial seguro si existe un botón de cierre
+  const closeBtn = $modal.querySelector('[data-modal-close]');
+  (closeBtn || $modal).focus?.();
+}
+
+
+
+
+
+
+
+// ──────────────────────────────────────────────────────────────
+// Helper: construir/encontrar la muestra por id_numeric y abrirla
+// ──────────────────────────────────────────────────────────────
+function openSampleById(idNum) {
+  const idStr = String(idNum);
+
+  // 1) Intenta tomarla del último enriched (ya tiene paramsEvaluados)
+  let row = (lastEnriched || []).find(r => String(r.id_numeric) === idStr);
+
+  // 2) Si no está, la reconstruimos a partir de 'samples' + 'analysesById'
+  if (!row) {
+    const s = (samples || []).find(x => String(x.id_numeric) === idStr);
+    if (!s) return; // nada que abrir
+
+    const dateISO = s.sampled_date_iso;
+    const dateStr = toDisplayDate(dateISO);
+    const items = (analysesById.get(cleanId(s.id_numeric)) || []);
+    const numAnalisis = items.length;
+
+    let incumplimientos = 0, graves = 0;
+    const paramsEvaluados = [];
+    for (const it of items) {
+      if (isOmittedComponent(it.component)) continue;
+      const key = matchParam(it.component);
+      const { value, flag } = interpretValue(it.result_text, it.result_value);
+      const res = key
+        ? evalParam(key, value, { hasAerosol: /conaeros/i.test((getPuntoInfo(s.sampling_point).aerosol || '')) })
+        : { status: 'sin-criterio', criterio: '' };
+
+      if (res.status === 'grave') graves++;
+      if (res.status === 'grave' || res.status === 'incumplimiento') incumplimientos++;
+      paramsEvaluados.push({ key, component: it.component, result_text: it.result_text, value, flag, ...res });
+    }
+
+    const status = graves > 0 ? 'grave' : (incumplimientos > 0 ? 'incumplimiento' : 'ok');
+    const info = getPuntoInfo(s.sampling_point) || {};
+    const nombre  = (info.nombre || s.sampling_point || '').toString();
+    const titular = titularCategoria(info.titular || '');
+    const tipo    = tipoCategoria(info.tipo || '');
+
+    row = { ...s, dateISO, dateStr, items, paramsEvaluados, numAnalisis,
+            numIncumplimientos: incumplimientos, status, graves, nombre, titular, tipo };
+  }
+
+  // 3) Cerrar el modal de punto y abrir el de muestra encima
+  closePointModal();
+  setTimeout(() => openModal(row), 0);
+}
+
+
+
+
+
+// === Fuentes → listado de muestras bajo el mapa para un SP ===
+
+
+
+
+function showSamplesForPoint(keyOrSp) {
+  const isNum = /^\d+$/.test(String(keyOrSp));
+  const num   = isNum ? String(keyOrSp) : normalizeSPNum(keyOrSp);
+
+  const list = document.getElementById('mapFuentesList');
+  if (!list) return;
+
+  const rows = samplesForFuenteNumber(num)
+    .sort((a,b) => (a.sampled_date_iso < b.sampled_date_iso ? 1 : -1));
+
+  // SP e info representativos
+  const spRep = getSPFromCoordKey(num) || (rows[0]?.sampling_point || `F-${num}`);
+  const info  = getPuntoInfo(spRep) || {};
+  const nombre = info.nombre || `Fuente ${num}`;
+
+  let html = `<div class="font-medium mb-1">Muestras de ${escapeHtml(nombre)} (SP: ${escapeHtml(spRep)})</div>`;
+  if (!rows.length){
+    html += `<div class="text-sm text-slate-500">No hay muestras para este punto.</div>`;
+    list.innerHTML = html;
+    return;
+  }
+
+  html += `<ul class="divide-y rounded-lg border">`;
+  for (const s of rows){
+    const tipoBadge = isPotableSample(s)
+      ? '<span class="ml-2 inline-block text-[10px] px-1.5 py-0.5 rounded bg-green-200 text-green-800">Potable</span>'
+      : '<span class="ml-2 inline-block text-[10px] px-1.5 py-0.5 rounded bg-sky-200 text-sky-800">Piscina</span>';
+
+    html += `
+      <li class="p-2 hover:bg-slate-50 cursor-pointer"
+          onclick="openSampleById('${String(s.id_numeric)}')">
+        <div class="flex items-center justify-between">
+          <div class="truncate">
+            <span class="font-medium">${escapeHtml(toDisplayDate(s.sampled_date_iso) || '')}</span>
+            ${tipoBadge}
+          </div>
+          <div class="text-xs text-slate-600">Id: <strong>${escapeHtml(String(s.id_numeric || ''))}</strong></div>
+        </div>
+      </li>`;
+  }
+  html += `</ul>`;
+  list.innerHTML = html;
+}
+
+// expón al ámbito global para el onclick del popup
+window.showSamplesForPoint = showSamplesForPoint;
+
+
+
+
+// (opcional) exponerla explícitamente
+window.showSamplesForPoint = showSamplesForPoint;
+
+
+
+
+
+
+// ──────────────────────────────────────────────────────────────
+// Modal "Puntos con incumplimientos" → listado de parámetros incumplidos
+// ──────────────────────────────────────────────────────────────
+
+function openPointModal(sp) {
+  const info     = getPuntoInfo(sp) || {};
+  const nombre   = escapeHtml(info.nombre || sp || '');
+  const titular  = escapeHtml(titularCategoria(info.titular || ''));
+  const tipo     = escapeHtml(tipoCategoria(info.tipo || ''));
+  const subtipo  = escapeHtml(info.subtipo || '');
+  const za       = escapeHtml(info.za || getZAFrom(sp, info.subtipo || '') || '');
+
+  // --- Cabecera ------------------------------------------------------
+  const headerEl = document.getElementById('modalPointHeader');
+  if (headerEl) {
+    headerEl.innerHTML = `
+      <div class="text-lg font-semibold">${nombre}</div>
+      <div class="text-xs text-slate-600">
+        <strong>SP:</strong> ${escapeHtml(sp || '')} ·
+        <strong>ZA:</strong> ${za || '-'}
+        ${subtipo ? ` · <strong>Subtipo:</strong> ${subtipo}` : ''}
+      </div>
+      <div class="text-xs text-slate-600">${titular} · ${tipo}</div>`;
+  }
+
+  // --- Cuerpo de tabla ----------------------------------------------
+  const tbody = document.getElementById('modalPointBody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+
+  const rows = (lastEnriched || [])
+    .filter(r => r.sampling_point === sp)
+    .sort((a, b) => (a.dateISO < b.dateISO ? 1 : -1));
+
+  const incumplidos = [];
+  for (const r of rows) {
+    for (const p of (r.paramsEvaluados || [])) {
+      if (p.status === 'grave' || p.status === 'incumplimiento') {
+        incumplidos.push({
+          id_numeric : r.id_numeric,
+          dateStr    : r.dateStr,
+          component  : p.component || p.key || '',
+          key        : p.key || '',
+          result_text: p.result_text || '',
+          value      : p.value,
+          flag       : p.flag,
+          status     : p.status,
+          criterio   : p.criterio || ''
+        });
+      }
+    }
+  }
+
+  if (incumplidos.length === 0) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="px-3 py-3 text-slate-500" colspan="7">
+      No hay parámetros incumplidos para este punto con los filtros actuales.
+    </td>`;
+    tbody.appendChild(tr);
+  } else {
+    const frag = document.createDocumentFragment();
+
+    for (const it of incumplidos) {
+      const getUnit = () => {
+        try {
+          const k = potKey ? potKey(it.component || it.key) : null;
+          if (k && typeof limitesPotables?.get === 'function' && limitesPotables.has(k)) {
+            return limitesPotables.get(k)?.[2] || '';
+          }
+        } catch (_) {}
+        return '';
+      };
+      const unit = getUnit();
+      const note = it.flag === 'nd' ? ' (no detectado)' : '';
+
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-slate-50 cursor-pointer';
+      tr.addEventListener('click', () => openSampleById(it.id_numeric));
+
+      tr.innerHTML = `
+        <td class="px-3 py-2 whitespace-nowrap">${escapeHtml(it.dateStr || '')}</td>
+        <td class="px-3 py-2">${escapeHtml(String(it.id_numeric ?? ''))}</td>
+        <td class="px-3 py-2">${escapeHtml(it.component || it.key || '')}</td>
+        <td class="px-3 py-2">${escapeHtml(it.result_text + (unit ? ' ' + unit : ''))}</td>
+        <td class="px-3 py-2">${escapeHtml(String(it.value ?? ''))}${note}</td>
+        <td class="px-3 py-2">${statusBadge(it.status)}</td>
+        <td class="px-3 py-2 text-slate-600">${escapeHtml(it.criterio)}</td>
+      `;
+      frag.appendChild(tr);
+    }
+
+    tbody.appendChild(frag);
+  }
+
+  // --- Mostrar modal -------------------------------------------------
+  const m = document.getElementById('modalPoint');
+  if (!m) return;
+  m.classList.remove('hidden');
+  m.classList.add('flex');
+  m.setAttribute('role', 'dialog');
+  m.setAttribute('aria-modal', 'true');
+  m.setAttribute('aria-labelledby', 'modalPointHeader');
+}
+
+
+
+
+
+
+
+
+
+function getParamUnit(param) {
+  const k = potKey(param || '');
+  if (k && limitesPotables.has(k)) {
+    return limitesPotables.get(k)[2] || '';
+  }
+  return '';
+}
+
+
+
+
+
+
+
+	
+	
+	
+function openPointInfo(sp) {
+  // Título
+  if (pointTrendChart) { pointTrendChart.destroy(); pointTrendChart = null; }
+
+  
+  const info  = getPuntoInfo(sp) || {};
+  const title = escapeHtml(info.nombre || sp || '');
+  document.getElementById('modalPointInfoHeader').innerHTML =
+    `<div class="text-base font-semibold">${title}</div>`;
+
+  // Filtros de fecha + job (sin búsqueda)
+  const dateFrom = document.getElementById('dateFrom').value || null;
+  const dateTo   = document.getElementById('dateTo').value   || null;
+
+  // Enriquecido SIN filtrar por estado (incluye OK)
+  let enrichedAll = samples.map(s => {
+    const dateISO = s.sampled_date_iso;
+    const dateStr = toDisplayDate(dateISO);
+    const items = (analysesById.get(cleanId(s.id_numeric)) || []);
+    const numAnalisis = items.length;
+
+    let incumplimientos = 0, graves = 0;
+    const paramsEvaluados = [];
+    for (const it of items) {
+      if (isOmittedComponent(it.component)) continue;
+      const key = matchParam(it.component);
+      const { value, flag } = interpretValue(it.result_text, it.result_value);
+      const res = key
+        ? evalParam(key, value, { hasAerosol: /conaeros/i.test((getPuntoInfo(s.sampling_point).aerosol || '')) })
+        : { status: 'sin-criterio', criterio: '' };
+      if (res.status === 'grave') graves++;
+      if (res.status === 'grave' || res.status === 'incumplimiento') incumplimientos++;
+      paramsEvaluados.push({ key, component: it.component, result_text: it.result_text, value, flag, ...res });
+    }
+
+    const status = graves > 0 ? 'grave' : (incumplimientos > 0 ? 'incumplimiento' : 'ok');
+    const pinfo  = getPuntoInfo(s.sampling_point);
+    const nombre = (pinfo.nombre || s.sampling_point || '').toString();
+
+    return { ...s, dateISO, dateStr, items, paramsEvaluados, numAnalisis,
+             numIncumplimientos: incumplimientos, status, graves, nombre };
+  });
+
+  // Filtro fechas
+  enrichedAll = enrichedAll.filter(r => {
+    if (dateFrom && r.dateISO < dateFrom) return false;
+    if (dateTo   && r.dateISO > dateTo)   return false;
+    return true;
+  });
+
+  // Filtro Job Name
+  
+ // ✅ nuevo (usa el mismo criterio que la tabla principal)
+enrichedAll = enrichedAll.filter(passJobFilter);
+
+
+  // Todas las muestras del punto (orden fecha desc)
+  const rows = enrichedAll
+    .filter(r => r.sampling_point === sp)
+    .sort((a,b) => (a.dateISO < b.dateISO ? 1 : -1));
+
+  // Pintar tabla
+  const tbody = document.getElementById('modalPointInfoBody');
+  tbody.innerHTML = '';
+
+  if (rows.length === 0) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="px-3 py-3 text-slate-500" colspan="4">No hay análisis para este punto.</td>`;
+    tbody.appendChild(tr);
+  } else {
+    for (const r of rows) {
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-slate-50 cursor-pointer';
+      tr.tabIndex = 0;
+      tr.addEventListener('click', () => { closePointInfo(); setTimeout(() => openModal(r), 0); });
+      tr.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); closePointInfo(); setTimeout(() => openModal(r), 0); }
+      });
+      tr.innerHTML = `
+        <td class="px-3 py-2 whitespace-nowrap">${r.dateStr || ''}</td>
+        <td class="px-3 py-2">${r.id_numeric || ''}</td>
+        <td class="px-3 py-2">${escapeHtml(r.collected_by || '')}</td>
+        <td class="px-3 py-2">${statusBadge(r.status)}</td>`;
+      tbody.appendChild(tr);
+    }
+  }
+
+  // ⚠️ Construir selector y gráfico para estas filas
+  
+  
+  setupPointTrend(rows);
+
+  // Mostrar modal
+  const m = document.getElementById('modalPointInfo');
+  m.classList.remove('hidden');
+  m.classList.add('flex');
+}
+
+
+
+
+
+
+	function closePointInfo(){
+  if (pointTrendChart) { pointTrendChart.destroy(); pointTrendChart = null; }
+  const m = document.getElementById('modalPointInfo');
+  m.classList.add('hidden'); m.classList.remove('flex');
+}
+
+	
+	
+	
+	
+
+    function rankStatus(s) { return s === 'grave' ? 4 : s === 'incumplimiento' ? 3 : s === 'ok' ? 2 : s === 'sin-dato' ? 1 : 0; }
+    function closeModal(){ const m = document.getElementById('modal'); m.classList.add('hidden'); m.classList.remove('flex'); }
+    function closePointModal(){ const m = document.getElementById('modalPoint'); m.classList.add('hidden'); m.classList.remove('flex'); }
+    function escapeHtml(str) { return (str ?? '').toString().replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\'':'&#39;','"':'&quot;'}[c])); }
+  </script>
+
+<!-- Modal muestra -->
+<div id="modal" class="fixed inset-0 z-[60] hidden items-center justify-center">
+
+  <div class="absolute inset-0 bg-black/40" onclick="closeModal()"></div>
+  <div class="relative max-h-[85vh] w-[95vw] max-w-4xl overflow-hidden rounded-2xl border bg-white shadow-2xl">
+
+    <!-- ✅ Cabecera correcta para "muestra" -->
+    <div class="flex items-center justify-between border-b p-4">
+      <h3 id="modalTitle" class="text-lg font-semibold">Detalles de la muestra</h3>
+      <button class="rounded-lg p-2 hover:bg-slate-100 text-slate-900" onclick="closeModal()" aria-label="Cerrar">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <!-- /cabecera -->
+
+    <div class="p-4 space-y-3 overflow-y-auto max-h-[70vh]">
+      <div id="modalHeaderInfo" class="text-sm text-slate-700"></div>
+      <div id="modalEval" class="text-sm"></div>
+      <div id="modalMuestrasWrap" class="overflow-x-auto rounded-xl border">
+        <table class="min-w-full divide-y divide-slate-200 text-sm">
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="px-3 py-2 text-left">Parámetro</th>
+              <th class="px-3 py-2 text-left">Resultado (texto)</th>
+              <th class="px-3 py-2 text-left">Valor usado</th>
+              <th class="px-3 py-2 text-left">Estado</th>
+              <th class="px-3 py-2 text-left">Criterio</th>
+            </tr>
+          </thead>
+          <tbody id="modalBody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="border-t p-3 text-right">
+      <button class="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" onclick="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Modal listado por Punto -->
+  
+  
+  
+  
+  
+  <div id="modalPoint" class="fixed inset-0 z-50 hidden items-center justify-center">
+  <div class="absolute inset-0 bg-black/40" onclick="closePointModal()"></div>
+  <div class="relative max-h-[85vh] w-[95vw] max-w-5xl overflow-hidden rounded-2xl border bg-white shadow-2xl">
+    
+    <!-- HEADER -->
+    <div class="flex items-center justify-between border-b p-4">
+      <div id="modalPointHeader" class="text-lg"></div>
+      <button class="rounded-lg p-2 hover:bg-slate-100" onclick="closePointModal()" aria-label="Cerrar">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="p-4 space-y-3 overflow-y-auto max-h-[70vh]">
+      <div id="modalMuestrasWrap" class="overflow-x-auto rounded-xl border">
+        <table class="min-w-full divide-y divide-slate-200 text-sm">
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="px-3 py-2 text-left">Fecha</th>
+              <th class="px-3 py-2 text-left">Id Numeric</th>
+              <th class="px-3 py-2 text-left">Parámetro</th>
+              <th class="px-3 py-2 text-left">Resultado (texto)</th>
+              <th class="px-3 py-2 text-left">Valor usado</th>
+              <th class="px-3 py-2 text-left">Estado</th>
+              <th class="px-3 py-2 text-left">Criterio</th>
+            </tr>
+          </thead>
+          <tbody id="modalPointBody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="border-t p-3 text-right">
+      <button class="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" onclick="closePointModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+  
+  
+  
+  
+  
+  <!-- Modal resumen por Punto (Puntos -> todos) -->
+  
+<!-- Modal resumen por Punto (Puntos -> todos) -->
+<div id="modalPointInfo" class="fixed inset-0 z-50 hidden items-center justify-center">
+  <div class="absolute inset-0 bg-black/40" onclick="closePointInfo()"></div>
+  <div class="relative max-h-[70vh] w-[96vw] max-w-3xl overflow-hidden rounded-2xl border bg-white shadow-2xl">
+    <!-- HEADER -->
+    <div class="flex items-center justify-between border-b p-4">
+      <div id="modalPointInfoHeader" class="text-lg"></div>
+      <button class="rounded-lg p-2 hover:bg-slate-100" onclick="closePointInfo()" aria-label="Cerrar">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="p-4 space-y-3 overflow-y-auto max-h-[58vh]">
+      <div class="overflow-x-auto rounded-xl border">
+        <table class="min-w-full divide-y divide-slate-200 text-sm">
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="px-3 py-2 text-left">Fecha</th>
+              <th class="px-3 py-2 text-left">Id Numeric</th>
+              <th class="px-3 py-2 text-left">Collected by</th>
+              <th class="px-3 py-2 text-left">Evaluación</th>
+            </tr>
+          </thead>
+          <tbody id="modalPointInfoBody" class="divide-y divide-slate-100"></tbody>
+        </table>
+      </div>
+
+<!-- Acordeón: Evolución de parámetros -->
+<div class="mt-4">
+  <button id="pointTrendToggle"
+          class="w-full flex items-center justify-between rounded-xl border px-4 py-2 text-left hover:bg-slate-50">
+    <span class="font-medium">Evolución de parámetros</span>
+    <span id="pointTrendChevron" class="text-slate-500">▾</span>
+  </button>
+
+  <div id="pointTrendPanel" class="border rounded-xl p-3 mt-2">
+<div class="flex items-center gap-3">
+  <label class="text-sm font-medium">Parámetros:</label>
+  <select id="pointTrendSelect" multiple size="6"
+          class="min-w-[280px] rounded-lg border px-2 py-1 text-sm bg-white text-slate-900"></select>
+  <!-- (el checkbox desaparece: ND siempre = 0) -->
+  <p class="text-xs text-slate-600">Usa tecla CTRL para seleccionar varios parámetros</p>
+</div>
+
+
+    <div class="mt-3 h-[260px]">
+      <canvas id="pointTrendChart"></canvas>
+    </div>
+    <p class="mt-2 text-xs text-slate-500">
+      Colores: <span class="text-red-600 font-medium">rojo</span> = grave, <span class="text-amber-600 font-medium">ámbar</span> = incumplimiento, gris/azul = OK.
+    </p>
+  </div>
+</div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="border-t p-3 text-right">
+      <button class="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" onclick="closePointInfo()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+  
+  
+<!-- Modal Siloe -->
+
+
+
+
+<div id="modalSiloe" class="fixed inset-0 z-50 hidden items-center justify-center">
+  <div class="absolute inset-0 bg-black/40" onclick="closeSiloeModal()"></div>
+
+  <div class="relative max-h-[88vh] w-[96vw] max-w-6xl overflow-hidden rounded-2xl border bg-white shadow-2xl">
+    <!-- HEADER: un solo contenedor -->
+    <div class="flex items-center justify-between border-b p-4">
+      <h3 class="text-lg font-semibold">Siloe · Estadística por punto</h3>
+      <button class="rounded-lg p-2 hover:bg-slate-100" onclick="closeSiloeModal()" aria-label="Cerrar">
+        <!-- X negra -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="black" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="p-4 overflow-y-auto max-h-[78vh] space-y-6" id="siloeContent">
+      <!-- Aquí se inyectan las tablas por punto -->
+    </div>
+
+    <div class="border-t p-3 text-right">
+      <button class="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700" onclick="closeSiloeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+
+  
+  
+  
+  
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1"></script>
+
+  
+  
+  <script>
+  
+  
+// === URLs RAW  ===
+const URL_SAMPLES  = 'https://raw.githubusercontent.com/gorbea0/LIMS/main/REPORTER_SAMPLE.CSV';
+const URL_ANALYSES = 'https://raw.githubusercontent.com/gorbea0/LIMS/main/REPORTER_5oct.CSV';
+
+// Mensajes de estado (opcional)
+function setCsvStatus(msg){ 
+  const el = document.getElementById('remoteCsvMsg'); 
+  if (el) el.textContent = msg || ''; 
+  console.info('[CSV]', msg);
+}
+
+// ——— Parseo desde TEXTO (igual que tus inputs) ———
+function parseSamplesFromText(csvText){
+  const res = Papa.parse(csvText, { header:true, skipEmptyLines:true });
+  samples = (res.data || []).map(r => ({
+    sampled_date_iso: toISODate(r['Sampled date'] || r['sampled date'] || r['Date'] || r['date']),
+    id_numeric:       (r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id'] || '').toString().trim(),
+    sampling_point:   (r['Sampling point'] || r['sampling point'] || r['Sampling Point'] || r['Point'] || r['point'] || '').toString().trim(),
+    collected_from:    r['Collected from'] || r['collected from'] || '',
+    collected_by:      r['Collected by']   || r['collected by']   || '',
+    job_name:         (r['Job Name'] || r['job name'] || r['Job'] || r['job'] || '').toString().trim(),
+	 test_schedule: (r['Test schedule'] || r['test schedule'] || r['Test Schedule'] || '').toString().trim(),
+  })).filter(r => r.id_numeric);
+}
+
+function parseAnalysesFromText(csvText){
+  const res = Papa.parse(csvText, { header:true, skipEmptyLines:true });
+  analyses = (res.data || []).map(r => ({
+    id_numeric:   (r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id'] || '').toString().trim(),
+    component:     r['Component name'] || r['component name'] || r['Component'],
+    result_text:   r['Result text'] || r['result text'] || r['Result'],
+    result_value:  r['Result value'] || r['result value'] || r['Value'],
+  }));
+  analysesById = new Map();
+  for (const a of analyses) {
+    if (!a.id_numeric) continue;
+    const key = a.id_numeric;
+    if (!analysesById.has(key)) analysesById.set(key, []);
+    analysesById.get(key).push(a);
+  }
+}
+
+// ——— Autocarga con timeout y cache-busting ———
+
+
+// ↓ Reemplaza tu fetchTextWithTimeout por esta versión (decodifica ISO-8859-1)
+async function fetchTextWithTimeout(url, ms = 15000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  const r = await fetch(url, { signal: ctrl.signal });
+  clearTimeout(t);
+  if (!r.ok) throw new Error(`HTTP ${r.status} en ${url}`);
+
+  // Decodifica el binario como ISO-8859-1 (Latin-1)
+  const buf = await r.arrayBuffer();
+  return new TextDecoder('iso-8859-1').decode(buf);
+}
+async function autoLoadCSVs() {
+  try {
+    setCsvStatus('Cargando datos del LIMS…');
+
+    const v = `?v=${Date.now()}`; // evita caché
+    const [t1, t2] = await Promise.all([
+      fetchTextWithTimeout(URL_SAMPLES  + v),
+      fetchTextWithTimeout(URL_ANALYSES + v),
+    ]);
+
+    parseSamplesFromText(t1);
+    parseAnalysesFromText(t2);
+    renderAll();
+
+    const [dMin, dMax] = getSamplesDateRange();
+    setCsvStatus(`Datos cargados automáticamente desde ${fmtISO(dMin)} hasta ${fmtISO(dMax)}.`);
+  } catch (err) {
+    console.warn('Auto-carga fallida:', err);
+    setCsvStatus('No se pudo cargar automáticamente. Usa la carga manual.');
+    const acc = document.getElementById('manualCsvAcc');
+    if (acc) acc.setAttribute('open', ''); // abrir acordeón de carga manual
+  }
+}
+
+
+
+// Ejecuta cuando TODO el DOM y las funciones previas ya existen
+document.addEventListener('DOMContentLoaded', autoLoadCSVs);
+
+document.getElementById('btnCalendar').addEventListener('click', openCalendarModal);
+
+</script>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</body>
+
+<style>
+/* En el modal del mapa, poner los controles de la esquina superior derecha en fila */
+#modalFuentes .leaflet-top.leaflet-right {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+#modalFuentes .leaflet-top.leaflet-right .leaflet-control {
+  margin: 10px 0 0 0; /* quitar margen lateral por defecto */
+}
+/* Ajustes mini del buscador */
+#modalFuentes .leaflet-control.custom-search input { height: 22px; }
+#modalFuentes .leaflet-control.custom-search button { height: 22px; }
+</style>
+
+
+
+
+</html>
+
+
+<script>
+// Botón Estadística
+document.getElementById('btnStats').addEventListener('click', openStatsModal);
+function openStatsModal(){
+  const rows = lastEnriched || [];
+
+  const prettyName = {
+    ph: 'pH', turbidez: 'Turbidez', cloro_libre:'Cloro libre', cloro_combinado:'Cloro combinado',
+    bromo:'Bromo', isocianurico:'Ácido isocianúrico', ecoli:'E. coli', temperatura:'Temperatura',
+    pseudomonas:'Pseudomonas', legionella:'Legionella', aluminio:'Aluminio', estafilococos:'Estafilococos'
+  };
+
+  // key -> { label, unit, values:[], incumpl: number }
+  const bucket = new Map();
+
+  for (const r of rows){
+    for (const p of (r.paramsEvaluados||[])){
+      const v = p.value;
+      if (v == null || Number.isNaN(v)) continue;
+
+      // Clave + nombre legible
+      const key   = (p.key && prettyName[p.key]) ? p.key : (p.key || (p.component||'').trim());
+      const label = prettyName[p.key] || (p.component || p.key || '').trim();
+      if (!label) continue;
+
+      if (!bucket.has(key)) bucket.set(key, { label, unit: (p.unit||'').trim(), values: [], incumpl: 0 });
+      const slot = bucket.get(key);
+
+      // Actualiza unidad si llega vacía y ahora disponemos de una
+      if (!slot.unit && p.unit) slot.unit = (p.unit||'').trim();
+
+      slot.values.push(Number(v));
+      if (p.status === 'incumplimiento' || p.status === 'grave') slot.incumpl += 1;
+    }
+  }
+
+  // Estadísticos + etiqueta con unidad
+  const rowsStats = [];
+  for (const {label, unit, values, incumpl} of bucket.values()){
+    if (!values.length) continue;
+    values.sort((a,b)=>a-b);
+    const n      = values.length;
+    const min    = values[0];
+    const max    = values[n-1];
+    const mean   = values.reduce((s,x)=>s+x,0)/n;
+    const median = (n%2===1) ? values[(n-1)/2] : (values[n/2-1]+values[n/2])/2;
+    const labelWithUnit = unit ? `${label} (${unit})` : label;
+    rowsStats.push({label: labelWithUnit, min, max, mean, median, n, incumpl});
+  }
+
+  // Pintar tabla
+  const tbody = document.getElementById('statsBody');
+  tbody.innerHTML = '';
+  const fmt = (x)=> (x===undefined || x===null || Number.isNaN(x)) ? '' : (Math.abs(x)>=100 ? x.toFixed(1) : x.toFixed(2));
+
+  rowsStats
+    .sort((a,b)=> a.label.localeCompare(b.label, 'es', {sensitivity:'base'}))
+    .forEach(s=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="px-3 py-2">${escapeHtml(s.label)}</td>
+        <td class="px-3 py-2">${fmt(s.min)}</td>
+        <td class="px-3 py-2">${fmt(s.max)}</td>
+        <td class="px-3 py-2">${fmt(s.mean)}</td>
+        <td class="px-3 py-2">${fmt(s.median)}</td>
+        <td class="px-3 py-2">${s.n}</td>
+        <td class="px-3 py-2">${s.incumpl}</td>`;
+      tbody.appendChild(tr);
+    });
+
+  // Abrir modal
+  const m = document.getElementById('modalStats');
+  m.classList.remove('hidden'); m.classList.add('flex');
+}
+
+function closeStatsModal(){
+  const m = document.getElementById('modalStats');
+  m.classList.add('hidden'); m.classList.remove('flex');
+}
+
+
+
+
+
+// Click del botón Siloe
+document.getElementById('btnSiloe').addEventListener('click', openSiloeModal);
+
+function openSiloeModal(){
+  const rows = lastEnriched || [];
+  const prettyName = {
+    ph: 'pH', turbidez: 'Turbidez', cloro_libre:'Cloro libre', cloro_combinado:'Cloro combinado',
+    bromo:'Bromo', isocianurico:'Ácido isocianúrico', ecoli:'E. coli', temperatura:'Temperatura',
+    pseudomonas:'Pseudomonas', legionella:'Legionella', aluminio:'Aluminio', estafilococos:'Estafilococos'
+  };
+
+  // Estructura: por punto -> por parámetro -> { values:[], incumpl: count }
+  const byPoint = new Map();
+  for (const r of rows){
+    const sp = r.sampling_point;
+    if (!byPoint.has(sp)) byPoint.set(sp, new Map());
+    const mapParam = byPoint.get(sp);
+
+    for (const p of (r.paramsEvaluados||[])){
+      const v = p.value;
+      if (v == null || Number.isNaN(v)) continue; // solo numéricos para estadísticos
+      const key = p.key || (p.component||'').trim();
+      const label = (p.key && prettyName[p.key]) ? prettyName[p.key] : (p.component || p.key || '').trim();
+      if (!label) continue;
+
+      if (!mapParam.has(key)) mapParam.set(key, { label, values: [], incumpl: 0 });
+      const slot = mapParam.get(key);
+      slot.values.push(Number(v));
+      if (p.status === 'incumplimiento' || p.status === 'grave') slot.incumpl += 1;
+    }
+  }
+
+  // Render
+  const wrap = document.getElementById('siloeContent');
+  wrap.innerHTML = '';
+
+  const fmt = (x)=> (x===undefined || x===null || Number.isNaN(x)) ? '' : (Math.abs(x)>=100 ? x.toFixed(1) : x.toFixed(2));
+
+  // Orden por nombre punto
+  const pointsSorted = [...byPoint.keys()].sort((a,b)=>{
+    const na = (getPuntoInfo(a).nombre || a).toString().toLowerCase();
+    const nb = (getPuntoInfo(b).nombre || b).toString().toLowerCase();
+    return na.localeCompare(nb, 'es', {sensitivity:'base'});
+  });
+
+  for (const sp of pointsSorted){
+    const info = getPuntoInfo(sp);
+    const titulo = info.nombre || sp;
+
+    // Calcular filas del punto
+    const rowsStats = [];
+    for (const {label, values, incumpl} of byPoint.get(sp).values()){
+      if (!values.length) continue;
+      values.sort((a,b)=>a-b);
+      const n = values.length;
+      const min = values[0];
+      const max = values[n-1];
+      const mean = values.reduce((s,x)=>s+x,0)/n;
+      const median = (n%2===1) ? values[(n-1)/2] : (values[n/2-1]+values[n/2])/2;
+      rowsStats.push({label, min, max, mean, median, n, incumpl});
+    }
+    rowsStats.sort((a,b)=> a.label.localeCompare(b.label,'es',{sensitivity:'base'}));
+
+    // Bloque HTML por punto
+    const section = document.createElement('section');
+    section.className = 'rounded-xl border bg-white shadow-sm';
+    section.innerHTML = `
+      <div class="px-4 pt-3 pb-2 border-b">
+        <div class="text-base font-semibold">${escapeHtml(titulo)}</div>
+        <div class="text-xs text-slate-600">${escapeHtml(sp)} · ${(info.titular||'').toString()} · ${(info.tipo||'').toString()}</div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-slate-200 text-sm">
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="px-3 py-2 text-left">Parámetro</th>
+              <th class="px-3 py-2 text-left">Mín</th>
+              <th class="px-3 py-2 text-left">Máx</th>
+              <th class="px-3 py-2 text-left">Media</th>
+              <th class="px-3 py-2 text-left">Mediana</th>
+              <th class="px-3 py-2 text-left"># análisis</th>
+              <th class="px-3 py-2 text-left"># incumpl.</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            ${rowsStats.map(s=>`
+              <tr>
+                <td class="px-3 py-2">${escapeHtml(s.label)}</td>
+                <td class="px-3 py-2">${fmt(s.min)}</td>
+                <td class="px-3 py-2">${fmt(s.max)}</td>
+                <td class="px-3 py-2">${fmt(s.mean)}</td>
+                <td class="px-3 py-2">${fmt(s.median)}</td>
+                <td class="px-3 py-2">${s.n}</td>
+                <td class="px-3 py-2">${s.incumpl}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>`;
+    wrap.appendChild(section);
+  }
+
+  // Abrir modal
+  const m = document.getElementById('modalSiloe');
+  m.classList.remove('hidden'); m.classList.add('flex');
+}
+
+function closeSiloeModal(){
+  const m = document.getElementById('modalSiloe');
+  m.classList.add('hidden'); m.classList.remove('flex');
+}
+
+
+
+
+// === Config gráfico (una sola vez) ===
+const EXCLUDED_TREND_PARAMS = new Set(['envase','biocida neutralizante','biocida nombre']);
+const _sev = (s) => (s === 'grave' ? 2 : (s === 'incumplimiento' ? 1 : 0));
+const BASE_COLORS = ['#2563eb','#0ea5e9','#10b981','#8b5cf6','#22c55e','#14b8a6','#475569'];
+const COLOR_AMBAR = '#f59e0b';
+const COLOR_ROJO  = '#ef4444';
+
+let pointTrendChart = null;
+let _pointTrendRows = [];
+
+function _setSelectedOptions(select, values){ [...select.options].forEach(o => o.selected = values.includes(o.value)); }
+function _getSelectedValues(select){ return [...select.selectedOptions].map(o => o.value); }
+function _pickDefaultParams(list){
+  const pref = ['Cloro libre','pH'];
+  const found = pref.map(p => list.find(k => k.toLowerCase() === p.toLowerCase())).filter(Boolean);
+  return found.length ? found : list.slice(0, Math.min(2, list.length));
+}
+
+function setupPointTrend(rows) {
+  _pointTrendRows = [...rows].sort((a,b) => (a.dateISO < b.dateISO ? -1 : 1));
+  const labels = _pointTrendRows.map(r => r.dateStr || toDisplayDate(r.dateISO));
+
+  // catálogo de parámetros graficables
+  const paramSet = new Map();
+  for (const r of _pointTrendRows) {
+    for (const p of (r.paramsEvaluados || [])) {
+      const label = (p.component || p.key || '').trim();
+      if (!label) continue;
+      if (EXCLUDED_TREND_PARAMS.has(label.toLowerCase())) continue;
+      if (!Number.isFinite(p.value) && p.flag !== 'nd') continue;
+      if (!paramSet.has(label)) paramSet.set(label, label);
+    }
+  }
+
+  const select = document.getElementById('pointTrendSelect');
+  const panel  = document.getElementById('pointTrendPanel');
+  const chev   = document.getElementById('pointTrendChevron');
+  let   toggle = document.getElementById('pointTrendToggle');
+
+  // poblar selector
+  select.innerHTML = '';
+  [...paramSet.keys()].sort((a,b) => a.localeCompare(b)).forEach(k => {
+    const opt = document.createElement('option');
+    opt.value = k; opt.textContent = paramSet.get(k);
+    select.appendChild(opt);
+  });
+
+  // acordeón cerrado por defecto
+  panel.classList.add('hidden'); chev.textContent = '▸';
+
+  // evitar listeners duplicados
+  const newToggle = toggle.cloneNode(true);
+  toggle.parentNode.replaceChild(newToggle, toggle);
+  toggle = newToggle;
+
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const willOpen = panel.classList.contains('hidden');
+
+    if (willOpen) {
+      panel.classList.remove('hidden'); chev.textContent = '▾';
+      if (!pointTrendChart) {
+        const current = [...select.options].filter(o => o.selected).map(o => o.value);
+        const chosen  = current.length ? current : _pickDefaultParams([...paramSet.keys()]);
+        _setSelectedOptions(select, chosen);
+        renderPointTrendChart(labels, chosen);
+      }
+    } else {
+      panel.classList.add('hidden'); chev.textContent = '▸';
+      if (pointTrendChart && typeof pointTrendChart.destroy === 'function') {
+        pointTrendChart.destroy(); pointTrendChart = null;
+      }
+    }
+  });
+
+  select.onchange = () => {
+    if (!panel.classList.contains('hidden')) {
+      renderPointTrendChart(labels, _getSelectedValues(select));
+    }
+  };
+}
+
+function renderPointTrendChart(labels, selectedParams) {
+  const ctx = document.getElementById('pointTrendChart').getContext('2d');
+
+  const series = (selectedParams || []).map((paramLabel, idx) => {
+    const base = BASE_COLORS[idx % BASE_COLORS.length];
+    const values = [], statuses = [];
+    for (const r of _pointTrendRows) {
+      const it = (r.paramsEvaluados || []).find(x => (x.component || x.key || '').trim() === paramLabel);
+      if (!it) { values.push(null); statuses.push('na'); continue; }
+      values.push(Number.isFinite(it.value) ? it.value : 0); // ND -> 0
+      statuses.push(it.status || 'ok');
+    }
+    let maxAbs = 0; for (const v of values) if (v != null) maxAbs = Math.max(maxAbs, Math.abs(v));
+    return { label: paramLabel, base, values, statuses, maxAbs };
+  });
+
+  const nonZeroMax = series.map(s => s.maxAbs).filter(m => m > 0);
+  const minMax = nonZeroMax.length ? Math.min(...nonZeroMax) : 0;
+  const maxMax = nonZeroMax.length ? Math.max(...nonZeroMax) : 0;
+  const NEED_DUAL_Y = (minMax > 0) && (maxMax / minMax >= 20);
+
+  for (const s of series) s.yAxisID = NEED_DUAL_Y && s.maxAbs / (minMax || 1) >= 20 ? 'y1' : 'y';
+
+  const datasets = series.map(s => {
+    const pointColors = s.statuses.map(st => _sev(st) === 2 ? COLOR_ROJO : _sev(st) === 1 ? COLOR_AMBAR : s.base);
+    const segColor = (c) => {
+      const i = c.p0DataIndex;
+      const sev = Math.max(_sev(s.statuses[i]), _sev(s.statuses[i+1]));
+      if (sev === 2) return COLOR_ROJO;
+      if (sev === 1) return COLOR_AMBAR;
+      return s.base;
+    };
+    return {
+      label: s.label,
+      data: s.values,
+      yAxisID: s.yAxisID,
+      tension: 0.25,
+      spanGaps: true,
+      pointRadius: 3,
+      borderWidth: 2,
+      borderColor: s.base,
+      backgroundColor: s.base,
+      pointBackgroundColor: pointColors,
+      pointBorderColor: pointColors,
+      segment: { borderColor: segColor },
+    };
+  });
+
+  if (pointTrendChart) pointTrendChart.destroy();
+
+  pointTrendChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw == null ? '—' : ctx.raw}` } }
+      },
+      scales: {
+        x: { ticks: { maxRotation: 0, autoSkip: true } },
+        y:  { type: 'linear', position: 'left',  beginAtZero: false, grid: { drawOnChartArea: true } },
+        y1: { type: 'linear', position: 'right', beginAtZero: false, grid: { drawOnChartArea: false }, display: NEED_DUAL_Y }
+      }
+    }
+  });
+}
+
+
+
+function getSamplesDateRange() {
+  // sampled_date_iso ya está en formato YYYY-MM-DD
+  const ds = (samples || [])
+    .map(s => s.sampled_date_iso)
+    .filter(Boolean)
+    .sort();                 // orden lexicográfico vale para YYYY-MM-DD
+  return ds.length ? [ds[0], ds[ds.length - 1]] : [null, null];
+}
+function fmtISO(iso) {
+  return iso ? toDisplayDate(iso) : '—';  // usa tu toDisplayDate(dd/mm/aaaa)
+}
+
+
+
+
+
+
+
+</script>
