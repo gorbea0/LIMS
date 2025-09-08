@@ -2903,7 +2903,14 @@ function parseSamplesFromText(csvText){
 }
 
 function parseAnalysesFromText(csvText){
-  const res = Papa.parse(csvText, { header:true, skipEmptyLines:true });
+ 
+const res = Papa.parse(csvText, {
+  header: true,
+  skipEmptyLines: true,
+  transformHeader: h => (h ?? '').toString().trim()
+});
+
+	
   analyses = (res.data || []).map(r => ({
     id_numeric:   (r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id'] || '').toString().trim(),
     component:     r['Component name'] || r['component name'] || r['Component'],
