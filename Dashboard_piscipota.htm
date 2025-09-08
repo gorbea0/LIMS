@@ -2888,9 +2888,16 @@ function setCsvStatus(msg){
   console.info('[CSV]', msg);
 }
 
-// ——— Parseo desde TEXTO (igual que tus inputs) ———
+// ——— Parseo desde TEXTO  ———
 function parseSamplesFromText(csvText){
-  const res = Papa.parse(csvText, { header:true, skipEmptyLines:true });
+
+const res = Papa.parse(csvText, {
+  header: true,
+  skipEmptyLines: true,
+  transformHeader: h => (h ?? '').toString().trim()
+});
+
+	
   samples = (res.data || []).map(r => ({
     sampled_date_iso: toISODate(r['Sampled date'] || r['sampled date'] || r['Date'] || r['date']),
     id_numeric:       (r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id'] || '').toString().trim(),
@@ -2929,7 +2936,7 @@ const res = Papa.parse(csvText, {
 // ——— Autocarga con timeout y cache-busting ———
 
 
-// ↓ Reemplaza tu fetchTextWithTimeout por esta versión (decodifica ISO-8859-1)
+//   (decodifica ISO-8859-1)
 async function fetchTextWithTimeout(url, ms = 15000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
