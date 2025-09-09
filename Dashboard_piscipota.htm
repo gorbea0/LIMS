@@ -2940,15 +2940,15 @@ const res = Papa.parse(csvText, {
 async function fetchTextWithTimeout(url, ms = 15000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
-  const r = await fetch(url, { signal: ctrl.signal });
+  const r = await fetch(url, { signal: ctrl.signal, cache: 'no-store' });
   clearTimeout(t);
   if (!r.ok) throw new Error(`HTTP ${r.status} en ${url}`);
 
-  // Decodifica el binario como ISO-8859-1 (Latin-1)
   const buf = await r.arrayBuffer();
-  //return new TextDecoder('iso-8859-1').decode(buf);
-	return new TextDecoder('utf-8').decode(buf); 
+  return new TextDecoder('iso-8859-1').decode(buf);        // <= igual que la carga manual
+
 }
+
 async function autoLoadCSVs() {
   try {
     setCsvStatus('Cargando datos del LIMS…');
