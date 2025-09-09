@@ -2946,7 +2946,8 @@ async function fetchTextWithTimeout(url, ms = 15000) {
 
   // Decodifica el binario como ISO-8859-1 (Latin-1)
   const buf = await r.arrayBuffer();
-  return new TextDecoder('iso-8859-1').decode(buf);
+  //return new TextDecoder('iso-8859-1').decode(buf);
+	return new TextDecoder('utf-8').decode(buf); 
 }
 async function autoLoadCSVs() {
   try {
