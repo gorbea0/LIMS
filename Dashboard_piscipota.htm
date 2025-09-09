@@ -2962,20 +2962,38 @@ async function fetchTextWithTimeout(url, ms = 15000) {
   return txt;
 }
 
-
 async function autoLoadCSVs() {
   try {
     setCsvStatus('Cargando datos del LIMS…');
 
     const v = `?v=${Date.now()}`; // evita caché
-   const [t1, t2] = await Promise.all([
-  fetchCsvTextSmart(URL_SAMPLES  + `?v=${Date.now()}`),
-  fetchCsvTextSmart(URL_ANALYSES + `?v=${Date.now()}`),
-]);
 
+    const [t1, t2] = await Promise.all([
+      fetchTextWithTimeout(URL_SAMPLES  + v),
+      fetchTextWithTimeout(URL_ANALYSES + v),
+    ]);
 
     parseSamplesFromText(t1);
     parseAnalysesFromText(t2);
+
+    // Diagnóstico rápido
+    const s = new Set(samples.map(x => String(x.id_numeric).trim()));
+    const a = new Set(analyses.map(x => String(x.id_numeric).trim()));
+    let inter = 0; for (const id of a) if (s.has(id)) inter++;
+    console.log('[DEBUG] samples:', samples.length, 'analyses:', analyses.length, 'IDs en común:', inter);
+
+    renderAll();
+
+    const [dMin, dMax] = getSamplesDateRange();
+    setCsvStatus(`Datos cargados automáticamente desde ${fmtISO(dMin)} hasta ${fmtISO(dMax)}.`);
+  } catch (err) {
+    console.warn('Auto-carga fallida:', err);
+    setCsvStatus('No se pudo cargar automáticamente. Usa la carga manual.');
+    const acc = document.getElementById('manualCsvAcc');
+    if (acc) acc.setAttribute('open', '');
+  }
+}
+
 
 
 
