@@ -2881,9 +2881,14 @@ enrichedAll = enrichedAll.filter(passJobFilter);
   <script>
   
   
-// === URLs RAW  ===
-const URL_SAMPLES  = 'https://raw.githubusercontent.com/gorbea0/LIMS/main/REPORTER_SAMPLE.CSV';
-const URL_ANALYSES = 'https://raw.githubusercontent.com/gorbea0/LIMS/main/REPORTER_5oct.CSV';
+// === URLs   ===
+//const URL_SAMPLES  = 'https://raw.githubusercontent.com/gorbea0/LIMS/main/REPORTER_SAMPLE.CSV';
+//const URL_ANALYSES = 'https://raw.githubusercontent.com/gorbea0/LIMS/main/REPORTER_5oct.CSV';
+const URL_SAMPLES  = './data/REPORTER_SAMPLE.CSV';
+const URL_ANALYSES = './data/REPORTER_5oct.CSV';
+
+
+	  
 
 // Mensajes de estado (opcional)
 function setCsvStatus(msg){ 
@@ -2941,27 +2946,15 @@ const res = Papa.parse(csvText, {
 
 
 //   (decodifica ISO-8859-1)
-	  
 async function fetchTextWithTimeout(url, ms = 15000) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), ms);
-
-  const r = await fetch(url, {
-    signal: ctrl.signal,
-    cache: 'no-store',
-    redirect: 'follow',
-    mode: 'cors',
-  });
+  const r = await fetch(url, { signal: ctrl.signal, cache: 'no-store' });
   clearTimeout(timer);
-
-  console.log('[HTTP]', r.status, r.type, 'redirected:', r.redirected, '\nURL final:', r.url);
-  console.log('[HTTP headers]', r.headers.get('content-type'), r.headers.get('content-length'));
-
-  // Si por CORS el cuerpo fuera opaco, esto fallaría. Probamos .text() directamente.
-  const txt = await r.text();
-  console.log('[LEN]', txt.length, 'primeros 120:', (txt.split(/\r?\n/)[0] || '').slice(0,120));
-  return txt;
+  if (!r.ok) throw new Error(`HTTP ${r.status} en ${url}`);
+  return await r.text(); // listo
 }
+
 
 
 async function autoLoadCSVs() {
