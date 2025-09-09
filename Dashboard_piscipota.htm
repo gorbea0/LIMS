@@ -1873,6 +1873,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function tipoCategoria(t) { const n = normalize(t); if (n.includes('interior')) return 'Interior'; if (n.includes('exterior')) return 'Exterior'; return ''; }
 
 
+const sIDs = new Set(samples.map(s => s.id_numeric));
+const aIDs = new Set(analyses.map(a => a.id_numeric));
+let inter = 0; for (const id of aIDs) if (sIDs.has(id)) inter++;
+console.log('[DEBUG] samples:', samples.length, 'analyses:', analyses.length, 'IDs en común:', inter);
 
 
 
@@ -2890,12 +2894,12 @@ function setCsvStatus(msg){
 
 // ——— Parseo desde TEXTO  ———
 function parseSamplesFromText(csvText){
-
 const res = Papa.parse(csvText, {
   header: true,
   skipEmptyLines: true,
-  transformHeader: h => (h ?? '').toString().trim()
+  transformHeader: h => (h ?? '').toString().replace(/^\uFEFF/,'').replace(/\u00A0/g,' ').trim()
 });
+
 
 	
   samples = (res.data || []).map(r => ({
@@ -2954,10 +2958,11 @@ async function autoLoadCSVs() {
     setCsvStatus('Cargando datos del LIMS…');
 
     const v = `?v=${Date.now()}`; // evita caché
-    const [t1, t2] = await Promise.all([
-      fetchTextWithTimeout(URL_SAMPLES  + v),
-      fetchTextWithTimeout(URL_ANALYSES + v),
-    ]);
+   const [t1, t2] = await Promise.all([
+  fetchCsvTextSmart(URL_SAMPLES  + `?v=${Date.now()}`),
+  fetchCsvTextSmart(URL_ANALYSES + `?v=${Date.now()}`),
+]);
+
 
     parseSamplesFromText(t1);
     parseAnalysesFromText(t2);
