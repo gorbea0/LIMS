@@ -2941,26 +2941,28 @@ const res = Papa.parse(csvText, {
 
 
 //   (decodifica ISO-8859-1)
+	  
 async function fetchTextWithTimeout(url, ms = 15000) {
   const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), ms);
-  const r = await fetch(url, { signal: ctrl.signal, cache: 'no-store' });
-  clearTimeout(t);
+  const timer = setTimeout(() => ctrl.abort(), ms);
 
-  // ⬇️ LOG: estado HTTP
-  console.log('[HTTP]', r.status, url);
+  const r = await fetch(url, {
+    signal: ctrl.signal,
+    cache: 'no-store',
+    redirect: 'follow',
+    mode: 'cors',
+  });
+  clearTimeout(timer);
 
-  if (!r.ok) throw new Error(`HTTP ${r.status} en ${url}`);
-  const buf = await r.arrayBuffer();
+  console.log('[HTTP]', r.status, r.type, 'redirected:', r.redirected, '\nURL final:', r.url);
+  console.log('[HTTP headers]', r.headers.get('content-type'), r.headers.get('content-length'));
 
-  // usa la codificación que prefieras (te dejo ISO-8859-1 que te funciona en manual)
-  const txt = new TextDecoder('iso-8859-1').decode(buf);
-
-  // ⬇️ LOG: primera línea del texto recibido
-  console.log('[RAW head]', url, (txt.split(/\r?\n/)[0] || '').slice(0, 200));
-
+  // Si por CORS el cuerpo fuera opaco, esto fallaría. Probamos .text() directamente.
+  const txt = await r.text();
+  console.log('[LEN]', txt.length, 'primeros 120:', (txt.split(/\r?\n/)[0] || '').slice(0,120));
   return txt;
 }
+
 
 async function autoLoadCSVs() {
   try {
