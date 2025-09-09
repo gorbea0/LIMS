@@ -2946,12 +2946,22 @@ async function fetchTextWithTimeout(url, ms = 15000) {
   const t = setTimeout(() => ctrl.abort(), ms);
   const r = await fetch(url, { signal: ctrl.signal, cache: 'no-store' });
   clearTimeout(t);
+
+  // ⬇️ LOG: estado HTTP
+  console.log('[HTTP]', r.status, url);
+
   if (!r.ok) throw new Error(`HTTP ${r.status} en ${url}`);
-
   const buf = await r.arrayBuffer();
-  return new TextDecoder('iso-8859-1').decode(buf);        // <= igual que la carga manual
 
+  // usa la codificación que prefieras (te dejo ISO-8859-1 que te funciona en manual)
+  const txt = new TextDecoder('iso-8859-1').decode(buf);
+
+  // ⬇️ LOG: primera línea del texto recibido
+  console.log('[RAW head]', url, (txt.split(/\r?\n/)[0] || '').slice(0, 200));
+
+  return txt;
 }
+
 
 async function autoLoadCSVs() {
   try {
@@ -2966,6 +2976,30 @@ async function autoLoadCSVs() {
 
     parseSamplesFromText(t1);
     parseAnalysesFromText(t2);
+
+
+
+// Cruce rápido, quitar es solo para depurar
+const s = new Set(samples.map(x => String(x.id_numeric).trim()));
+const a = new Set(analyses.map(x => String(x.id_numeric).trim()));
+let inter = 0; for (const id of a) if (s.has(id)) inter++;
+console.log('[DEBUG] samples:', samples.length, 'analyses:', analyses.length, 'IDs en común:', inter);
+
+// Muestra 1 ejemplo si existe quitar despues de depurar
+const any = [...a].find(id => s.has(id));
+if (any) {
+  console.log('[DEBUG] sample example:', samples.find(smp => smp.id_numeric === any));
+  console.log('[DEBUG] analyses example:', (analysesById.get(any) || []).slice(0, 3));
+}
+
+
+
+
+
+
+
+
+	  
     renderAll();
 
     const [dMin, dMax] = getSamplesDateRange();
