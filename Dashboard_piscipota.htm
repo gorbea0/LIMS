@@ -581,7 +581,44 @@ const potableSynonyms = new Map([
  const cleanId = (v) => (v == null ? '' : String(v).trim());
     const normalize = (s) => (s ?? "").toString().normalize("NFD").replace(/\p{Diacritic}/gu, "").toLowerCase().trim();
 
+// Helpers multiples CSV
 
+// === Merge & Dedupe helpers ===
+function keySample(row) {
+  // 1 muestra por Id Numeric 
+  return String(row.id_numeric || '').trim();
+}
+function keyAnalysis(row) {
+  const id  = String(row.id_numeric || '').trim();
+  const cmp = String(row.component || '').trim().toLowerCase();
+  const val = String(row.result_value ?? row.result_text ?? '').trim();
+  return `${id}||${cmp}||${val}`;
+}
+
+function mergeUniqueSamples(existing, incoming) {
+  const map = new Map((existing || []).map(r => [keySample(r), r]));
+  for (const r of (incoming || [])) map.set(keySample(r), r); // la última gana
+  return [...map.values()];
+}
+function mergeUniqueAnalyses(existing, incoming) {
+  const map = new Map((existing || []).map(r => [keyAnalysis(r), r]));
+  for (const r of (incoming || [])) map.set(keyAnalysis(r), r); // la última gana
+  return [...map.values()];
+}
+function rebuildAnalysesById(arr) {
+  const m = new Map();
+  for (const a of (arr || [])) {
+    const k = String(a.id_numeric || '').trim();
+    if (!k) continue;
+    if (!m.has(k)) m.set(k, []);
+    m.get(k).push(a);
+  }
+  return m;
+}
+
+
+
+	  // Fin helpers multiples CSV
 
 
 
@@ -1742,44 +1779,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       Papa.parse(file, { header: true, skipEmptyLines: true, encoding: "ISO-8859-1", transformHeader: h => h.trim(), complete: (results) => onDone(results.data) });
     }
 
-    document.getElementById('csvSamples').addEventListener('change', (e) => {
-      const f = e.target.files?.[0]; if (!f) return;
-      parseCSVFile(f, (rows) => {
-        
-		
-		
-		samples = rows.map(r => ({
-          sampled_date_iso: toISODate(r['Sampled date'] || r['sampled date'] || r['Date'] || r['date']),
-          id_numeric: cleanId(r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id']),
-          sampling_point: (r['Sampling point'] || r['sampling point'] || r['Sampling Point'] || r['Point'] || r['point'] || '').toString().trim(),
-          collected_from: r['Collected from'] || r['collected from'] || '',
-          collected_by: r['Collected by'] || r['collected by'] || '',
-          job_name: (r['Job Name'] || r['job name'] || r['Job'] || r['job'] || '').toString().trim(),
-		   test_schedule: (r['Test schedule'] || r['test schedule'] || r['Test Schedule'] || '').toString().trim(),
-        })).filter(r => r.id_numeric);
-        renderAll();
-      });
-    });
+  document.getElementById('csvSamples')?.addEventListener('change', async (e) => {
+  const files = e.target.files;
+  if (!files || !files.length) return;
+  for (const f of files) {
+    const txt = await f.text();
+    parseSamplesFromText(txt);
+  }
+  renderAll();
+});
 
-    document.getElementById('csvAnalyses').addEventListener('change', (e) => {
-      const f = e.target.files?.[0]; if (!f) return;
-      parseCSVFile(f, (rows) => {
-        analyses = rows.map(r => ({
-          id_numeric: cleanId(r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id']),
-          component: r['Component name'] || r['component name'] || r['Component'],
-          result_text: r['Result text'] || r['result text'] || r['Result'],
-          result_value: r['Result value'] || r['result value'] || r['Value'],
-        }));
-        analysesById = new Map();
-        for (const a of analyses) {
-          if (!a.id_numeric) continue;
-          const key = cleanId(a.id_numeric);
-          if (!analysesById.has(key)) analysesById.set(key, []);
-          analysesById.get(key).push(a);
-        }
-        renderAll();
-      });
-    });
+document.getElementById('csvAnalyses')?.addEventListener('change', async (e) => {
+  const files = e.target.files;
+  if (!files || !files.length) return;
+  for (const f of files) {
+    const txt = await f.text();
+    parseAnalysesFromText(txt);
+  }
+  renderAll();
+});
+
 
     // ===== Job Name chips =====
     //let jobFilter = 'ambas';
@@ -2900,11 +2919,27 @@ function setCsvStatus(msg){
 
 // ——— Parseo desde TEXTO  ———
 function parseSamplesFromText(csvText){
-const res = Papa.parse(csvText, {
-  header: true,
-  skipEmptyLines: true,
-  transformHeader: h => (h ?? '').toString().replace(/^\uFEFF/,'').replace(/\u00A0/g,' ').trim()
-});
+  const res = Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true,
+    transformHeader: h => (h ?? '').toString()
+      .replace(/^\uFEFF/,'').replace(/\u00A0/g,' ').trim()
+  });
+
+  const newSamples = (res.data || []).map(r => ({
+    sampled_date_iso: toISODate(r['Sampled date'] || r['sampled date'] || r['Date'] || r['date']),
+    id_numeric:       String(r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id'] || '').trim(),
+    sampling_point:   String(r['Sampling point'] || r['sampling point'] || r['Sampling Point'] || r['Point'] || r['point'] || '').trim(),
+    collected_from:   r['Collected from'] || r['collected from'] || '',
+    collected_by:     r['Collected by']   || r['collected by']   || '',
+    job_name:         String(r['Job Name'] || r['job name'] || r['Job'] || r['job'] || '').trim(),
+    test_schedule:    String(r['Test schedule'] || r['test schedule'] || r['Test Schedule'] || '').trim(),
+  })).filter(r => r.id_numeric);
+
+  // ⬇️ ahora fusiona sin duplicados
+  samples = mergeUniqueSamples(samples || [], newSamples);
+}
+
 
 
 	
@@ -2920,12 +2955,27 @@ const res = Papa.parse(csvText, {
 }
 
 function parseAnalysesFromText(csvText){
- 
-const res = Papa.parse(csvText, {
-  header: true,
-  skipEmptyLines: true,
-  transformHeader: h => (h ?? '').toString().trim()
-});
+  const res = Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true,
+    transformHeader: h => (h ?? '').toString()
+      .replace(/^\uFEFF/,'').replace(/\u00A0/g,' ').trim()
+  });
+
+  const newAnalyses = (res.data || []).map(r => ({
+    id_numeric:   String(r['Id Numeric'] || r['ID Numeric'] || r['Id numeric'] || r['id numeric'] || r['Id'] || r['id'] || '').trim(),
+    component:    r['Component name'] || r['component name'] || r['Component'],
+    result_text:  r['Result text'] || r['result text'] || r['Result'],
+    result_value: r['Result value'] || r['result value'] || r['Value'],
+  })).filter(a => a.id_numeric);
+
+  // ⬇️ ahora fusiona sin duplicados
+  analyses = mergeUniqueAnalyses(analyses || [], newAnalyses);
+
+  // reindexa el mapa por Id
+  analysesById = rebuildAnalysesById(analyses);
+}
+
 
 	
   analyses = (res.data || []).map(r => ({
