@@ -2996,33 +2996,6 @@ async function autoLoadCSVs() {
 
 
 
-    renderAll();
-
-    const [dMin, dMax] = getSamplesDateRange();
-    setCsvStatus(`Datos cargados automáticamente desde ${fmtISO(dMin)} hasta ${fmtISO(dMax)}.`);
-  } catch (err) {
-    console.warn('Auto-carga fallida:', err);
-    setCsvStatus('No se pudo cargar automáticamente. Usa la carga manual.');
-    const acc = document.getElementById('manualCsvAcc');
-    if (acc) acc.setAttribute('open', '');
-  }
-}
-
-
-
-
-// Cruce rápido, quitar es solo para depurar
-const s = new Set(samples.map(x => String(x.id_numeric).trim()));
-const a = new Set(analyses.map(x => String(x.id_numeric).trim()));
-let inter = 0; for (const id of a) if (s.has(id)) inter++;
-console.log('[DEBUG] samples:', samples.length, 'analyses:', analyses.length, 'IDs en común:', inter);
-
-// Muestra 1 ejemplo si existe quitar despues de depurar
-const any = [...a].find(id => s.has(id));
-if (any) {
-  console.log('[DEBUG] sample example:', samples.find(smp => smp.id_numeric === any));
-  console.log('[DEBUG] analyses example:', (analysesById.get(any) || []).slice(0, 3));
-}
 
 
 
@@ -3031,8 +3004,6 @@ if (any) {
 
 
 
-	  
-    renderAll();
 
     const [dMin, dMax] = getSamplesDateRange();
     setCsvStatus(`Datos cargados automáticamente desde ${fmtISO(dMin)} hasta ${fmtISO(dMax)}.`);
