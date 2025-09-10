@@ -661,6 +661,11 @@ function isPiscinaSample(row){
 const URL_COORDS_FUENTES = 'https://raw.githubusercontent.com/gorbea0/LIMS/main/coordenadas_fuentes.json';
 let _fuentesMap, _fuentesLayer, _coordsFuentes = null;
 
+let _fuenteMarkersByKey = new Map();  // numKey -> marker
+let _fuenteLastHighlights = [];       // recordar últimos destacados
+
+	  
+
 // Abrir/cerrar modal
 function openFuentesMap(){
   const m = document.getElementById('modalFuentes');
@@ -673,6 +678,9 @@ function closeFuentesMap(){
 }
 
 
+
+
+	  
 
 
 // ¿Es un sampling point de FUENTE?  F45, F-45, F 45…
@@ -704,6 +712,44 @@ function normalizeSP(sp) {
   const m = String(sp || '').match(/\d+/);
   return m ? m[0] : '';
 }
+
+
+// Normaliza consulta de fuente ("F23", "F-23", "23") -> "23"
+function normalizeFuenteQuery(q){
+  const m = String(q || '').trim().match(/\d+/);
+  return m ? m[0] : '';
+}
+
+// Quita realces anteriores
+function clearFuenteHighlights(){
+  for (const mk of _fuenteLastHighlights) {
+    try { mk.setStyle({ weight:1, radius:7, color:'#1f2937' }); } catch {}
+  }
+  _fuenteLastHighlights = [];
+}
+
+// Realza un conjunto de markers y ajusta vista
+function highlightFuenteKeys(keys){
+  clearFuenteHighlights();
+  const bounds = [];
+  for (const k of keys){
+    const mk = _fuenteMarkersByKey.get(String(k));
+    if (!mk) continue;
+    mk.setStyle({ weight:3, radius:10, color:'#111827' });
+    _fuenteLastHighlights.push(mk);
+    bounds.push(mk.getLatLng());
+    mk.openPopup();
+  }
+  if (bounds.length === 1) {
+    _fuentesMap.flyTo(bounds[0], 17);
+  } else if (bounds.length > 1) {
+    _fuentesMap.fitBounds(L.latLngBounds(bounds), { padding: [20,20] });
+  }
+}
+
+
+
+	  
 
 // A partir del número del JSON de coords (p.ej. "45") busca un SP real de FUENTE (F45, F-45…)
 function getSPFromCoordKey(key) {
@@ -774,16 +820,26 @@ function addFuentesSearchControls() {
   const ctrl = L.control({ position: 'topright' });
   ctrl.onAdd = function () {
     const div = L.DomUtil.create('div', 'custom-search bg-white/95 backdrop-blur p-1 rounded shadow');
-    div.innerHTML = `
-      <div class="flex items-center gap-1">
-        <input id="searchSP" type="text" placeholder="SP o nº"
-               class="w-24 px-2 py-0.5 border rounded text-xs" />
-        <input id="searchNombre" type="text" placeholder="Calle"
-               class="w-40 px-2 py-0.5 border rounded text-xs" />
-        <button id="searchBtn"
-                class="px-2 py-0.5 text-xs border rounded bg-white hover:bg-slate-50"
-                title="Buscar">🔎</button>
-      </div>`;
+   div.innerHTML = `
+  <div class="flex flex-col gap-1">
+    <div class="flex items-center gap-1">
+      <input id="searchFuente" type="text" placeholder="Fuente: F23 / F-23 / 23"
+             class="w-40 px-2 py-0.5 border rounded text-xs" />
+      <button id="searchFuenteBtn"
+              class="px-2 py-0.5 text-xs border rounded bg-white hover:bg-slate-50"
+              title="Buscar fuente">🔎</button>
+    </div>
+    <div class="flex items-center gap-1">
+      <input id="searchSP" type="text" placeholder="SP exacto"
+             class="w-24 px-2 py-0.5 border rounded text-xs" />
+      <input id="searchNombre" type="text" placeholder="Calle"
+             class="w-40 px-2 py-0.5 border rounded text-xs" />
+      <button id="searchBtn"
+              class="px-2 py-0.5 text-xs border rounded bg-white hover:bg-slate-50"
+              title="Buscar">🔎</button>
+    </div>
+  </div>`;
+
     L.DomEvent.disableClickPropagation(div);
     L.DomEvent.disableScrollPropagation(div);
     return div;
@@ -818,6 +874,42 @@ function addFuentesSearchControls() {
     else alert('No encontrado.');
   };
 
+
+
+
+// === Buscador específico de FUENTES (acepta F23 / F-23 / 23 y muestra TODAS las coincidentes)
+const runFuente = () => {
+  const q = document.getElementById('searchFuente')?.value || '';
+  const num = normalizeFuenteQuery(q);
+  if (!num) { alert('Introduce el número de la fuente (p.ej. F23, F-23 o 23).'); return; }
+
+  // En _coordsFuentes las claves son los números como string ("23", "45", ...)
+  const keys = Object.keys(_coordsFuentes || {}).filter(k => String(k) === num);
+
+  if (keys.length) {
+    highlightFuenteKeys(keys);
+  } else {
+    // Si no existe en el índice de coordenadas, intentamos deducir por SPs de muestras
+    const rows = samplesForFuenteNumber(num);
+    if (rows.length) {
+      // Centrar en la primera que tenga coords (si coincide con índice)
+      const maybeKey = Object.keys(_coordsFuentes || {}).find(k => k === num);
+      if (maybeKey) highlightFuenteKeys([maybeKey]);
+      else alert('Hay muestras con ese número, pero sin coordenadas registradas en coordenadas_fuentes.json.');
+    } else {
+      alert('No se encontraron fuentes con ese número.');
+    }
+  }
+};
+
+// eventos del buscador de fuentes
+document.getElementById('searchFuenteBtn')?.addEventListener('click', runFuente);
+document.getElementById('searchFuente')?.addEventListener('keydown', e => { if (e.key === 'Enter') runFuente(); });
+
+	
+
+
+	
   document.getElementById('searchBtn')?.addEventListener('click', run);
   document.getElementById('searchSP')?.addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
   document.getElementById('searchNombre')?.addEventListener('keydown', e => { if (e.key === 'Enter') run(); });
@@ -865,6 +957,7 @@ function computeIncumplimientosForSP(sp){
 function renderFuentesMarkers(){
   if (!_fuentesMap || !_coordsFuentes) return;
   _fuentesLayer.clearLayers();
+	 _fuenteMarkersByKey.clear();
 
   const bounds = [];
 
@@ -887,6 +980,11 @@ function renderFuentesMarkers(){
       radius: 7, weight: 1, color: '#1f2937', fillColor: col, fillOpacity: 0.9
     });
 
+ // índice: numKey -> marker
+    _fuenteMarkersByKey.set(numKey, marker);
+
+
+	  
     const info   = sp ? (getPuntoInfo(sp) || {}) : {};
     const nombre = info.nombre || `Fuente ${numKey}`;
     const za     = info.za || (sp ? getZAFrom(sp, info.subtipo || '') : '');
