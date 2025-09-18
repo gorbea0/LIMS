@@ -4436,5 +4436,88 @@
     "Tipo": NaN,
     "Subtipo": "Prioritario",
     "ZA": "ZA Vitoria"
-  }
+  },
+
+{
+    "Sampling point": "D-168",
+    "Nombre": "Fuente NDR Hueto Abajo lavadero",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "Fuente NDR"
+  },
+  
+{
+    "Sampling point": "D-127",
+    "Nombre": "Fuente NDR Aberasturi sulfurosa",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "Fuente NDR"
+  },
+
+{
+    "Sampling point": "D-117",
+    "Nombre": "Fuente NDR Monasterio embolo",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "Fuente NDR"
+  },
+{
+    "Sampling point": "D-1077",
+    "Nombre": "Centro 3º edad Arana",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": ""
+  },
+
+{
+    "Sampling point": "D-118",
+    "Nombre": "Fuente NDR Monasterio abrevadero",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "Fuente NDR"
+  },
+
+{
+    "Sampling point": "D-186",
+    "Nombre": "Parque tecnológico Miñano",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "ZA Vitoria"
+  },
+{
+    "Sampling point": "D-1143",
+    "Nombre": "Ikastola Adurza",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "ZA Vitoria"
+  },{
+    "Sampling point": "D-157",
+    "Nombre": "Fuente NDR Subijana Camino Santiago",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "Fuente NDR"
+  },
+{
+    "Sampling point": "D-1062",
+    "Nombre": "Centro de Mayores San Martín",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "ZA Vitoria"
+  },
+{
+    "Sampling point": "190",
+    "Nombre": "Fuente cementerio Sta Isabel",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "ZA Vitoria"
+  },
+{
+    "Sampling point": "1918",
+    "Nombre": "Fuente Sta Isabel",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "ZA Vitoria"
+  },
+
+  
 ]
