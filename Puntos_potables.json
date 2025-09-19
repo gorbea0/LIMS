@@ -4512,12 +4512,45 @@
     "ZA": "ZA Vitoria"
   },
 {
-    "Sampling point": "1918",
+    "Sampling point": "191",
     "Nombre": "Fuente Sta Isabel",
     "Tipo": NaN,
     "Subtipo": "",
     "ZA": "ZA Vitoria"
   },
+{
+    "Sampling point": "D-255",
+    "Nombre": "Crispijana",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "ZA Vitoria"
+  },
+
+
+{
+    "Sampling point": "D-195",
+    "Nombre": "Fuente NDR Otazu",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "Fuente NDR"
+  },
+
+{
+    "Sampling point": "D-158",
+    "Nombre": "Fuente NDR Subijana 2",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "Fuente NDR"
+  },
+  {
+    "Sampling point": "D-159",
+    "Nombre": "Fuente NDR Ruta Europa",
+    "Tipo": NaN,
+    "Subtipo": "",
+    "ZA": "Fuente NDR"
+  }
+
+  
 
   
 ]
