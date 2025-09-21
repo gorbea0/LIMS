@@ -2280,9 +2280,7 @@ function renderAll() {
   // Filtro por ámbito + Job Name
   enriched = enriched.filter(passJobFilter);
   
-  if (activeTab !== 'blancos') {
-  enriched = enriched.filter(r => !isBlankOrDup(r));
-}
+ 
 
   
 
