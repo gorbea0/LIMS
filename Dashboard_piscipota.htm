@@ -116,26 +116,29 @@
 </section>
 
     <section class="rounded-2xl border bg-white p-4 shadow-sm">
-      <div class="grid gap-3 md:grid-cols-4 items-end">
-        <div>
-          <label class="block text-sm text-slate-600">Desde</label>
-          <input id="dateFrom" type="date" placeholder="dd/mm/aaaa" class="mt-1 w-full rounded border p-2" />
-        </div>
-        <div>
-          <label class="block text-sm text-slate-600">Hasta</label>
-          <input id="dateTo" type="date" placeholder="dd/mm/aaaa" class="mt-1 w-full rounded border p-2" />
-        </div>
-        <div class="md:col-span-2">
-          <label class="block text-sm text-slate-600">Buscar Punto / Nombre</label>
-          <input id="searchBox" type="text" placeholder="Ej. D-224 o Piscina Municipal" class="mt-1 w-full rounded border p-2" />
-        </div>	
-		
-	 <button id="btnApplyFilters" class="ml-auto rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">Aplicar filtros</button>
-		
-		
-        <button id="btnClearFilters" class="rounded-xl border px-4 py-2 hover:bg-slate-50">Limpiar</button>			
-		
-      </div>
+   <div class="flex flex-wrap items-end gap-3">
+  <div>
+    <label class="block text-sm text-slate-600">Desde</label>
+    <input id="dateFrom" type="date" placeholder="dd/mm/aaaa" class="mt-1 w-full rounded border p-2" />
+  </div>
+  <div>
+    <label class="block text-sm text-slate-600">Hasta</label>
+    <input id="dateTo" type="date" placeholder="dd/mm/aaaa" class="mt-1 w-full rounded border p-2" />
+  </div>
+  <div class="flex-1 min-w-[250px]">
+    <label class="block text-sm text-slate-600">Buscar Punto / Nombre</label>
+    <input id="searchBox" type="text" placeholder="Ej. D-224 o Piscina Municipal" class="mt-1 w-full rounded border p-2" />
+  </div>
+  <div class="flex gap-2">
+    <button id="btnApplyFilters" class="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+      Aplicar filtros
+    </button>
+    <button id="btnClearFilters" class="rounded-xl border px-4 py-2 hover:bg-slate-50">
+      Limpiar
+    </button>
+  </div>
+</div>
+
       <!-- Filtro Job Name -->  
 	  
       <div class="mt-3 flex flex-wrap items-center gap-2">
@@ -160,7 +163,7 @@
   <button data-job="ambas"  class="job-chip rounded-lg px-3 py-1.5 text-sm bg-blue-600 text-white">Ambas</button>
 </div>
 	
-		<button id="btnStats" class="rounded-xl border px-4 py-2 hover:bg-slate-50">Estadística</button>
+		<button id="btnStats" class="rounded-xl border px-4 py-2 hover:bg-slate-50">📊Estadística</button>
 		
 		<button id="btnCalendar" class="rounded-lg border px-3 py-1.5 text-sm bg-white hover:bg-slate-50">
   📅 Ver calendario
