@@ -4249,7 +4249,9 @@ function renderList(){
   }
 
   // contador de filas con algún incumplimiento (para los chips ½ LQ y ⅓ LQ)
-  $('#bm-counter')?.textContent = String(totalInc);
+ const cntEl = document.getElementById('bm-counter');
+if (cntEl) cntEl.textContent = String(totalInc);
+
   updateHalfBadges();
 }
 
