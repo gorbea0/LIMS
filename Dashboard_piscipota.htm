@@ -4292,7 +4292,7 @@ document.getElementById('modal')?.classList.add('z-[1200]'); // si lo estás usa
     const analysesMap = (window.analysesById || new Map());
     const items = analysesMap.get(String(row.id_numeric)) || [];
 
-    const dupMatch = String(row?.description||'').match(/duplicado\s+(\d+)/i);
+   
     const isDup = !!dupMatch;
 
     // Cabecera
