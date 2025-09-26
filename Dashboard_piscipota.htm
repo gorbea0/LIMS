@@ -2576,7 +2576,7 @@ function renderAll() {
       <td class="px-3 py-2">${escapeHtml(r.collected_by || '')}</td>
       <td class="px-3 py-2">${r.numAnalisis}</td>
       <td class="px-3 py-2">${r.numIncumplimientos}</td>
-      //<td class="px-3 py-2">${statusBadge(r.status)}</td>`;
+    
 	  <td class="px-3 py-2">${statusBadgeInline(r)}</td>`;
     document.getElementById('tableBody').appendChild(tr);
   }
