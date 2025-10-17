@@ -4721,7 +4721,7 @@ function renderStats(){
   }
 
   // ====== 2) BLANCOS por parámetro (total evaluables vs incumplimientos) ======
-  // Usamos tu propio evalBlankAnalyses + LOQ_BLANCOS/loqKey/norm
+  // Usamos evalBlankAnalyses + LOQ_BLANCOS/loqKey/norm
   const paramAgg = new Map(); // key -> {label, total, inc}
   for (const s of (state.blancos || [])){
     const items = analysesMap.get(String(s.id_numeric)) || [];
@@ -4906,148 +4906,108 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 
-
 <script>
-// ========= EKUIS: Exportar XML desde los filtros vigentes =========
+// ====== EKUIS: Exportar XML POTABLES sin depender del estado de la vista ======
 
-// 1) Diccionario (ajústalo a tus códigos reales)
-//    Si no hay mapeo, se deja vacío "" (como pediste)
-const componentToCodigo = new Map([
-  // Potables (ejemplos)
-  ['amonio', 'AMON'],           // AMON
-  ['ph', 'PH'],                 // PH
-  ['nitrato', 'NITR'],          // NITR
-  ['nitritos', 'NITRIT'],       // NITRIT
-  ['cloro libre', 'CLLIB'],     // CLLIB
-  ['coliformes totales', 'COLT'],
-  ['escherichia coli', 'ECOLI'],
-  // Piscinas (añade lo que uses)
-  ['turbidez', 'TURB'],
-  ['bromo', 'BROM'],
-  ['ácido isocianúrico', 'ISOC'],
-]);
-
-// 2) Opcional: método por parámetro (si no hay, vacío)
-const ensayoPorCodigo = new Map([
-  ['AMON', 'PNTE-AI-004'],
-  // añade los tuyos...
-]);
-
-// 3) Formateo dd-mm-aaaa
-function toDDMMYYYY(iso) {
+// dd/mm/yyyy
+function fmtDDMMYYYY(iso) {
   if (!iso) return '';
+  // iso esperado yyyy-mm-dd
   const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!m) return '';
-  return `${m[3]}-${m[2]}-${m[1]}`;
+  return `${m[3]}/${m[2]}/${m[1]}`;
 }
 
-// 4) Construcción de cada <PARAMETRO .../>, dejando vacíos si no hay dato
-function buildParametroNodes(sample, items) {
-  const out = [];
-  for (const a of (items || [])) {
-    // Normaliza nombre
-    const rawName = (a.component || '').toString().trim();
-    if (!rawName) continue;
-
-    // Valor “usable” con tu helper (ND / “<…” -> 0)
-    const { value, flag } = interpretValue(a.result_text, a.result_value);
-
-    // Código EKUIS (o vacío)
-    const kNorm = rawName.normalize('NFD').replace(/\p{Diacritic}/gu,'').toLowerCase();
-    const kod   = componentToCodigo.get(kNorm) || componentToCodigo.get(rawName.toLowerCase()) || '';
-
-    // Ensayo (si hay mapeo por código)
-    const ensayo = ensayoPorCodigo.get(kod || '') || '';
-
-    // Unidad (si tu helper la sabe; si no, vacía)
-    const uni = (getParamUnit && getParamUnit(rawName)) || '';
-
-    // Tipo de resultado: L para numérico, T para texto
-    const tipoRes = Number.isFinite(value) ? 'L' : 'T';
-
-    // Resultado: numérico si hay; si no, el texto “pelado”
-    let resultado = '';
-    if (Number.isFinite(value)) {
-      // Evita notación rara; usa punto decimal
-      resultado = String(value);
-    } else {
-      resultado = (a.result_text || '').toString().trim();
-    }
-
-    // Arma el nodo (self-closing)
-    out.push(
-      `<PARAMETRO codigo="${escapeXml(kod)}" ensayo="${escapeXml(ensayo)}" tiporesultado="${escapeXml(tipoRes)}" resultado="${escapeXml(resultado)}" unimed="${escapeXml(uni)}"/>`
-    );
-  }
-  return out.join('');
-}
-
-// 5) Escapado mínimo XML para atributos
-function escapeXml(s) {
+// Escape mínimo para atributos XML
+function x(s){
   return (s ?? '').toString()
     .replace(/&/g,'&amp;').replace(/"/g,'&quot;')
     .replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-// 6) Construcción de cada <MUESTRA …> … </MUESTRA>
-function buildMuestraNode(r) {
-  const id     = r.id_numeric || '';
-  const punto  = r.sampling_point || r.punto || '';
-  const obslab = r.observations || r.obslab || '';
-  const obscal = r.obscal || '';          // forzado a vacío si no hay
-  const motivo = r.motivo || '';          // vacío si no hay
-  const tipo   = r.tipo || '';            // vacío si no hay (p.ej. "SUPERV")
-  const calif  = r.calificacion || '';    // vacío si no hay (p.ej. "1")
+// Reconstruye filas POTABLES aplicando los filtros de fechas/job como en renderAll()
+function buildPotablesForExport(){
+  const dateFrom = document.getElementById('dateFrom')?.value || null; // yyyy-mm-dd
+  const dateTo   = document.getElementById('dateTo')?.value   || null; // yyyy-mm-dd
+  // Partimos de samples y añadimos items de analysesById
+  let enriched = (window.samples || []).map(s => {
+    const dateISO = s.sampled_date_iso;       // ya en ISO (yyyy-mm-dd)
+    const items   = (window.analysesById?.get(String(s.id_numeric).trim()) || []);
+    return { ...s, dateISO, items };
+  });
 
-  // SOLO fecha de toma de muestra:
-  const ddmmyyyy = toDDMMYYYY(r.dateISO || r.sampled_date_iso || '');
+  // Filtro por fecha de TOMA (como en tu renderAll) y por Job
+  if (dateFrom) enriched = enriched.filter(r => r.dateISO >= dateFrom);
+  if (dateTo)   enriched = enriched.filter(r => r.dateISO <= dateTo);
+  if (typeof window.passJobFilter === 'function') {
+    enriched = enriched.filter(window.passJobFilter);  // mismo criterio de Job Name
+  }
 
-  // Parámetros (desde analysesById)
-  const items = (analysesById && analysesById.get(String(id))) || [];
-  const paramsXml = buildParametroNodes(r, items);
+  // Sólo POTABLES (usa  helper)
+  if (typeof window.isPotableSample === 'function') {
+    enriched = enriched.filter(window.isPotableSample);
+  }
 
-  return `<MUESTRA referencia="${escapeXml(id)}" fecharec="${escapeXml(ddmmyyyy)}" punto="${escapeXml(punto)}" motivo="${escapeXml(motivo)}" tipo="${escapeXml(tipo)}" calificacion="${escapeXml(calif)}" fechaana="${escapeXml(ddmmyyyy)}" obslab="${escapeXml(obslab)}" obscal="${escapeXml(obscal)}">${paramsXml}</MUESTRA>`;
+  // Opcional: excluir blancos/duplicados si  helper existe
+  if (typeof window.isBlankOrDup === 'function') {
+    enriched = enriched.filter(r => !window.isBlankOrDup(r));
+  }
+
+  return enriched;
 }
 
-// 7) Ensamblar y descargar
-function downloadEkuisXml(rows) {
-  const cuerpo = rows.map(buildMuestraNode).join('');
-  const xml = `<?xml version="1.0" encoding="UTF-8"?><EKUIS>${cuerpo}</EKUIS>`;
-
-  const blob = new Blob([xml], { type: 'application/xml;charset=UTF-8' });
-  const url  = URL.createObjectURL(blob);
-
-  // nombre de archivo con rango (si lo hay)
-  const dFrom = document.getElementById('dateFrom')?.value || '';
-  const dTo   = document.getElementById('dateTo')?.value   || '';
-  const rango = (dFrom || dTo) ? `_${(dFrom||'').replaceAll('-','')}-${(dTo||'').replaceAll('-','')}` : '';
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `ekuis${rango}.xml`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+// Construye un string <PARAMETRO .../> por cada análisis (deja vacíos si no hay)
+function buildParametrosXML(items){
+  const rows = Array.isArray(items) ? items : [];
+  return rows.map(a => {
+    const codigo        = '';                     // si no mapping, lo dejamos vacío
+    const ensayo        = '';                     // idem
+    const tiporesultado = (Number.isFinite(a.result_value) ? 'L' : 'T'); // heurística simple
+    const unimed        = (a.unit || a.unimed || '');
+    // resultado: usa result_text como pediste
+    const resultado     = (a.result_text ?? '').toString().trim();
+    return `<PARAMETRO codigo="${x(codigo)}" ensayo="${x(ensayo)}" tiporesultado="${x(tiporesultado)}" resultado="${x(resultado)}" unimed="${x(unimed)}"/>`;
+  }).join('');
 }
 
-// 8) Click del botón
-document.getElementById('btn_ekuis')?.addEventListener('click', () => {
-  // Usa lo que está visible ahora mismo (ya filtrado por fecha de TOMA)
-  const rows = (window.lastEnriched || [])
-    // si quisieras excluir blancos/duplicados del XML, descomenta:
-    // .filter(r => !isBlankOrDup(r))
-    .map(r => ({
-      ...r,
-      // aseguramos la fecha ISO usada arriba
-      dateISO: r.dateISO || r.sampled_date_iso || ''
-    }));
+// Construye un string <MUESTRA ...> ... </MUESTRA> para cada fila
+function buildMuestraXML(r){
+  const referencia = r.id_numeric ?? '';
+  const fecharec   = fmtDDMMYYYY(r.sampled_date_iso || r.dateISO || '');
+  const punto      = r.sampling_point || r.punto || '';
+  const motivo     = r.motivo || '';
+  const tipo       = r.tipo || '';         // p. ej. SUPERV, GRIFO... (si no hay, vacío)
+  const calif      = r.calificacion || '';
+  // fechaana: si existiera una autorización distinta, ; si no, la de toma
+  const fechaana   = fmtDDMMYYYY(r.fecha_autorizacion_iso || r.sampled_date_iso || r.dateISO || '');
+  const obslab     = r.obslab || r.observations || '';
+  const obscal     = r.obscal || '';
 
+  const params     = buildParametrosXML(r.items);
+  return `<MUESTRA referencia="${x(referencia)}" fecharec="${x(fecharec)}" punto="${x(punto)}" motivo="${x(motivo)}" tipo="${x(tipo)}" calificacion="${x(calif)}" fechaana="${x(fechaana)}" obslab="${x(obslab)}" obscal="${x(obscal)}">${params}</MUESTRA>`;
+}
+
+// Ensambla y descarga el XML
+function exportEkuis(){
+  const rows = buildPotablesForExport();
   if (!rows.length) {
-    alert('No hay muestras visibles para exportar.');
+    alert('No hay POTABLES en el intervalo de fechas de TOMA (o los filtros activos las excluyen).');
     return;
   }
-  downloadEkuisXml(rows);
-});
+  const cuerpo = rows.map(buildMuestraXML).join('');
+  // Raíz como en tu ejemplo principal
+  const xml = `<?xml version="1.0" encoding="UTF-8"?><LABORATORIO codigo="DEMSAC">${cuerpo}</LABORATORIO>`;
+
+  const dFrom = document.getElementById('dateFrom')?.value || '';
+  const dTo   = document.getElementById('dateTo')?.value   || '';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([xml], {type:'application/xml;charset=UTF-8'}));
+  a.download = `POTABLES_${(dFrom||'').replaceAll('-','')}_a_${(dTo||'').replaceAll('-','')}.xml`;
+  a.click();
+}
+
+// Enlazar el botón
+document.getElementById('btn_ekuis')?.addEventListener('click', exportEkuis);
 </script>
 
 
