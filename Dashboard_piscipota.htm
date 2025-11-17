@@ -2594,40 +2594,61 @@ function renderPuntos(enriched, showAll) {
   // Agrupar por punto de muestreo → objeto "p" con metadatos y contadores
   const map = new Map();
   for (const r of (enriched || [])) {
-    const key = r && (r.sampling_point || r.samplingPoint || r.punto || r.nombre || '—');
+    if (!r) continue;
+
+    // clave “cruda” y clave normalizada para agrupar
+    const rawKey =
+      r.sampling_point || r.samplingPoint || r.punto || r.nombre || '—';
+
+    // normalizar: quitar no-break spaces, recortar, unificar espacios
+    const key = String(rawKey ?? '')
+      .replace(/\u00A0/g, ' ')
+      .trim();
+
+    if (!key) continue;
+
     if (!map.has(key)) {
-      const info = getPuntoInfo(key) || {};
-      const nombre  = r?.nombre || info.nombre || key;
-      const titular = r?.titular || info.titular || '';
-      const tipo    = r?.tipo || info.tipo || '';
-      const za      = U(r?.za || info.za || getZAFrom(key, r?.subtipo || info.subtipo || r?.test_schedule || r?.['test schedule']));
-      const subtipo = U(r?.subtipo || info.subtipo || '');
+      // para info usamos tanto la clave cruda como la normalizada
+      const info = getPuntoInfo(rawKey) || getPuntoInfo(key) || {};
+      const nombre  = r.nombre  || info.nombre  || key;
+      const titular = r.titular || info.titular || '';
+      const tipo    = r.tipo    || info.tipo    || '';
+      const za      = U(
+        r.za ||
+        info.za ||
+        getZAFrom(key, r.subtipo || info.subtipo || r.test_schedule || r['test schedule'])
+      );
+      const subtipo = U(r.subtipo || info.subtipo || '');
 
       map.set(key, {
-        sp: key,
-        nombre, titular, tipo, za, subtipo,
-        analisis: 0,            // nº de parámetros evaluados
-        muestras: 0,            // nº de muestras
-        total: 0,               // nº de parámetros que incumplen (antes)
-        graves: 0,              // nº de parámetros en grave
-        _idsInc: new Set(),     // ids de muestra con incumplimiento (estado incumplimiento|grave)
-        _idsGrave: new Set(),   // ids de muestra con estado grave
+        sp: key,                     // lo que verás como "SP D-254"
+        nombre,
+        titular,
+        tipo,
+        za,
+        subtipo,
+        analisis: 0,
+        muestras: 0,
+        total: 0,
+        graves: 0,
+        _idsInc: new Set(),
+        _idsGrave: new Set(),
       });
     }
 
     const obj = map.get(key);
     obj.muestras += 1;
-    obj.analisis += N(r?.numAnalisis);
-    obj.total    += N(r?.numIncumplimientos); // ← parámetros que incumplen (mantenemos)
-    obj.graves   += N(r?.graves);              // ← parámetros en grave
+    obj.analisis += N(r.numAnalisis);
+    obj.total    += N(r.numIncumplimientos);
+    obj.graves   += N(r.graves);
 
     // Contadores por MUESTRA (no por parámetro)
-    const status = (r?.status || '').toString().toLowerCase();
-    // Preferimos id_numeric; si faltara, usamos un fallback estable
-    const idStr = String(r?.id_numeric ?? '') || `${key}#${r?.dateStr || r?.date || ''}`;
+    const status = (r.status || '').toString().toLowerCase();
+    const idStr  = String(r.id_numeric ?? '') || `${key}#${r.dateStr || r.date || ''}`;
     if (status === 'incumplimiento' || status === 'grave') obj._idsInc.add(idStr);
     if (status === 'grave') obj._idsGrave.add(idStr);
   }
+
 
   // → Array de puntos + materializamos tamaños de los sets
   let puntos = [...map.values()].map(p => ({
