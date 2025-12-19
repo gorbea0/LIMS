@@ -2376,6 +2376,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+	  // refrescar despues de filtrar
+
+// === FIX: Aplicar filtros debe refrescar la vista actual inmediatamente ===
+document.addEventListener('DOMContentLoaded', () => {
+  const btnApply = document.getElementById('btnApplyFilters');
+  const btnClear = document.getElementById('btnClearFilters');
+
+  const dateFromEl = document.getElementById('dateFrom');
+  const dateToEl   = document.getElementById('dateTo');
+  const searchEl   = document.getElementById('searchBox');
+
+  btnApply?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof renderAll === 'function') renderAll();
+  });
+
+  btnClear?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (dateFromEl) dateFromEl.value = '';
+    if (dateToEl)   dateToEl.value   = '';
+    if (searchEl)   searchEl.value   = '';
+    if (typeof renderAll === 'function') renderAll();
+  });
+
+  // Enter en el buscador = aplicar filtros
+  searchEl?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (typeof renderAll === 'function') renderAll();
+    }
+  });
+});
+
+
+// fin de refrescar despues de filtrar
+	  
+
     // Normaliza categorías desde el JSON
     function titularCategoria(t) { const n = normalize(t); if (n.includes('priv')) return 'Privada'; if (n.includes('ayuntamiento') || n.includes('municip')) return 'Municipal'; return ''; }
     function tipoCategoria(t) { const n = normalize(t); if (n.includes('interior')) return 'Interior'; if (n.includes('exterior')) return 'Exterior'; return ''; }
