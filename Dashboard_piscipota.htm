@@ -837,8 +837,7 @@ const potableSynonyms = new Map([
   ['ph', 'ph'],
   ['pH', 'ph'],
   ['e coli', 'escherichia coli'],
-  ['Escherichia coli', 'escherichia coli'],
-	['Recuento de E. coli', 'escherichia coli'],
+  ['escherichia coli', 'escherichia coli'],
   ['ecoli', 'escherichia coli'],
   ['coliformes', 'coliformes totales'],
   ['coliformes totales', 'coliformes totales'],
@@ -857,12 +856,11 @@ const potableSynonyms = new Map([
   ['nitritos', 'nitritos'],
   ['legionella', 'leg'],
   ['legionella spp', 'legionella spp'],
-  ['Recuento de C. perfringens (incluido esp', 'clostridium perfringens'],
+  ['clostridium perfringens', 'clostridium perfringens', 'Recuento de C. perfringens (incluido esp', 'Clostridium perfringens'],
   ['enterococos', 'enterococos'],
-  ['rcto. bacterias heterótrofas 22º', 'rcto. bacterias heterótrofas 22º','Recnto. microorg. cultivables a 22º C'],
+  ['rcto. bacterias heterótrofas 22º', 'rcto. bacterias heterótrofas 22º'],
 	
 ]);
-
 
 
  const cleanId = (v) => (v == null ? '' : String(v).trim());
