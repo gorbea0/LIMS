@@ -929,27 +929,36 @@ function potKey(name){
 }
 function isPotableSample(row){
   const up = v => (v ?? '').toString().toUpperCase();
-
+  
   const j   = up(row?.job_name || '').trim();
   const ts  = up(row?.test_schedule || row?.testSchedule || row?.['test schedule'] || '');
   const st  = up(row?.sample_type || '');
   const tbl = up(row?.table_name || '');
-
-  // NUEVO: señales por Sampling Point y por "Collected from"
   const sp  = (row?.sampling_point || row?.['sampling point'] || row?.samplingPoint || '') + '';
   const cf  = up(row?.collected_from || row?.['collected from'] || row?.collectedFrom || '');
+  const idt = up(row?.id_text || '');  // ← NUEVO: revisar id_text también
 
+  // Señales por Sampling Point
   const spLooksPotable = /^[FG][\s-]?\d+\s*$/i.test(sp);        // F-271, G-73...
+  
+  // Señales por Collected from
   const cfSaysPotable  = /\b(FUENTE|GRIFO|POTABLE)\b/.test(cf); // “Fuente…”, “Grifo…”, etc.
+  
+  // Señales por ID Text (¡IMPORTANTE!)
+  const idtSaysPotable = /^[MG]-\d{3}-AC1$/i.test(String(row?.id_text || '').trim());
 
   // Potables “normales”
   if (j.startsWith('AGUAS') || j.startsWith('FUENTES')) return true;
+  
   // Potables en blancos/duplicados o por plan
   if (st === 'CONTROL-PO') return true;
   if (ts.includes('POT-'))  return true;
   if (tbl.includes('AGUAS') && st !== 'CONTROL-LE') return true;
 
-  // NUEVO: heurísticas de SP/Collected from
+  // IDs específicos (como M-013-AC1, M-016-AC1, etc.)
+  if (idtSaysPotable) return true;  // ← ESTO ES CLAVE
+
+  // Heurísticas de SP/Collected from
   if (spLooksPotable || cfSaysPotable) return true;
 
   return false;
