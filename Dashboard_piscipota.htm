@@ -917,13 +917,35 @@ const limitesPotables = (() => {
 })();
 
 function potKey(name){
+  if (!name) return null;
+  
+  // Limpia y normaliza
   const n = normalize(name || '');
-  if (!n) return null;
-  // mapea por sinónimos si existe
-  if (potableSynonyms.has(n)) return potableSynonyms.get(n);
-  // si coincide tal cual con la tabla
+  
+  // Primero busca en sinónimos
+  if (potableSynonyms.has(n)) {
+    return potableSynonyms.get(n);
+  }
+  
+  // Intenta coincidencias parciales
+  const normalizedName = n.toLowerCase()
+    .replace(/[()]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  
+  // Búsqueda más flexible
+  if (normalizedName.includes('enterococo')) return 'enterococos';
+  if (normalizedName.includes('coli') && !normalizedName.includes('coliform')) return 'escherichia coli';
+  if (normalizedName.includes('coliform')) return 'coliformes totales';
+  if (normalizedName.includes('perfringens')) return 'clostridium perfringens';
+  if (normalizedName.includes('cultivable') || normalizedName.includes('heterotrof')) {
+    return 'rcto. bacterias heterótrofas 22º';
+  }
+  
+  // Si coincide tal cual con la tabla
   if (limitesPotables.has(n)) return n;
-  // intents básicos
+  
+  // Intenta básicos
   const try_ = [...limitesPotables.keys()].find(k => n.includes(k));
   return try_ || null;
 }
