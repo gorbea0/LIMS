@@ -798,7 +798,7 @@ const limitesPotablesRaw = {
   'coliformes totales': [0, 100, 'UFC/100mL'],
   'conductividad': [2500, 4000, 'µS/cm'],
   'cromo total': [50, null, 'µg/L'],
-  'enterococos': [0, null, 'UFC/100mL'],
+  '': [0, null, 'UFC/100mL'],
   'escherichia coli': [0, null, 'UFC/100mL'],
   'hierro': [200, 600, 'µg/L'],
   'leg': [100, null, 'UFC/L'],
@@ -837,7 +837,8 @@ const potableSynonyms = new Map([
   ['ph', 'ph'],
   ['pH', 'ph'],
   ['e coli', 'escherichia coli'],
-  ['escherichia coli', 'escherichia coli'],
+  ['Escherichia coli', 'escherichia coli'],
+	['Recuento de E. coli', 'escherichia coli'],
   ['ecoli', 'escherichia coli'],
   ['coliformes', 'coliformes totales'],
   ['coliformes totales', 'coliformes totales'],
@@ -856,7 +857,7 @@ const potableSynonyms = new Map([
   ['nitritos', 'nitritos'],
   ['legionella', 'leg'],
   ['legionella spp', 'legionella spp'],
-  [ 'Recuento de C. perfringens (incluido esp', 'clostridium perfringens'],
+  ['Recuento de C. perfringens (incluido esp', 'clostridium perfringens'],
   ['enterococos', 'enterococos'],
   ['rcto. bacterias heterótrofas 22º', 'rcto. bacterias heterótrofas 22º','Recnto. microorg. cultivables a 22º C'],
 	
@@ -2226,7 +2227,7 @@ function prettyParamName(key, fallback='') {
   const map = {
     ph:'pH', turbidez:'Turbidez', cloro_libre:'Cloro libre', cloro_combinado:'Cloro combinado',
     cloro_total:'Cloro total', bromo:'Bromo', isocianurico:'Ácido isocianúrico',
-    ecoli:'E. coli', enterococos:'Enterococos', legionella:'Legionella', pseudomonas:'Pseudomonas',
+    ecoli:'E. coli', :'', legionella:'Legionella', pseudomonas:'Pseudomonas',
     aluminio:'Aluminio', aluminio_total:'Aluminio total', plomo_total:'Plomo total',
     nitrato:'Nitrato', nitritos:'Nitritos', clorato:'Clorato', sodio:'Sodio',
     "recuento_de_e_coli":'E. coli', "recuento_bacterias_coliformes":'Bacterias coliformes'
