@@ -2100,7 +2100,7 @@ function passJobFilter(r) {
     } // <- ESTA llave faltaba
 
     case 'aluminio':
-      if (v > 0.3) return { status: 'incumplimiento', criterio: 'Aluminio > 0.3' };
+      if (v > 300) return { status: 'incumplimiento', criterio: 'Aluminio > 0.3' };
       return { status: 'ok', criterio: '\u2264 0.3' };
 
     case 'estafilococos':
